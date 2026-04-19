@@ -1,65 +1,110 @@
 import Image from "next/image";
+import Navbar from "./components/Navbar";
+import LinkPreview from "@/components/ui/link-preview";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex w-full flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-[#1C1C1C]">
+      <main className="flex flex-1 max-w-2xl w-full flex-col items-center bg-white dark:bg-[#1C1C1C] sm:items-start">
+        <div className="mb-5">22, Design Engineer</div>
+        <div className="flex  flex-col gap-2 ">
+        <span>Currently Frontend Lead at x2c.fun</span>
+
+        <span>Prev at Artizen</span>
+
+        <span>Before that i was just coding</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
+        <div className="flex w-full justify-center py-24 items-center ">
+  <div className="relative flex items-center justify-center">
+    <div className="relative z-[1] h-[20vh] w-[15vw] -translate-y-2 rotate-[-4deg] rounded-4xl bg-red-200" />
+    <div className="relative z-[2] -ml-10 h-[20vh] w-[15vw] translate-y-3 rotate-[3deg] rounded-4xl bg-green-200" />
+    <div className="relative z-[3] -ml-10 h-[20vh] w-[15vw] -translate-y-1 -rotate-2 rounded-4xl bg-blue-200" />
+    <div className="relative z-[4] -ml-10 h-[20vh] w-[15vw] translate-y-4 rotate-[5deg] rounded-4xl bg-purple-200" />
+  </div>
+</div>
       </main>
+      <section className="w-full max-w-none self-stretch py-12">
+        <div className="mx-auto max-w-2xl px-4">
+          <h2 className="w-full text-left text-xl font-medium text-neutral-900 dark:text-white">
+            Selected Projects
+          </h2>
+        </div>
+        <div className="mt-4 w-full overflow-x-auto scrolll pb-2 pl-[max(1rem,calc((100vw-42rem)/2-0.4rem))] pr-4 [scrollbar-width:thin]">
+          <div className="flex w-max gap-4">
+    {[
+      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-blue-100" },
+      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-blue-100" },
+      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-blue-100" },
+      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-blue-100" },
+      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-blue-100" },
+      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-blue-100" },
+      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-blue-100" },
+    ].map((item, index) => (
+      <article
+        key={index}
+        className="flex w-[min(280px,85vw)] shrink-0 flex-col gap-3"
+      >
+        <div
+          className={`aspect-[2/2] w-full rounded-2xl ${item.color} dark:bg-zinc-800`}
+        />
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="text-left text-base font-semibold text-neutral-900 dark:text-white">
+            {item.title}
+          </h3>
+          <span className="shrink-0 text-neutral-900 dark:text-white" aria-hidden>
+            ↗
+          </span>
+        </div>
+        <p className="text-left text-sm leading-snug text-zinc-600 dark:text-zinc-400">
+          {item.desc}
+        </p>
+      </article>
+    ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full max-w-none self-stretch py-12">
+        <div className="mx-auto max-w-2xl px-4">
+          <h2 className="w-full text-left text-xl font-medium text-neutral-900 dark:text-white">
+            Companies I have Contributed to
+          </h2>
+        </div>
+        <div className="mt-4 w-full overflow-x-auto scrolll pb-2 pl-[max(1rem,calc((100vw-42rem)/2-0.4rem))] pr-4 [scrollbar-width:thin]">
+          <div className="flex w-max gap-4">
+    {[
+      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-blue-100" },
+      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-blue-100" },
+      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-blue-100" },
+      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-blue-100" },
+      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-blue-100" },
+      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-blue-100" },
+      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-blue-100" },
+    ].map((item, index) => (
+      <article
+        key={index}
+        className="flex w-[min(280px,85vw)] shrink-0 flex-col gap-3"
+      >
+        <div
+          className={`aspect-[2/2] w-full rounded-2xl ${item.color} dark:bg-zinc-800`}
+        />
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="text-left text-base font-semibold text-neutral-900 dark:text-white">
+            {item.title}
+          </h3>
+          <span className="shrink-0 text-neutral-900 dark:text-white" aria-hidden>
+            ↗
+          </span>
+        </div>
+        <p className="text-left text-sm leading-snug text-zinc-600 dark:text-zinc-400">
+          {item.desc}
+        </p>
+      </article>
+    ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
