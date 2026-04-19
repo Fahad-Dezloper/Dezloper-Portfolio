@@ -29,12 +29,12 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex  p-6 mx-auto flex-col items-center">
-      <Navbar />
-      <TooltipProvider>
-      {children}
-      </TooltipProvider>
-    </body>
+      <body className="flex min-h-dvh w-full flex-col items-center p-6">
+        <div className="flex w-full items-center flex-col">
+          <Navbar />
+          <TooltipProvider>{children}</TooltipProvider>
+        </div>
+      </body>
     </html>
   );
 }
