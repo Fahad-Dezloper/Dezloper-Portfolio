@@ -11,3 +11,9 @@ https://spencergabor.work/
 https://chanhdai.com/
 
 https://rauchg.com/2020/books-people-reread
+
+//blogs [ make the website static and fetch blogs from notion ] https://medium.com/@dezloperr
+
+//pending
+imporve open source contribution company image quality
+make cool experence i have had section more better
