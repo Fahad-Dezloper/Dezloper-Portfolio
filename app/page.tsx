@@ -18,7 +18,7 @@ export default function Home() {
         <span>
           Solana Superdevs Fellowship graduate{" "}
           <LinkPreview
-            url="https://fellowship.superteamin.fun/#program"
+            url="https://www.superdev.fun/"
             className="underline underline-offset-4"
           >
             (program)
@@ -94,8 +94,9 @@ export default function Home() {
           <div className="flex w-max gap-4">
     {[
       { title: "Antiwork", desc: "Sell your stuff. See what sticks.", link: "https://github.com/antiwork/gumboard/pulls?q=is%3Apr+author%3AFahad-Dezloper+is%3Aclosed", img: "/OSC/antiwork.png" },
-      { title: "Zero", desc: "An Open-Source Gmail Alternative for the Future of Email", link: "https://github.com/Mail-0/Zero/pulls?q=is%3Apr+author%3AFahad-Dezloper+is%3Aclosed", img: "/OSC/zero.png" },
+      { title: "Zero", desc: "An Open-Source Gmail Alternative for the Future of Email", link: "https://github.com/Mail-0/Zero/pulls?q=is%3Apr+author%3AFahad-Dezloper+is%3Aclosed", img: "/OSC/zero2.png" },
       { title: "Cal", desc: "Scheduling infrastructure for absolutely everyone.", link:"https://github.com/calcom/cal.diy/pulls/Fahad-Dezloper", img: "/OSC/cal.png" },
+      { title: "Solix", desc: "The universal data bridge for Solana. Making on-chain data accessible to every developer.", link:"https://github.com/SolixDB/app/pulls?q=is%3Apr+author%3AFahad-Dezloper+is%3Aclosed", img: "/OSC/solix.png" },
     ].map((item, index) => (
       <article
         key={index}
