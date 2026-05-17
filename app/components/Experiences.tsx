@@ -1,23 +1,71 @@
+type ExperienceItem = {
+  id: string;
+  title: string;
+  dates?: string;
+  description?: string;
+  bullets?: string[];
+};
+type FunExperienceItem = {
+  id: string;
+  title: string;
+  dates?: string;
+  description?: string;
+  image?: string;
+  bullets?: string[];
+  className?: string;
+  config?: {
+    y: number;
+    x: number;
+    zIndex: number;
+    rotate: number;
+  };
+};
+
 export default function Experiences() {
-  const experiences = [
+  const professionalExperince: ExperienceItem[] = [
     {
       id: "x2c",
       title: "Frontend Lead · X2C.fun",
       dates: "Nov 2025 – Present",
     },
     {
+      id: "artizence",
+      title: "Frontend Lead · Artizence Systems LLP",
+      dates: "Feb 2025 – Apr 2025",
+    },
+    {
+      id: "read-rise",
+      title: "Manager · Read & Rise",
+      dates: "Sep 2022 – Oct 2023",
+    },
+  ];
+
+  const experiences: FunExperienceItem[] = [
+    {
+      id: "superteam",
+      title: "Startup Village 2026 Resident",
+      dates: "May 15 - May 25",
+      image: "/experiences/superteam.jpeg",
+      className: "bg-blue-500",
+      config: {
+        y: 4,
+        x: 25,
+        zIndex: 5,
+        rotate: -3,
+      },
+    },
+    {
       id: "superteam",
       title: "Full Fledged Superteam Member",
       dates: "Nov 2025 – Present",
-    },
-    {
-      id: "superdevs",
-      title: "Solana Superdevs Fellowship · Graduate",
-      bullets: [
-        "Graduated in the top 20 out of 2500.",
-        "Learned and built on Solana (Rust), including private key management.",
-        "Convocation at Ahmedabad Startup Village.",
-      ],
+      image: "/experiences/STIndia.png",
+      className: "bg-orange-500",
+      config: {
+        y: 24,
+        x: 155,
+        zIndex: 5,
+        rotate: 5,
+      },
     },
     {
       id: "athena",
@@ -25,29 +73,55 @@ export default function Experiences() {
       dates: "Aug – Present",
       description:
         "Elite developer community of 300 cracked devs (160/300 members).",
+      image: "/experiences/athena.png",
+      className: "bg-red-500",
+      config: {
+        y: 4,
+        x: 300,
+        zIndex: 5,
+        rotate: 3,
+      },
     },
     {
-      id: "artizence",
-      title: "Frontend Lead · Artizence Systems LLP",
-      dates: "Feb 2025 – Apr 2025",
+      id: "superdevs",
+      title: "Solana Superdevs Fellowship · Graduate",
+      dates: "Sept – Dec",
       bullets: [
-        "Built and deployed 5+ fully responsive dashboards with dynamic API integrations.",
-        "Designed and implemented 24+ screens with clean UI/UX.",
-        "Contributed to a modular, scalable frontend architecture.",
+        "Graduated in the top 20 out of 2500.",
+        "Learned and built on Solana (Rust), including private key management.",
+        "Convocation at Ahmedabad Startup Village.",
       ],
-    },
-    {
-      id: "read-rise",
-      title: "Manager · Read & Rise",
-      dates: "Sep 2022 – Oct 2023",
-      bullets: [
-        "Managed and maintained the company website for performance and timely updates.",
-        "Led website enhancement projects to improve UX and functionality.",
-        "Handled inventory and stock management, ensuring accurate tracking and restocking.",
-        "Collaborated cross-functionally to streamline operations and boost workflow efficiency.",
-      ],
+      image: "/experiences/superdevs.png",
+      className: "bg-green-500",
+      config: {
+        y: 18,
+        x: 450,
+        zIndex: 5,
+        rotate: -3,
+      },
     },
   ];
+
+  const allExperiences = [...professionalExperince];
+
+  const renderTitle = (title: string) => {
+    const parts = title.split(" · ");
+    if (parts.length === 2) {
+      return (
+        <div className="text-sm font-intert">
+          <span className="font-medium">{parts[0]}</span>
+          <span className="text-[#cecdc3]/50 font-bold tracking-tight text-xs">
+            {" · " + parts[1]}
+          </span>
+        </div>
+      );
+    }
+    return (
+      <div className="text-sm">
+        <span className="font-medium">{title}</span>
+      </div>
+    );
+  };
 
   return (
     <section className="w-full max-w-none self-stretch py-12">
@@ -55,43 +129,33 @@ export default function Experiences() {
         <h2 className="w-full text-left text-xl font-medium text-neutral-900 dark:text-white">
           Cool Experience I have had
         </h2>
-      </div>
-      <div className="mt-4 w-full overflow-x-auto scrolll pb-2 pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
-        <div className="flex w-max gap-4">
-          {experiences.map((item, index) => (
-            <article
-              key={index}
-              className="flex w-[min(340px,85vw)] shrink-0 flex-col gap-4 rounded-2xl bg-zinc-100/80 p-6 dark:bg-zinc-800/40 border border-zinc-200/50 dark:border-zinc-700/50"
-            >
-              <div className="flex flex-col gap-1">
-                <h3 className="text-left text-base font-semibold text-neutral-900 dark:text-white leading-tight">
-                  {item.title}
-                </h3>
+        <div className="mt-6 flex flex-col gap-6">
+          {allExperiences.map((item, index) => (
+            <article key={index} className="flex flex-col gap-2">
+              <div className="flex justify-between items-baseline gap-4">
+                {renderTitle(item.title)}
                 {item.dates && (
-                  <span className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                  <span className="text-xs text-[#cecdc3]/40 shrink-0">
                     {item.dates}
                   </span>
                 )}
               </div>
-              
-              {item.description && (
-                <p className="text-left text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
-                  {item.description}
-                </p>
-              )}
-
-              {item.bullets && (
-                <ul className="text-left text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 flex flex-col gap-2 list-none m-0 p-0">
-                  {item.bullets.map((bullet, i) => (
-                    <li key={i} className="flex gap-2.5">
-                      <span className="text-zinc-400 dark:text-zinc-500 mt-[1px]">•</span>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
             </article>
           ))}
+          <div className="flex w-full h-60 items-center">
+            {experiences.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className={`w-40 absolute h-40 rounded-xl ${item.className} `}
+                  style={{
+                    zIndex: item.config?.zIndex,
+                    transform: `translateX(${item.config?.x}px) translateY(${item.config?.y}px) rotate(${item.config?.rotate}deg)`,
+                  }}
+                ></div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

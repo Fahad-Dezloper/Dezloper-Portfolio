@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Inter_Tight } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
@@ -12,6 +14,18 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const inter = Inter({
+  weight: ["100", "200", "300", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  variable: "--font-next-interr",
+});
+
+const intertight = Inter_Tight({
+  weight: ["100", "200", "300", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  variable: "--font-next-intert",
 });
 
 export const metadata: Metadata = {
@@ -29,7 +43,9 @@ export default function RootLayout({
       lang="en"
       className={`scroll-smooth ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-dvh w-full flex-col items-center p-6">
+      <body
+        className={`${intertight.variable} ${inter.variable} flex min-h-dvh w-full flex-col items-center p-6`}
+      >
         <div className="flex w-full items-center flex-col">
           <Navbar />
           <TooltipProvider>{children}</TooltipProvider>
