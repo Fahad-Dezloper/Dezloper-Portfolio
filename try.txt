@@ -17,3 +17,13 @@ https://rauchg.com/2020/books-people-reread
 //pending
 imporve open source contribution company image quality
 make cool experence i have had section more better
+
+projects
+fontme
+crowdify
+CEX backend rust
+gitearn
+movr
+
+books page will look like this
+https://press.stripe.com/
