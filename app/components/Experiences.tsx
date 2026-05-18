@@ -15,6 +15,7 @@ type FunExperienceItem = {
   bullets?: string[];
   className?: string;
   object?: string;
+  smallImage?: string;
   config?: {
     y: number;
     x: number;
@@ -49,6 +50,7 @@ export default function Experiences() {
       dates: "May 15 - May 25",
       image: "/experiences/startupVillage.png",
       className: "bg-blue-500",
+      smallImage: "/experiences/STIndia.png",
       width: "60",
       object: "cover",
       config: {
@@ -67,49 +69,51 @@ export default function Experiences() {
         "Learned and built on Solana (Rust), including private key management.",
         "Convocation at Ahmedabad Startup Village.",
       ],
-      image: "/experiences/superdevsfellow.png",
+      image: "/experiences/superdevs.png",
       className: "bg-green-500",
-      width: "40",
+      smallImage: "/experiences/100xDevs.png",
+      width: "60",
       object: "cover",
       config: {
         y: 18,
-        x: 235,
+        x: 265,
         zIndex: 20,
         rotate: -3,
       },
     },
     {
-      id: "superteam",
-      title: "Full Fledged Superteam Member",
+      id: "athena",
+      title: "Athena Hacker House",
       dates: "Nov 2025 – Present",
-      image: "/experiences/STIndia.png",
+      image: "/experiences/athena2.png",
       className: "bg-orange-500",
+      smallImage: "/experiences/athena.png",
       width: "40",
       object: "cover",
       config: {
         y: 24,
-        x: 380,
+        x: 420,
         zIndex: 30,
         rotate: 5,
       },
     },
-    {
-      id: "athena",
-      title: "Full Fledged Athena FOSS Member",
-      dates: "Aug – Present",
-      description:
-        "Elite developer community of 300 cracked devs (160/300 members).",
-      image: "/experiences/athena.png",
-      className: "bg-red-500",
-      width: "40",
-      object: "cover",
-      config: {
-        y: 4,
-        x: 500,
-        zIndex: 40,
-        rotate: 3,
-      },
-    },
+    // {
+    //   id: "athena",
+    //   title: "Full Fledged Athena FOSS Member",
+    //   dates: "Aug – Present",
+    //   description:
+    //     "Elite developer community of 300 cracked devs (160/300 members).",
+    //   image: "/experiences/athena.png",
+    //   className: "bg-red-500",
+    //   width: "40",
+    //   object: "cover",
+    //   config: {
+    //     y: 4,
+    //     x: 500,
+    //     zIndex: 40,
+    //     rotate: 3,
+    //   },
+    // },
   ];
 
   const allExperiences = [...professionalExperince];
@@ -152,8 +156,8 @@ export default function Experiences() {
               </div>
             </article>
           ))}
-          <div className="flex w-full h-60 items-center">
-            {experiences.map((item, index) => {
+          <div className="flex w-full gap-4 pb-4 mt-2">
+            {/* {experiences.map((item, index) => {
               return (
                 <div
                   key={index}
@@ -168,6 +172,38 @@ export default function Experiences() {
                     alt={item.title}
                     className={`object-${item.object} w-full h-full `}
                   />
+                </div>
+              );
+            })} */}
+            {experiences.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className="flex flex-col relative gap-2.5 shrink-0 group mt-6"
+                >
+                  <div className="absolute z-10 w-10 h-10 rounded-md overflow-hidden -top-5 left-2 transition-transform duration-300 group-hover:-translate-y-3">
+                    <img
+                      src={item.smallImage}
+                      alt=""
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="w-60 h-40 z-20 relative overflow-hidden rounded-md  bg-neutral-100 dark:bg-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="object-cover w-full h-full transition-transform duration-300 "
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-0.5 px-0.5">
+                    <h3 className="text-sm font-medium text-neutral-900 dark:text-zinc-100 leading-tight font-intert">
+                      {item.title}
+                    </h3>
+                    <span className="text-xs text-[#cecdc3]/50">
+                      {item.dates}
+                    </span>
+                  </div>
                 </div>
               );
             })}
