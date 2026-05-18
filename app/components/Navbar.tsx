@@ -7,6 +7,13 @@ const Navbar = () => {
     <div className="flex items-end max-w-2xl justify-between mb-5 md:mb-10  w-full">
       <a
         href="/"
+        onClick={(e) => {
+          if (window.location.pathname === "/") {
+            e.preventDefault();
+          }
+          const audio = new Audio("/sound/FAHHH (Meme Sound Effect).mp3");
+          audio.play().catch(console.error);
+        }}
         className="hover:bg-neutral-200 dark:hover:bg-neutral-700 p-2 rounded-2xl -ml-2 transition-[background-color] font-bold"
       >
         Fahad Khan
