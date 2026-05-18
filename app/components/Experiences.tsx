@@ -11,8 +11,10 @@ type FunExperienceItem = {
   dates?: string;
   description?: string;
   image?: string;
+  width?: string;
   bullets?: string[];
   className?: string;
+  object?: string;
   config?: {
     y: number;
     x: number;
@@ -45,41 +47,15 @@ export default function Experiences() {
       id: "superteam",
       title: "Startup Village 2026 Resident",
       dates: "May 15 - May 25",
-      image: "/experiences/superteam.jpeg",
+      image: "/experiences/startupVillage.png",
       className: "bg-blue-500",
+      width: "60",
+      object: "cover",
       config: {
         y: 4,
         x: 25,
-        zIndex: 5,
+        zIndex: 10,
         rotate: -3,
-      },
-    },
-    {
-      id: "superteam",
-      title: "Full Fledged Superteam Member",
-      dates: "Nov 2025 – Present",
-      image: "/experiences/STIndia.png",
-      className: "bg-orange-500",
-      config: {
-        y: 24,
-        x: 155,
-        zIndex: 5,
-        rotate: 5,
-      },
-    },
-    {
-      id: "athena",
-      title: "Full Fledged Athena FOSS Member",
-      dates: "Aug – Present",
-      description:
-        "Elite developer community of 300 cracked devs (160/300 members).",
-      image: "/experiences/athena.png",
-      className: "bg-red-500",
-      config: {
-        y: 4,
-        x: 300,
-        zIndex: 5,
-        rotate: 3,
       },
     },
     {
@@ -91,13 +67,47 @@ export default function Experiences() {
         "Learned and built on Solana (Rust), including private key management.",
         "Convocation at Ahmedabad Startup Village.",
       ],
-      image: "/experiences/superdevs.png",
+      image: "/experiences/superdevsfellow.png",
       className: "bg-green-500",
+      width: "40",
+      object: "cover",
       config: {
         y: 18,
-        x: 450,
-        zIndex: 5,
+        x: 235,
+        zIndex: 20,
         rotate: -3,
+      },
+    },
+    {
+      id: "superteam",
+      title: "Full Fledged Superteam Member",
+      dates: "Nov 2025 – Present",
+      image: "/experiences/STIndia.png",
+      className: "bg-orange-500",
+      width: "40",
+      object: "cover",
+      config: {
+        y: 24,
+        x: 380,
+        zIndex: 30,
+        rotate: 5,
+      },
+    },
+    {
+      id: "athena",
+      title: "Full Fledged Athena FOSS Member",
+      dates: "Aug – Present",
+      description:
+        "Elite developer community of 300 cracked devs (160/300 members).",
+      image: "/experiences/athena.png",
+      className: "bg-red-500",
+      width: "40",
+      object: "cover",
+      config: {
+        y: 4,
+        x: 500,
+        zIndex: 40,
+        rotate: 3,
       },
     },
   ];
@@ -147,12 +157,18 @@ export default function Experiences() {
               return (
                 <div
                   key={index}
-                  className={`w-40 absolute h-40 rounded-xl ${item.className} `}
+                  className={`w-${item.width} absolute h-40 overflow-hidden rounded-xl ${item.className} `}
                   style={{
                     zIndex: item.config?.zIndex,
                     transform: `translateX(${item.config?.x}px) translateY(${item.config?.y}px) rotate(${item.config?.rotate}deg)`,
                   }}
-                ></div>
+                >
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className={`object-${item.object} w-full h-full `}
+                  />
+                </div>
               );
             })}
           </div>

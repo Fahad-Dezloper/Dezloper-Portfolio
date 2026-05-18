@@ -17,6 +17,11 @@ const Navbar = () => {
             About
           </span>
         </a> */}
+        <a className="group p-2" href="/craft">
+          <span className="group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 rounded-xl py-0.5 px-1.5 inline-flex">
+            Craft
+          </span>
+        </a>
         <a className="group p-2" href="/blogs">
           <span className="group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 rounded-xl py-0.5 px-1.5 inline-flex">
             Blogs

@@ -30,12 +30,12 @@ export default function Contributions() {
 
   return (
     <section id="contribute" className="w-full max-w-none self-stretch py-12">
-      <div className="mx-auto max-w-2xl px-4">
+      <div className="mx-auto max-w-2xl">
         <h2 className="w-full text-left text-xl font-medium text-neutral-900 dark:text-white">
           Companies I have Contributed to
         </h2>
       </div>
-      <div className="mt-4 w-full overflow-x-auto scrolll pb-2 pl-[max(1rem,calc((100vw-42rem)/2-0.4rem))] pr-4 [scrollbar-width:thin]">
+      <div className="mt-4 w-full overflow-x-auto scrolll pb-2 pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
         <div className="flex w-max gap-4">
           {contributions.map((item, index) => (
             <Link
