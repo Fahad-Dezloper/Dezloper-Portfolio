@@ -14,35 +14,35 @@ const Navbar = () => {
           const audio = new Audio("/sound/FAHHH (Meme Sound Effect).mp3");
           audio.play().catch(console.error);
         }}
-        className="hover:bg-neutral-200 dark:hover:bg-neutral-700 p-2 rounded-2xl -ml-2 transition-[background-color] font-bold"
+        className="hover:bg-[var(--foreground)]/5 p-2 rounded-2xl -ml-2 transition-[background-color] font-bold"
       >
         Fahad Khan
       </a>
       <nav className="text-xs grow justify-end items-center flex">
         {/* <a className="group p-2" href="/about">
-          <span className="group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 rounded-xl py-0.5 px-1.5 inline-flex">
+          <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
             About
           </span>
         </a> */}
         <a className="group p-2" href="/craft">
-          <span className="group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 rounded-xl py-0.5 px-1.5 inline-flex">
+          <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
             Craft
           </span>
         </a>
         <a className="group p-2" href="/blogs">
-          <span className="group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 rounded-xl py-0.5 px-1.5 inline-flex">
+          <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
             Blogs
           </span>
         </a>
         <a className="group p-2" href="/books">
-          <span className="group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 rounded-xl py-0.5 px-1.5 inline-flex">
+          <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
             Books
           </span>
         </a>
         {/* <div className="flex flex-col relative items-center">
           <span onClick={() => setOpen(true)} className="group p-2">
             <span
-              className={`group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 ${open == true && "bg-neutral-700"} rounded-xl py-0.5 px-1.5 inline-flex`}
+              className={`group-hover:bg-[var(--foreground)]/5 ${open == true && "bg-neutral-700"} rounded-xl py-0.5 px-1.5 inline-flex`}
             >
               More
             </span>
@@ -50,12 +50,12 @@ const Navbar = () => {
           {open == true && (
             <div className="flex flex-col items-center bg-neutral-800 rounded-xl absolute top-8 py-1 px-2 gap-0">
               <a className="group px-2 py-1" href="/blogs">
-                <span className="group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 rounded-xl py-0.5 px-1.5 inline-flex">
+                <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
                   Blogs
                 </span>
               </a>
               <a className="group px-2 py-1" href="/books">
-                <span className="group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 rounded-xl py-0.5 px-1.5 inline-flex">
+                <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
                   Books
                 </span>
               </a>
@@ -63,7 +63,7 @@ const Navbar = () => {
           )}
         </div> */}
         <div className="flex gap-1 relative  px-2">
-          <span className="absolute -top-2 left-2 font-bold text-neutral-400 whitespace-nowrap">
+          <span className="absolute -top-2 left-2 font-bold text-[var(--foreground)]/50 whitespace-nowrap">
             Follow me
           </span>
           <a
@@ -71,7 +71,7 @@ const Navbar = () => {
             target="_blank"
             className="group inline-flex items-center py-2 px-1 rounded-sm transition-[background-color] whitespace-nowrap -mr-2"
           >
-            <span className="group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 rounded-xl py-0.5 px-1.5 inline-flex items-center gap-1">
+            <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex items-center gap-1">
               <svg
                 viewBox="0 0 24 24"
                 className="inline-flex fill-current"
@@ -90,7 +90,7 @@ const Navbar = () => {
             className="group inline-flex items-center py-2 px-1 rounded-sm transition-[background-color] whitespace-nowrap -mr-2"
             title="GitHub"
           >
-            <span className="group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 rounded-xl py-0.5 px-1.5 inline-flex items-center gap-1">
+            <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex items-center gap-1">
               <svg
                 aria-hidden="true"
                 className="inline-flex fill-current"

@@ -38,7 +38,7 @@ export default function Projects() {
   return (
     <section className="w-full max-w-none self-stretch py-12">
       <div className="mx-auto max-w-2xl">
-        <h2 className="w-full text-left text-xl font-medium text-neutral-900 dark:text-white mb-6">
+        <h2 className="text-xs font-medium text-[var(--foreground)]/50 uppercase tracking-wider mb-3">
           Projects
         </h2>
 
@@ -47,12 +47,11 @@ export default function Projects() {
           {openSourceProjects.map((item, index) => (
             <div key={index} className="flex flex-col gap-1.5 group">
               <div className="flex items-center gap-2">
-                <h3 className="text-base font-medium text-neutral-900 dark:text-white group-hover:underline decoration-neutral-300 dark:decoration-zinc-600 underline-offset-4">
+                <h3 className="text-base font-medium text-[var(--foreground)] group-hover:text-[var(--foreground)]/70 transition-colors">
                   <a
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:underline underline-offset-4 font-intert"
                   >
                     {item.title}
                   </a>
@@ -61,12 +60,12 @@ export default function Projects() {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="text-[var(--foreground)]/50 hover:text-[var(--foreground)] transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 >
                   ↗
                 </a>
               </div>
-              <p className="text-sm leading-snug text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm leading-snug text-[var(--foreground)]/70">
                 {item.desc}
               </p>
             </div>
@@ -83,7 +82,7 @@ export default function Projects() {
               className="flex w-[min(280px,85vw)] shrink-0 flex-col gap-3 group"
             >
               <div
-                className={`aspect-5/4 w-full rounded-2xl dark:bg-zinc-800 overflow-hidden relative`}
+                className={`aspect-5/4 w-full rounded-2xl bg-[var(--foreground)]/5 border border-[var(--foreground)]/5 overflow-hidden relative`}
               >
                 {item.video && (
                   <video

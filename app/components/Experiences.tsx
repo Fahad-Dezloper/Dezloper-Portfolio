@@ -122,16 +122,16 @@ export default function Experiences() {
     const parts = title.split(" · ");
     if (parts.length === 2) {
       return (
-        <div className="text-sm font-intert">
+        <div className="text-base">
           <span className="font-medium">{parts[0]}</span>
-          <span className="text-[#cecdc3]/50 font-bold tracking-tight text-xs">
+          <span className="text-[var(--foreground)]/50">
             {" · " + parts[1]}
           </span>
         </div>
       );
     }
     return (
-      <div className="text-sm">
+      <div className="text-base">
         <span className="font-medium">{title}</span>
       </div>
     );
@@ -140,7 +140,7 @@ export default function Experiences() {
   return (
     <section className="w-full max-w-none self-stretch py-12">
       <div className="mx-auto max-w-2xl">
-        <h2 className="w-full text-left text-xl font-medium text-neutral-900 dark:text-white">
+        <h2 className="text-xs font-medium text-[var(--foreground)]/50 uppercase tracking-wider mb-3">
           Cool Experience I have had
         </h2>
         <div className="mt-6 flex flex-col gap-6">
@@ -149,7 +149,7 @@ export default function Experiences() {
               <div className="flex justify-between items-baseline gap-4">
                 {renderTitle(item.title)}
                 {item.dates && (
-                  <span className="text-xs text-[#cecdc3]/40 shrink-0">
+                  <span className="text-xs text-[var(--foreground)]/40 shrink-0">
                     {item.dates}
                   </span>
                 )}
@@ -188,7 +188,7 @@ export default function Experiences() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="w-60 h-40 z-20 relative overflow-hidden rounded-md  bg-neutral-100 dark:bg-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50">
+                  <div className="w-60 h-40 z-20 relative overflow-hidden rounded-md bg-[var(--foreground)]/5 border border-[var(--foreground)]/5">
                     <img
                       src={item.image}
                       alt={item.title}
@@ -197,10 +197,10 @@ export default function Experiences() {
                   </div>
 
                   <div className="flex flex-col gap-0.5 px-0.5">
-                    <h3 className="text-sm font-medium text-neutral-900 dark:text-zinc-100 leading-tight font-intert">
+                    <h3 className="text-sm font-medium text-[var(--foreground)] leading-tight">
                       {item.title}
                     </h3>
-                    <span className="text-xs text-[#cecdc3]/50">
+                    <span className="text-xs text-[var(--foreground)]/50">
                       {item.dates}
                     </span>
                   </div>
