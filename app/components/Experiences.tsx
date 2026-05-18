@@ -124,7 +124,7 @@ export default function Experiences() {
       return (
         <div className="text-base">
           <span className="font-medium">{parts[0]}</span>
-          <span className="text-[var(--foreground)]/50">
+          <span className="text-[var(--foreground)]/50 text-sm">
             {" · " + parts[1]}
           </span>
         </div>
@@ -132,7 +132,7 @@ export default function Experiences() {
     }
     return (
       <div className="text-base">
-        <span className="font-medium">{title}</span>
+        <span className="font-medium text-xs">{title}</span>
       </div>
     );
   };

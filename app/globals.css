@@ -18,11 +18,9 @@
   --font-intert: var(--font-next-intert);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #100f0f;
-    --foreground: #cecdc3;
-  }
+.dark {
+  --background: #100f0f;
+  --foreground: #cecdc3;
 }
 
 body {
