@@ -36,7 +36,7 @@ export default function Projects() {
   ];
 
   return (
-    <section className="w-full max-w-none self-stretch py-12">
+    <section className="w-full max-w-none self-stretch ">
       <div className="mx-auto max-w-2xl">
         <h2 className="text-xs font-medium text-[var(--foreground)]/50 uppercase tracking-wider mb-3">
           Projects
@@ -48,11 +48,7 @@ export default function Projects() {
             <div key={index} className="flex flex-col gap-1.5 group">
               <div className="flex items-center gap-2">
                 <h3 className="text-base font-medium text-[var(--foreground)] group-hover:text-[var(--foreground)]/70 transition-colors">
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={item.link} target="_blank" rel="noopener noreferrer">
                     {item.title}
                   </a>
                 </h3>
@@ -74,7 +70,7 @@ export default function Projects() {
       </div>
 
       {/* Video Projects Carousel */}
-      <div className="mt-8 w-full overflow-x-auto scrolll pb-2 pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
+      <div className="mt-8 w-full overflow-x-auto scrolll pb-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
         <div className="flex w-max gap-4">
           {videoProjects.map((item, index) => (
             <div

@@ -46,7 +46,7 @@ export default function RootLayout({
       className={`scroll-smooth ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body
-        className={`${intertight.variable} ${inter.variable} flex min-h-dvh w-full flex-col items-center p-6`}
+        className={`${intertight.variable} ${inter.variable} flex min-h-dvh w-full flex-col items-center px-4 py-6 sm:px-6`}
       >
         <ThemeProvider
           attribute="class"

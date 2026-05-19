@@ -62,7 +62,7 @@ export default function Experiences() {
     },
     {
       id: "superdevs",
-      title: "Solana Superdevs Fellowship · Graduate",
+      title: "Solana Superdevs Fellowship",
       dates: "Sept – Dec",
       bullets: [
         "Graduated in the top 20 out of 2500.",
@@ -138,7 +138,7 @@ export default function Experiences() {
   };
 
   return (
-    <section className="w-full max-w-none self-stretch py-12">
+    <section className="w-full max-w-none self-stretch">
       <div className="mx-auto max-w-2xl">
         <h2 className="text-xs font-medium text-[var(--foreground)]/50 uppercase tracking-wider mb-3">
           Cool Experience I have had
@@ -146,7 +146,7 @@ export default function Experiences() {
         <div className="mt-6 flex flex-col gap-6">
           {allExperiences.map((item, index) => (
             <article key={index} className="flex flex-col gap-2">
-              <div className="flex justify-between items-baseline gap-4">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-1 sm:gap-4">
                 {renderTitle(item.title)}
                 {item.dates && (
                   <span className="text-xs text-[var(--foreground)]/40 shrink-0">
@@ -156,58 +156,43 @@ export default function Experiences() {
               </div>
             </article>
           ))}
-          <div className="flex w-full gap-4 pb-4 mt-2">
-            {/* {experiences.map((item, index) => {
-              return (
-                <div
-                  key={index}
-                  className={`w-${item.width} absolute h-40 overflow-hidden rounded-xl ${item.className} `}
-                  style={{
-                    zIndex: item.config?.zIndex,
-                    transform: `translateX(${item.config?.x}px) translateY(${item.config?.y}px) rotate(${item.config?.rotate}deg)`,
-                  }}
-                >
+        </div>
+      </div>
+
+      <div className="mt-8 w-full overflow-x-auto scrolll pb-2 pt-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
+        <div className="flex w-max gap-4">
+          {experiences.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className="flex flex-col relative gap-2.5 shrink-0 group mt-6"
+              >
+                <div className="absolute z-10 w-10 h-10 rounded-md overflow-hidden -top-5 left-2 transition-transform duration-300 md:group-hover:-translate-y-3 -translate-y-3 shadow-md border border-[var(--foreground)]/10">
+                  <img
+                    src={item.smallImage}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="w-[min(240px,75vw)] aspect-video z-20 relative overflow-hidden rounded-md bg-[var(--foreground)]/5 border border-[var(--foreground)]/5">
                   <img
                     src={item.image}
                     alt={item.title}
-                    className={`object-${item.object} w-full h-full `}
+                    className="object-cover w-full h-full transition-transform duration-300 "
                   />
                 </div>
-              );
-            })} */}
-            {experiences.map((item, index) => {
-              return (
-                <div
-                  key={index}
-                  className="flex flex-col relative gap-2.5 shrink-0 group mt-6"
-                >
-                  <div className="absolute z-10 w-10 h-10 rounded-md overflow-hidden -top-5 left-2 transition-transform duration-300 group-hover:-translate-y-3">
-                    <img
-                      src={item.smallImage}
-                      alt=""
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="w-60 h-40 z-20 relative overflow-hidden rounded-md bg-[var(--foreground)]/5 border border-[var(--foreground)]/5">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="object-cover w-full h-full transition-transform duration-300 "
-                    />
-                  </div>
 
-                  <div className="flex flex-col gap-0.5 px-0.5">
-                    <h3 className="text-sm font-medium text-[var(--foreground)] leading-tight">
-                      {item.title}
-                    </h3>
-                    <span className="text-xs text-[var(--foreground)]/50">
-                      {item.dates}
-                    </span>
-                  </div>
+                <div className="flex flex-col gap-0.5 px-0.5 max-w-[min(240px,75vw)] whitespace-normal">
+                  <h3 className="text-sm font-medium text-[var(--foreground)] leading-tight">
+                    {item.title}
+                  </h3>
+                  <span className="text-xs text-[var(--foreground)]/50">
+                    {item.dates}
+                  </span>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

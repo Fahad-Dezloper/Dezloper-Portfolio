@@ -75,6 +75,12 @@ const components = {
       {...props}
     />
   ),
+  img: (props: any) => (
+    <img
+      className="max-w-full h-auto rounded-xl my-6 border border-[var(--foreground)]/5 object-cover"
+      {...props}
+    />
+  ),
 };
 
 export async function generateStaticParams() {

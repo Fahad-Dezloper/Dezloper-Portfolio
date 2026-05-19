@@ -32,7 +32,7 @@ const Blogs = () => {
             <Link
               key={post.slug}
               href={`/${post.slug}`}
-              className="group py-3 flex justify-between items-baseline gap-4 border-b border-[var(--foreground)]/5 last:border-0 transition-colors"
+              className="group py-3 flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-1 sm:gap-4 border-b border-[var(--foreground)]/5 last:border-0 transition-colors"
             >
               <span className="font-medium group-hover:text-[var(--foreground)]/70 transition-colors">
                 {post.title}

@@ -16,7 +16,7 @@ export default function Hero() {
   return (
     <main className="flex flex-1 max-w-2xl w-full flex-col items-center sm:items-start">
       <div className="flex flex-col gap-3 text-[var(--foreground)]/70 leading-relaxed text-[15px] sm:text-base">
-        <div className="flex w-full justify-between items-center">
+        <div className="flex w-full  justify-between items-start sm:items-center gap-3 sm:gap-0">
           <p>22, Design engineer</p>
 
           <button

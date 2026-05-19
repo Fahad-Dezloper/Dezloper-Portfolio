@@ -12,7 +12,7 @@ const Navbar = () => {
     setMounted(true);
   }, []);
   return (
-    <div className="flex items-end max-w-2xl justify-between mb-5 md:mb-10  w-full">
+    <div className="flex items-center sm:items-end flex-wrap gap-y-6 max-w-2xl justify-between mb-8 md:mb-10 w-full">
       <Link
         href="/"
         onClick={(e) => {

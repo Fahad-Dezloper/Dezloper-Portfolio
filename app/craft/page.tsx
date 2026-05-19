@@ -35,7 +35,7 @@ export default function CraftPage() {
   return (
     <main className="w-full max-w-none">
       <div className="px-4 sm:px-0">
-        <div className="columns-3 gap-4 space-y-4">
+        <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
           {crafts.map((item, index) => (
             <a
               key={index}

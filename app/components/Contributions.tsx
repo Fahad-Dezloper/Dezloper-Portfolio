@@ -29,13 +29,13 @@ export default function Contributions() {
   ];
 
   return (
-    <section id="contribute" className="w-full max-w-none self-stretch py-12">
+    <section id="contribute" className="w-full max-w-none self-stretch">
       <div className="mx-auto max-w-2xl">
         <h2 className="text-xs font-medium text-[var(--foreground)]/50 uppercase tracking-wider mb-3">
           Companies I have Contributed to
         </h2>
       </div>
-      <div className="mt-4 w-full overflow-x-auto scrolll pb-2 pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
+      <div className="mt-4 w-full overflow-x-auto scrolll pb-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
         <div className="flex w-max gap-4">
           {contributions.map((item, index) => (
             <Link
@@ -43,10 +43,10 @@ export default function Contributions() {
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex w-[min(280px,85vw)] shrink-0 flex-col gap-3 group"
+              className="flex md:w-[min(280px,17vw)] w-[min(280px,40vw)] shrink-0 flex-col gap-3 group"
             >
               <div
-                className={`aspect-2/2 w-full rounded-2xl overflow-hidden bg-[var(--foreground)]/5 border border-[var(--foreground)]/5`}
+                className={` md:w-[16vw] w-[34vw] rounded-2xl overflow-hidden bg-[var(--foreground)]/5 border border-[var(--foreground)]/5`}
               >
                 <img
                   src={item.img}
@@ -55,7 +55,7 @@ export default function Contributions() {
                 />
               </div>
               <div className="flex items-start justify-between gap-2">
-                <h3 className="text-left text-base font-medium text-[var(--foreground)] group-hover:text-[var(--foreground)]/70 transition-colors">
+                <h3 className="text-left text-base font-medium text-[var(--foreground)] group-hover:text-[var(--foreground)]/70 group-hover:underline transition-colors">
                   {item.title}
                 </h3>
               </div>
