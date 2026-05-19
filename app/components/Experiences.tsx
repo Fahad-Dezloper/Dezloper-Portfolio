@@ -167,7 +167,7 @@ export default function Experiences() {
                 key={index}
                 className="flex flex-col relative gap-2.5 shrink-0 group mt-6"
               >
-                <div className="absolute z-10 w-10 h-10 rounded-md overflow-hidden -top-5 left-2 transition-transform duration-300 md:group-hover:-translate-y-3 -translate-y-3 shadow-md border border-[var(--foreground)]/10">
+                <div className="absolute z-10 w-10 h-10 rounded-md overflow-hidden -top-5 left-2 transition-transform duration-300 md:group-hover:-translate-y-3 md:-translate-y-0 -translate-y-3 shadow-md border border-[var(--foreground)]/10">
                   <img
                     src={item.smallImage}
                     alt=""

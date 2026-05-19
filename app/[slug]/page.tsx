@@ -90,6 +90,37 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const resolvedParams = await params;
+  const post = getBlogPostBySlug(resolvedParams.slug);
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+    };
+  }
+
+  return {
+    title: post.metadata.title,
+    description: post.metadata.description,
+    openGraph: {
+      title: post.metadata.title,
+      description: post.metadata.description,
+      type: "article",
+      publishedTime: post.metadata.date,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.metadata.title,
+      description: post.metadata.description,
+    },
+  };
+}
+
 export default async function BlogPostPage({
   params,
 }: {
