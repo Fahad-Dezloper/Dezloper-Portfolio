@@ -11,6 +11,7 @@ const Navbar = () => {
   useEffect(() => {
     setMounted(true);
   }, []);
+
   return (
     <div className="flex items-center sm:items-end flex-wrap gap-y-6 max-w-2xl justify-between mb-8 md:mb-10 w-full">
       <Link
@@ -22,7 +23,7 @@ const Navbar = () => {
           const audio = new Audio("/sound/FAHHH (Meme Sound Effect).mp3");
           audio.play().catch(console.error);
         }}
-        className="hover:bg-[var(--foreground)]/5 p-2 rounded-2xl -ml-2 transition-[background-color] font-bold"
+        className="hover:bg-[var(--foreground)]/5 p-2 rounded-2xl flex gap-2 items-center -ml-2 transition-[background-color] font-bold"
       >
         Fahad Khan
       </Link>

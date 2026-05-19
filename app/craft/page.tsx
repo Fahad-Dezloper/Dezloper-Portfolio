@@ -21,7 +21,7 @@ export default function CraftPage() {
     {
       title: "Interface Craft",
       date: "January 2026",
-      video: "/Craft/InterfaceCraft.mp4",
+      video: "/Craft/interfaceCraft.mp4",
       link: "#",
     },
     {
