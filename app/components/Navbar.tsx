@@ -31,21 +31,21 @@ const Navbar = () => {
             About
           </span>
         </a> */}
-        <a className="group p-2" href="/craft">
+        <a className="group p-2 font-semibold" href="/craft">
           <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
             Craft
           </span>
         </a>
-        <a className="group p-2" href="/blogs">
+        <a className="group p-2 font-semibold" href="/blogs">
           <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
             Blogs
           </span>
         </a>
-        <a className="group p-2" href="/books">
+        {/* <a className="group p-2" href="/books">
           <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
             Books
           </span>
-        </a>
+        </a> */}
         {/* <div className="flex flex-col relative items-center">
           <span onClick={() => setOpen(true)} className="group p-2">
             <span
