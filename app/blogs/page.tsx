@@ -1,49 +1,52 @@
-import react from 'react'
-import GitHubContributionsDemo from '../components/GithubChart'
+import React from "react";
+import Link from "next/link";
 
 const Blogs = () => {
-    return (
-        <div className="min-w-2xl max-w-2xl">
-        
-        <div className="w-full mb-12">
-          <div className='flex justify-between w-full'>
-            <span>how are you doing</span>
-            <span>Jan 18, 2026</span>
-          </div>
-        </div>
+  // Placeholder blog posts matching the visual vibe
+  const posts = [
+    {
+      title: "how are you doing",
+      date: "Jan 18, 2026",
+      slug: "#",
+    },
+    {
+      title: "For Devs",
+      date: "Dec 10, 2025",
+      slug: "#",
+    },
+    {
+      title: "Project One overview",
+      date: "Nov 05, 2025",
+      slug: "#",
+    },
+  ];
 
-        <div className="flex flex-col">
-          <h2 className="w-full mb-5 text-left text-xl font-bold text-neutral-900 dark:text-white">
-        For Devs
-          </h2>
-          <div className='grid grid-cols-2 overflow-hidden gap-4'>
-          {[
-      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-blue-100" },
-      { title: "Project One", desc: "Short description that can wrap to two lines.", color: "bg-red-100" },
-    ].map((item, index) => (
-      <article
-        key={index}
-        className="flex h-[20vh] bg-red-300 rounded-2xl w-full flex-col gap-3"
-      >
-        {/* <div
-          className={`h-[20vh] w-full rounded-2xl ${item.color}`}
-        />
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="text-left text-base font-semibold text-neutral-900 dark:text-white">
-            {item.title}
-          </h3>
-          <span className="shrink-0 text-neutral-900 dark:text-white" aria-hidden>
-            ↗
-          </span>
+  return (
+    <main className="w-full max-w-2xl flex-1 flex flex-col ">
+      <section className="flex flex-col text-[var(--foreground)] w-full">
+        <h1 className="text-xs font-medium text-[var(--foreground)]/50 uppercase tracking-wider mb-3">
+          Writing
+        </h1>
+
+        <div className="flex flex-col w-full">
+          {posts.map((post, index) => (
+            <Link
+              key={index}
+              href={post.slug}
+              className="group py-3 flex justify-between items-baseline gap-4 border-b border-[var(--foreground)]/5 last:border-0 transition-colors"
+            >
+              <span className="font-medium group-hover:text-[var(--foreground)]/70 transition-colors">
+                {post.title}
+              </span>
+              <span className="text-xs text-[var(--foreground)]/40 shrink-0">
+                {post.date}
+              </span>
+            </Link>
+          ))}
         </div>
-        <p className="text-left text-sm leading-snug text-zinc-600 dark:text-zinc-400">
-          {item.desc}
-        </p> */}
-      </article>
-    ))}
-          </div>
-        </div>
-      </div>
-    )
-}
-export default Blogs
+      </section>
+    </main>
+  );
+};
+
+export default Blogs;
