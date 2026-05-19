@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { useTheme } from "next-themes";
 
 const Navbar = () => {
@@ -12,7 +13,7 @@ const Navbar = () => {
   }, []);
   return (
     <div className="flex items-end max-w-2xl justify-between mb-5 md:mb-10  w-full">
-      <a
+      <Link
         href="/"
         onClick={(e) => {
           if (window.location.pathname === "/") {
@@ -24,23 +25,23 @@ const Navbar = () => {
         className="hover:bg-[var(--foreground)]/5 p-2 rounded-2xl -ml-2 transition-[background-color] font-bold"
       >
         Fahad Khan
-      </a>
+      </Link>
       <nav className="text-xs grow justify-end items-center flex">
         {/* <a className="group p-2" href="/about">
           <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
             About
           </span>
         </a> */}
-        <a className="group p-2 font-semibold" href="/craft">
+        <Link className="group p-2 font-semibold" href="/craft">
           <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
             Craft
           </span>
-        </a>
-        <a className="group p-2 font-semibold" href="/blogs">
+        </Link>
+        <Link className="group p-2 font-semibold" href="/blogs">
           <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
             Blogs
           </span>
-        </a>
+        </Link>
         {/* <a className="group p-2" href="/books">
           <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
             Books
@@ -114,33 +115,31 @@ const Navbar = () => {
             </span>
           </a>
         </div>
-        {mounted && (
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-[var(--foreground)]/50 hover:text-[var(--foreground)] transition-all hover:bg-[var(--foreground)]/5 size-8 ml-2"
+        <button
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-[var(--foreground)]/50 hover:text-[var(--foreground)] transition-all hover:bg-[var(--foreground)]/5 size-8 ml-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="size-4.5"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="size-4.5"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
-              <path d="M12 3l0 18"></path>
-              <path d="M12 9l4.65 -4.65"></path>
-              <path d="M12 14.3l7.37 -7.37"></path>
-              <path d="M12 19.6l8.85 -8.85"></path>
-            </svg>
-            <span className="sr-only">Toggle theme</span>
-          </button>
-        )}
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+            <path d="M12 3l0 18"></path>
+            <path d="M12 9l4.65 -4.65"></path>
+            <path d="M12 14.3l7.37 -7.37"></path>
+            <path d="M12 19.6l8.85 -8.85"></path>
+          </svg>
+          <span className="sr-only">Toggle theme</span>
+        </button>
       </nav>
     </div>
   );

@@ -1,23 +1,22 @@
 import React from "react";
 import Link from "next/link";
+import { getBlogPosts } from "@/lib/mdx";
 
 const Blogs = () => {
-  // Placeholder blog posts matching the visual vibe
-  const posts = [
+  const posts = getBlogPosts();
+
+  const devPosts = [
     {
-      title: "how are you doing",
-      date: "Jan 18, 2026",
-      slug: "#",
+      title: "AMM [ Automated Market Maker ]",
+      img: "/blogs/AMM.png",
+      slug: "AMM",
+      date: "Sep 1, 2025",
     },
     {
-      title: "For Devs",
-      date: "Dec 10, 2025",
-      slug: "#",
-    },
-    {
-      title: "Project One overview",
-      date: "Nov 05, 2025",
-      slug: "#",
+      title: "ReVanced — The Art of Digital Reverse Engineering",
+      img: "/blogs/Revanced.png",
+      slug: "ReVanced",
+      date: "Sep 2, 2025",
     },
   ];
 
@@ -29,10 +28,10 @@ const Blogs = () => {
         </h1>
 
         <div className="flex flex-col w-full">
-          {posts.map((post, index) => (
+          {posts.map((post) => (
             <Link
-              key={index}
-              href={post.slug}
+              key={post.slug}
+              href={`/${post.slug}`}
               className="group py-3 flex justify-between items-baseline gap-4 border-b border-[var(--foreground)]/5 last:border-0 transition-colors"
             >
               <span className="font-medium group-hover:text-[var(--foreground)]/70 transition-colors">
@@ -41,6 +40,32 @@ const Blogs = () => {
               <span className="text-xs text-[var(--foreground)]/40 shrink-0">
                 {post.date}
               </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+      <section className="flex flex-col text-[var(--foreground)] w-full mt-8">
+        <h1 className="text-xs font-medium text-[var(--foreground)]/50 uppercase tracking-wider mb-3">
+          For Devs
+        </h1>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+          {devPosts.map((post, index) => (
+            <Link
+              key={index}
+              href={`/${post.slug}`}
+              className="flex flex-col gap-3 group"
+            >
+              <div className="h-fit rounded-2xl bg-[var(--foreground)]/5 border border-[var(--foreground)]/5 overflow-hidden">
+                <img
+                  src={post.img}
+                  alt={post.title}
+                  className="w-full h-full object-contain transition-transform duration-300 "
+                />
+              </div>
+              <h3 className="text-sm font-medium text-[var(--foreground)] group-hover:text-[var(--foreground)]/70 transition-colors">
+                {post.title}
+              </h3>
             </Link>
           ))}
         </div>

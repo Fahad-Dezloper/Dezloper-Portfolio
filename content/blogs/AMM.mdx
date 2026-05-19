@@ -1,0 +1,98 @@
+---
+title: "AMM [ Automated Market Maker ]"
+date: "Sep 1, 2025"
+description: "Understanding the mechanics of Automated Market Makers in DeFi."
+---
+
+![AMM](/blogs/AMM.png)
+
+## What is an AMM (Automated Market Maker)?
+
+An **Automated Market Maker (AMM)** is a type of market maker — similar in concept to firms like Citadel — but fully automated through smart contracts. They are mainly used in **decentralized exchanges (DEXs)** to keep the market liquid.
+
+Unlike traditional **order book systems**, AMMs rely on **algorithmic models** that dynamically adjust prices based on the ratio of assets in a **liquidity pool**.
+
+## Who Built It and Why?
+
+The idea of AMMs was first introduced by **Vitalik Buterin in 2017**, with working models arriving shortly after.
+
+*The point of an AMM is simple:*
+Instead of matching a **buyer** and **seller** (like stock markets do), AMMs use **liquidity pools and smart contracts** to let anyone trade at any time.
+
+This innovation made decentralized exchanges possible, removing middlemen and laying the foundation for modern **DeFi**.
+
+### The Fruit Basket Analogy 🍎🍌
+
+Think of an AMM as a **basket of fruits** — say, apples and bananas.
+
+* If someone gives the basket bananas, they can take out apples.
+* If they give apples, they can take out bananas.
+
+The system always balances the ratio of fruits inside the basket. That’s how trading works in an AMM.
+
+## Key Concepts in AMMs
+
+### 1. Liquidity Pool = The Basket
+
+Liquidity providers (LPs) are people who fill the basket with **both fruits** (tokens). They maintain a consistent ratio.
+
+In return, LPs earn a **small commission** whenever someone trades.
+
+### 2. How Prices Change
+
+When you take **Token A** out, you must put in **Token B**.
+
+Example:
+* If you keep taking apples and adding bananas, the basket ends up with **too many bananas** and **fewer apples**.
+* This makes **apples more expensive** (since they’re rarer).
+* Meanwhile, **bananas get cheaper** (since they’re abundant).
+
+That’s how the AMM automatically sets prices.
+
+---
+
+### 3. Slippage (Big Trades Move Prices More)
+
+If you suddenly dump **a lot of bananas** into the basket, the balance shifts drastically.
+
+As a result:
+* Apples feel **very rare**.
+* You’ll get **fewer apples per banana**.
+
+This price shift = **slippage**.
+
+### 4. Impermanent Loss (IL)
+
+Now let’s talk about the risk for liquidity providers.
+
+Imagine you deposit **50 apples and 50 bananas** into the basket.
+* If the price of apples suddenly skyrockets outside the AMM, traders will take apples and replace them with bananas.
+* When you withdraw your share later, you may end up with **more bananas and fewer apples**, which might be worth less than if you just held the tokens separately.
+
+👉 This difference = **impermanent loss**.
+
+It’s called *impermanent* because if prices return to their old levels, the loss disappears. But if they don’t, it becomes permanent.
+
+## Limitations of AMMs
+
+* **Impermanent Loss** — as explained above, LPs may lose value if prices move significantly.
+* **Slippage** — large trades can heavily distort prices.
+* **Risk of Bugs/Exploits** — since AMMs are smart contracts, bugs in code can be exploited.
+
+## The Future of AMMs
+
+### Concentrated Liquidity (More Efficient Pools)
+
+Projects like Uniswap V3 introduced concentrated liquidity, making capital use much more efficient.
+
+### Cross-Chain and Omnichain AMMs
+
+Right now, most AMMs only work on **one blockchain**.
+
+For example, if you want to swap apples on **Ethereum** for bananas on **Solana**, you need bridges (which are risky).
+
+Future AMMs will be:
+* **Cross-chain**, enabling swaps across blockchains directly.
+* **Omnichain**, meaning a single fruit basket spans multiple blockchains.
+
+Projects like LayerZero are already building toward this vision.
