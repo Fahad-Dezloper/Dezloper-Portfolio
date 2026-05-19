@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useTheme } from "next-themes";
 
 const Navbar = () => {

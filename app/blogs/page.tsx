@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { getBlogPosts } from "@/lib/mdx";
 
 const Blogs = () => {
@@ -8,13 +8,13 @@ const Blogs = () => {
   const devPosts = [
     {
       title: "AMM [ Automated Market Maker ]",
-      img: "/blogs/AMM.png",
+      img: "/blogs/AMM.webp",
       slug: "AMM",
       date: "Sep 1, 2025",
     },
     {
       title: "ReVanced — The Art of Digital Reverse Engineering",
-      img: "/blogs/Revanced.png",
+      img: "/blogs/Revanced.webp",
       slug: "ReVanced",
       date: "Sep 2, 2025",
     },

@@ -26,7 +26,7 @@ export default function Projects() {
       link: "#",
     },
     {
-      video: "/Craft/InterfaceCraft.mp4",
+      video: "/Craft/interfaceCraft.mp4",
       link: "#",
     },
     {

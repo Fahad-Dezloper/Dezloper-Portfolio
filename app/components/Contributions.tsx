@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 export default function Contributions() {
   const contributions = [
@@ -6,25 +6,25 @@ export default function Contributions() {
       title: "Antiwork",
       desc: "Sell your stuff. See what sticks.",
       link: "https://github.com/antiwork/gumboard/pulls?q=is%3Apr+author%3AFahad-Dezloper+is%3Aclosed",
-      img: "/OSC/antiwork.png",
+      img: "/OSC/antiwork.webp",
     },
     {
       title: "Zero",
       desc: "An Open-Source Gmail Alternative for the Future of Email",
       link: "https://github.com/Mail-0/Zero/pulls?q=is%3Apr+author%3AFahad-Dezloper+is%3Aclosed",
-      img: "/OSC/zero2.png",
+      img: "/OSC/zero2.webp",
     },
     {
       title: "Cal",
       desc: "Scheduling infrastructure for absolutely everyone.",
       link: "https://github.com/calcom/cal.diy/pulls/Fahad-Dezloper",
-      img: "/OSC/cal.png",
+      img: "/OSC/cal.webp",
     },
     {
       title: "Solix",
       desc: "The universal data bridge for Solana. Making on-chain data accessible to every developer.",
       link: "https://github.com/SolixDB/app/pulls?q=is%3Apr+author%3AFahad-Dezloper+is%3Aclosed",
-      img: "/OSC/solix.png",
+      img: "/OSC/solix.webp",
     },
   ];
 

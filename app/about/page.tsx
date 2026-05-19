@@ -1,6 +1,6 @@
 import React from "react";
 import GitHubContributionsDemo from "../components/GithubChart";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import ExperienceAccordion from "./ExperienceAccordion";
 
 const page = () => {
