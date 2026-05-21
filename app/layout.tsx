@@ -7,6 +7,7 @@ import { ViewTransitions } from "next-view-transitions";
 import Navbar from "./components/Navbar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "./components/ThemeProvider";
+import SoundOnLoad from "./components/SoundOnLoad";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +35,7 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
   ? process.env.NEXT_PUBLIC_SITE_URL
   : process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000";
+    : "https://www.faahhad.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -66,7 +67,7 @@ export const metadata: Metadata = {
     siteName: "Fahad Khan",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/My/OG3.png",
         width: 1200,
         height: 630,
         alt: "Fahad Khan - Design Engineer",
@@ -78,7 +79,7 @@ export const metadata: Metadata = {
     title: "Fahad Khan — Design Engineer",
     description:
       "I consider myself a builder at heart and enjoy crafting products & interfaces that feel great to use.",
-    images: ["/opengraph-image.png"],
+    images: ["/My/OG3.png"],
     creator: "@dezloperr",
   },
   icons: {
@@ -110,6 +111,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <div className="flex w-full items-center flex-col">
+              <SoundOnLoad />
               <Navbar />
               <TooltipProvider>{children}</TooltipProvider>
             </div>
