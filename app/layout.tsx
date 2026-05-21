@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     siteName: "Fahad Khan",
     images: [
       {
-        url: "/My/OG3.png",
+        url: "https://ox35safakaidjuzg.public.blob.vercel-storage.com/OG.png",
         width: 1200,
         height: 630,
         alt: "Fahad Khan - Design Engineer",
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     title: "Fahad Khan — Design Engineer",
     description:
       "I consider myself a builder at heart and enjoy crafting products & interfaces that feel great to use.",
-    images: ["/My/OG3.png"],
+    images: ["https://ox35safakaidjuzg.public.blob.vercel-storage.com/OG.png"],
     creator: "@dezloperr",
   },
   icons: {
