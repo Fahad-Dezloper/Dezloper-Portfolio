@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Projects() {
   const openSourceProjects = [
     {
@@ -15,23 +17,23 @@ export default function Projects() {
   const videoProjects = [
     {
       video: "/Craft/dynamicIsland.mp4",
-      link: "#",
+      link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/DynamicIsland.tsx",
     },
     {
       video: "/Craft/bell.mp4",
-      link: "#",
+      link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/shared/Ring.tsx",
     },
     {
       video: "/Craft/Gooey.mp4",
-      link: "#",
+      link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/GooeyFilter.tsx",
     },
     {
       video: "/Craft/interfaceCraft.mp4",
-      link: "#",
+      link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/InterfaceCraft.tsx",
     },
     {
       video: "/Craft/smoothness.mp4",
-      link: "#",
+      link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/SmoothnessState.tsx",
     },
   ];
 
@@ -73,7 +75,10 @@ export default function Projects() {
       <div className="mt-8 w-full overflow-x-auto scrolll pb-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
         <div className="flex w-max gap-4">
           {videoProjects.map((item, index) => (
-            <div
+            <Link
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
               key={index}
               className="flex w-[min(280px,85vw)] shrink-0 flex-col gap-3 group"
             >
@@ -105,7 +110,7 @@ export default function Projects() {
               <p className="text-left text-sm leading-snug text-zinc-600 dark:text-zinc-400 line-clamp-2">
                 {item.desc}
               </p> */}
-            </div>
+            </Link>
           ))}
         </div>
       </div>

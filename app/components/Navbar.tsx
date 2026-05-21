@@ -72,7 +72,7 @@ const Navbar = () => {
           )}
         </div> */}
         <div className="flex gap-1 relative  px-2">
-          <span className="absolute -top-2 left-2 font-bold text-[var(--foreground)]/50 whitespace-nowrap">
+          <span className="absolute -top-3 left-2 font-bold text-[var(--foreground)]/50 whitespace-nowrap">
             Follow me
           </span>
           <a
@@ -117,7 +117,11 @@ const Navbar = () => {
           </a>
         </div>
         <button
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          onClick={() => {
+            if (theme === "system") setTheme("light");
+            else if (theme === "light") setTheme("dark");
+            else setTheme("system");
+          }}
           className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-[var(--foreground)]/50 hover:text-[var(--foreground)] transition-all hover:bg-[var(--foreground)]/5 size-8 ml-2"
         >
           <svg

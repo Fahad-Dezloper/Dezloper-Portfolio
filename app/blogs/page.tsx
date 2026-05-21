@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "next-view-transitions";
 import { getBlogPosts } from "@/lib/mdx";
+import { ChevronRight } from "lucide-react";
 
 const Blogs = () => {
   const posts = getBlogPosts();
@@ -32,10 +33,16 @@ const Blogs = () => {
             <Link
               key={post.slug}
               href={`/${post.slug}`}
-              className="group py-3 flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-1 sm:gap-4 border-b border-[var(--foreground)]/5 last:border-0 transition-colors"
+              className="group py-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-4 border-b border-[var(--foreground)]/5 last:border-0 transition-colors"
             >
-              <span className="font-medium group-hover:text-[var(--foreground)]/70 transition-colors">
-                {post.title}
+              <span className="text-sm md:text-xl font-bold flex items-center gap-0.5">
+                {/* <ChevronRight className="md:size-6 size-4 opacity-0 blur-[10px] group-hover:opacity-100 group-hover:blur-0 transition-all duration-200 ease-out shrink-0" /> */}
+                <span
+                  className="text-[var(--foreground)] group-hover:text-[var(--foreground)]/70 transition-colors"
+                  style={{ viewTransitionName: `post-title-${post.slug}` }}
+                >
+                  {post.title}
+                </span>
               </span>
               <span className="text-xs text-[var(--foreground)]/40 shrink-0">
                 {post.date}

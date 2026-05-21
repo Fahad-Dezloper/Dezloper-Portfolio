@@ -5,7 +5,6 @@ import { Link } from "next-view-transitions";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import rehypePrettyCode from "rehype-pretty-code";
 
-// Custom MDX components to match the minimalist aesthetic
 const components = {
   h1: (props: any) => (
     <h1
@@ -139,9 +138,12 @@ export default async function BlogPostPage({
         <header className="mb-10">
           <Link
             href={"/blogs"}
-            className="text-2xl flex items-center font-bold text-[var(--foreground)] mb-2"
+            className="text-sm whitespace-nowrap md:text-2xl flex items-center font-bold text-[var(--foreground)] mb-2"
           >
-            <ChevronLeft /> {post.metadata.title}
+            <ChevronLeft className="md:size-6 size-4" />
+            <span style={{ viewTransitionName: `post-title-${resolvedParams.slug}` }}>
+              {post.metadata.title}
+            </span>
           </Link>
           <div className="flex items-center gap-4 text-sm text-[var(--foreground)]/50">
             <time>{post.metadata.date}</time>

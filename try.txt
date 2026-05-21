@@ -27,3 +27,11 @@ movr
 
 books page will look like this
 https://press.stripe.com/
+
+        <div className="w-8 h-8 rounded-full overflow-hidden">
+          <img
+            src={"/My/Mine.png"}
+            alt="Fahad Khan"
+            className="w-full h-full object-cover"
+          />
+        </div>
