@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "./components/ThemeProvider";
 import SoundOnLoad from "./components/SoundOnLoad";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -101,6 +102,11 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`scroll-smooth ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       >
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="dd06aa90-d4d3-407e-a703-ca7bce3ceec6"
+        />
         <body
           className={`${intertight.variable} ${inter.variable} flex min-h-dvh w-full flex-col items-center px-4 py-6 sm:px-6`}
         >
