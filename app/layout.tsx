@@ -111,7 +111,7 @@ export default function RootLayout({
         >
           <div className="flex w-full items-center flex-col">
             <SoundOnLoad />
-            <Navbar />
+            {/* <Navbar /> */}
             <TooltipProvider>{children}</TooltipProvider>
           </div>
         </body>

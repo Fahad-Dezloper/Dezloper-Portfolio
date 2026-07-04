@@ -1,9 +1,13 @@
 "use client";
 import { Check, Copy } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Hero() {
   const [copied, setCopied] = useState(false);
+  const [hoveredWord, setHoveredWord] = useState<
+    "crafting" | "protocols" | null
+  >(null);
 
   const handleCopy = () => {
     navigator.clipboard.writeText("fahadkhann0204@gmail.com");
@@ -14,10 +18,25 @@ export default function Hero() {
   };
 
   return (
-    <main className="flex flex-1 max-w-2xl w-full flex-col items-center sm:items-start">
+    <main className="flex flex-1 max-w-xl pt-[200px] w-full flex-col items-center sm:items-start">
       <div className="flex flex-col gap-3 text-[var(--foreground)]/70 leading-relaxed text-[15px] sm:text-base">
-        <div className="flex w-full  justify-between items-start sm:items-center gap-3 sm:gap-0">
-          <p>22, Design engineer</p>
+        <div className="flex w-full  justify-between items-end  gap-3 sm:gap-0">
+          <div className="flex flex-col">
+            <Link
+              href="/"
+              onClick={(e) => {
+                if (window.location.pathname === "/") {
+                  e.preventDefault();
+                }
+                const audio = new Audio("/sound/FAHHH (Meme Sound Effect).mp3");
+                audio.play().catch(console.error);
+              }}
+              className="hover:bg-[var(--foreground)]/5 text-foreground p-2 rounded-2xl flex gap-2 items-center -ml-2 transition-[background-color] w-fit font-bold"
+            >
+              Fahad Khan
+            </Link>
+            <p className="text-secondary">Design & Infra Engineer</p>
+          </div>
 
           <button
             onClick={handleCopy}
@@ -47,9 +66,44 @@ export default function Hero() {
           </button>
         </div>
 
-        <p>
-          I consider myself a builder at heart and enjoy crafting products &
-          interfaces that feel great to use.
+        <p className="pt-[20px] leading-relaxed">
+          <span
+            className={`transition-all duration-300 ${hoveredWord === "crafting" ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
+          >
+            I love designing and{" "}
+          </span>
+          <span
+            className="text-foreground font-medium cursor-default"
+            onMouseEnter={() => setHoveredWord("crafting")}
+          >
+            crafting
+          </span>
+          <span
+            className={`transition-all duration-300 ${hoveredWord === "crafting" ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
+          >
+            {" "}
+            motion that makes interfaces feel alive and delivers that
+            &quot;wow&quot; factor.{" "}
+          </span>
+
+          <span
+            className={`transition-all duration-300 ${hoveredWord === "protocols" ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
+          >
+            When I&apos;m not obsessing over pixels, I&apos;m exploring
+            distributed systems,{" "}
+          </span>
+          <span
+            className="text-foreground font-medium cursor-default"
+            onMouseEnter={() => setHoveredWord("protocols")}
+          >
+            protocols
+          </span>
+          <span
+            className={`transition-all duration-300 ${hoveredWord === "protocols" ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
+          >
+            , infrastructure and rebuilding systems from scratch to understand
+            them from first principles.
+          </span>
         </p>
 
         {/* <div className="mt-2 flex items-center">
