@@ -1,5 +1,6 @@
 import Hero from "./components/Hero";
 import Experiences from "./components/Experiences";
+import FunExperiences from "./components/FunExperiences";
 import Projects from "./components/Projects";
 import Contributions from "./components/Contributions";
 
@@ -9,6 +10,7 @@ export default function Home() {
       <Hero />
       <Experiences />
       <Projects />
+      <FunExperiences />
       <Contributions />
     </div>
   );

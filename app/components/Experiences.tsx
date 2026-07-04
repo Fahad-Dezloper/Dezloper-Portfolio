@@ -1,3 +1,6 @@
+"use client";
+import { useState } from "react";
+
 type ExperienceItem = {
   id: string;
   title: string;
@@ -7,26 +10,11 @@ type ExperienceItem = {
   logo?: string;
   link?: string;
 };
-type FunExperienceItem = {
-  id: string;
-  title: string;
-  dates?: string;
-  description?: string;
-  image?: string;
-  width?: string;
-  bullets?: string[];
-  className?: string;
-  object?: string;
-  smallImage?: string;
-  config?: {
-    y: number;
-    x: number;
-    zIndex: number;
-    rotate: number;
-  };
-};
+
 
 export default function Experiences() {
+  const [showAll, setShowAll] = useState(false);
+
   const professionalExperince: ExperienceItem[] = [
     {
       id: "Swish",
@@ -45,6 +33,33 @@ export default function Experiences() {
         "Web3 game studio | Owned the frontend across Farcaster mini apps, web games, the Skins NFT marketplace, user game dashboard, and the company website.",
       link: "https://www.x2c.fun/",
       logo: "/companies/x2c.png",
+    },
+    {
+      id: "food-for-thought",
+      title: "Food For Thought Fest",
+      dates: "Freelance",
+      description:
+        "India's biggest food festival | Built a comprehensive website covering all aspects of the event, including the food, thought, and fun fest verticals.",
+      link: "https://foodforthoughtfest.in/",
+      logo: "/companies/FoodFest.png",
+    },
+    {
+      id: "ascomp",
+      title: "Ascomp INC",
+      dates: "Freelance",
+      description:
+        "India's leading projector supplier for PVR Cinemas | Developed a robust CRM for administrators and engineers to manage projector maintenance and AMCs, featuring customizable forms, automated workflows, and comprehensive payment tracking.",
+      link: "",
+      logo: "/companies/Ascomp.png",
+    },
+    {
+      id: "haute-services",
+      title: "Haute Services",
+      dates: "Freelance",
+      description:
+        "Premium boutique consultancy firm | Built a full-stack website highlighting the firm's three distinct verticals—Hospitality Consulting, Lifestyle Events, and Art Advisory—while maintaining an authentic and premium brand aesthetic.",
+      link: "https://hauteservices.in/",
+      logo: "/companies/Haute.png",
     },
     {
       id: "artizence",
@@ -66,80 +81,10 @@ export default function Experiences() {
     },
   ];
 
-  const experiences: FunExperienceItem[] = [
-    {
-      id: "superteam",
-      title: "Startup Village 2026 Resident",
-      dates: "May 15 - May 25",
-      image: "/experiences/startupVillage.webp",
-      className: "bg-blue-500",
-      smallImage: "/experiences/STIndia.webp",
-      width: "60",
-      object: "cover",
-      config: {
-        y: 4,
-        x: 25,
-        zIndex: 10,
-        rotate: -3,
-      },
-    },
-    {
-      id: "superdevs",
-      title: "Solana Superdevs Fellowship",
-      dates: "Sept – Dec",
-      bullets: [
-        "Graduated in the top 20 out of 2500.",
-        "Learned and built on Solana (Rust), including private key management.",
-        "Convocation at Ahmedabad Startup Village.",
-      ],
-      image: "/experiences/superdevs.webp",
-      className: "bg-green-500",
-      smallImage: "/experiences/100xDevs.webp",
-      width: "60",
-      object: "cover",
-      config: {
-        y: 18,
-        x: 265,
-        zIndex: 20,
-        rotate: -3,
-      },
-    },
-    {
-      id: "athena",
-      title: "Athena Hacker House",
-      dates: "Nov 2025 – Present",
-      image: "/experiences/athena2.webp",
-      className: "bg-orange-500",
-      smallImage: "/experiences/athena.webp",
-      width: "40",
-      object: "cover",
-      config: {
-        y: 24,
-        x: 420,
-        zIndex: 30,
-        rotate: 5,
-      },
-    },
-    // {
-    //   id: "athena",
-    //   title: "Full Fledged Athena FOSS Member",
-    //   dates: "Aug – Present",
-    //   description:
-    //     "Elite developer community of 300 cracked devs (160/300 members).",
-    //   image: "/experiences/athena.webp",
-    //   className: "bg-red-500",
-    //   width: "40",
-    //   object: "cover",
-    //   config: {
-    //     y: 4,
-    //     x: 500,
-    //     zIndex: 40,
-    //     rotate: 3,
-    //   },
-    // },
-  ];
-
   const allExperiences = [...professionalExperince];
+  const visibleExperiences = showAll
+    ? allExperiences
+    : allExperiences.slice(0, 3);
 
   return (
     <section className="w-full max-w-none self-stretch">
@@ -148,7 +93,7 @@ export default function Experiences() {
           Cool Experience I have had
         </h2>
         <div className="flex flex-col gap-10">
-          {allExperiences.map((item, index) => (
+          {visibleExperiences.map((item, index) => (
             <article
               key={index}
               className="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start"
@@ -220,44 +165,16 @@ export default function Experiences() {
             </article>
           ))}
         </div>
+        {allExperiences.length > 3 && (
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="mt-8 text-sm font-medium text-secondary hover:text-foreground transition-colors mx-auto flex items-center justify-center w-full"
+          >
+            {showAll ? "View less" : "View more"}
+          </button>
+        )}
       </div>
 
-      <div className="mt-8 w-full overflow-x-auto scrolll pb-2 pt-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
-        <div className="flex w-max gap-4">
-          {experiences.map((item, index) => {
-            return (
-              <div
-                key={index}
-                className="flex flex-col relative gap-2.5 shrink-0 group mt-6"
-              >
-                <div className="absolute z-10 w-10 h-10 rounded-md overflow-hidden -top-5 left-2 transition-transform duration-300 md:group-hover:-translate-y-3 md:-translate-y-0 -translate-y-3 shadow-md border border-[var(--foreground)]/10">
-                  <img
-                    src={item.smallImage}
-                    alt=""
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="w-[min(240px,75vw)] aspect-video z-20 relative overflow-hidden rounded-md bg-[var(--foreground)]/5 border border-[var(--foreground)]/5">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="object-cover w-full h-full transition-transform duration-300 "
-                  />
-                </div>
-
-                <div className="flex flex-col gap-0.5 px-0.5 max-w-[min(240px,75vw)] whitespace-normal">
-                  <h3 className="text-sm font-medium text-[var(--foreground)] leading-tight">
-                    {item.title}
-                  </h3>
-                  <span className="text-xs text-[var(--foreground)]/50">
-                    {item.dates}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
     </section>
   );
 }

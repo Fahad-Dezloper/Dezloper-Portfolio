@@ -5,9 +5,8 @@ import { useState } from "react";
 
 export default function Hero() {
   const [copied, setCopied] = useState(false);
-  const [hoveredWord, setHoveredWord] = useState<
-    "crafting" | "protocols" | null
-  >(null);
+  const [unblurredCrafting, setUnblurredCrafting] = useState(false);
+  const [unblurredProtocols, setUnblurredProtocols] = useState(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText("fahadkhann0204@gmail.com");
@@ -35,7 +34,7 @@ export default function Hero() {
             >
               Fahad Khan
             </Link>
-            <p className="text-secondary">Design & Infra Engineer</p>
+            <p className="text-secondary">Updated 4th July, 2026</p>
           </div>
 
           <button
@@ -68,41 +67,44 @@ export default function Hero() {
 
         <p className="pt-[20px] leading-relaxed">
           <span
-            className={`transition-all duration-300 ${hoveredWord === "crafting" ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
+            className={`transition-all duration-300 ${unblurredCrafting ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
           >
             I love designing and{" "}
           </span>
           <span
             className="text-foreground font-medium cursor-default"
-            onMouseEnter={() => setHoveredWord("crafting")}
+            onMouseEnter={() => setUnblurredCrafting(true)}
           >
             crafting
           </span>
           <span
-            className={`transition-all duration-300 ${hoveredWord === "crafting" ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
+            className={`transition-all duration-300 ${unblurredCrafting ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
           >
             {" "}
-            motion that makes interfaces feel alive and delivers that
-            &quot;wow&quot; factor.{" "}
+            motion that makes interfaces feel alive.
           </span>
+          <br />
 
+          <span className="transition-all duration-300 blur-none opacity-100">
+            When I&apos;m not obsessing over pixels,{" "}
+          </span>
           <span
-            className={`transition-all duration-300 ${hoveredWord === "protocols" ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
+            className={`transition-all duration-300 ${unblurredProtocols ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
           >
-            When I&apos;m not obsessing over pixels, I&apos;m exploring
-            distributed systems,{" "}
+            I&apos;m exploring{" "}
           </span>
           <span
             className="text-foreground font-medium cursor-default"
-            onMouseEnter={() => setHoveredWord("protocols")}
+            onMouseEnter={() => setUnblurredProtocols(true)}
           >
             protocols
           </span>
           <span
-            className={`transition-all duration-300 ${hoveredWord === "protocols" ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
+            className={`transition-all duration-300 ${unblurredProtocols ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
           >
-            , infrastructure and rebuilding systems from scratch to understand
-            them from first principles.
+            {" "}
+            and complex infrastructure, rebuilding them from scratch to
+            understand them from first principles.
           </span>
         </p>
 

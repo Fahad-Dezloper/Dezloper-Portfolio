@@ -3,6 +3,11 @@ import Link from "next/link";
 export default function Projects() {
   const openSourceProjects = [
     {
+      title: "PerpExchange",
+      desc: "A perpetual futures exchange a crypto trading platform for leveraged perpetual contracts, built entirely from scratch. (Ongoing)",
+      link: "https://github.com/Fahad-Dezloper/PerpExchange",
+    },
+    {
       title: "CEX",
       desc: "A high-performance centralized crypto exchange on Solana with MPC wallets. Provides real-time order matching and low latency.",
       link: "https://github.com/Fahad-Dezloper/CEX",
@@ -10,7 +15,7 @@ export default function Projects() {
     {
       title: "AllSolana",
       desc: "High-density index of active repositories on Solana. Discover and contribute to top open-source projects in the ecosystem.",
-      link: "https://github.com/Fahad-Dezloper/AllSolana",
+      link: "https://www.solanaoss.com/",
     },
   ];
 
@@ -39,7 +44,7 @@ export default function Projects() {
 
   return (
     <section className="w-full max-w-none self-stretch ">
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto max-w-xl">
         <h2 className="text-xs font-medium text-[var(--foreground)]/50 uppercase tracking-wider mb-3">
           Projects
         </h2>
@@ -49,18 +54,31 @@ export default function Projects() {
           {openSourceProjects.map((item, index) => (
             <div key={index} className="flex flex-col gap-1.5 group">
               <div className="flex items-center gap-2">
-                <h3 className="text-base font-medium text-[var(--foreground)] group-hover:text-[var(--foreground)]/70 transition-colors">
-                  <a href={item.link} target="_blank" rel="noopener noreferrer">
-                    {item.title}
-                  </a>
-                </h3>
                 <a
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[var(--foreground)]/50 hover:text-[var(--foreground)] transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="flex relative items-center -gap-1 group hover:opacity-80 transition-opacity"
                 >
-                  ↗
+                  <h3 className="text-base font-semibold text-foreground group-hover:underline">
+                    {item.title}
+                  </h3>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-arrow-up-right size-3 inline -translate-y-2 translate-x-0.5 text-muted-foreground md:opacity-80 scale-60 group-hover:scale-100 group-hover:opacity-100 transition-[opacity,scale] origin-bottom-left ease-out"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 7h10v10"></path>
+                    <path d="M7 17 17 7"></path>
+                  </svg>
                 </a>
               </div>
               <p className="text-sm leading-snug text-[var(--foreground)]/70">
