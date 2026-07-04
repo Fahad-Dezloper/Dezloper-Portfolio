@@ -26,6 +26,12 @@ export default function Contributions() {
       link: "https://github.com/SolixDB/app/pulls?q=is%3Apr+author%3AFahad-Dezloper+is%3Aclosed",
       img: "/OSC/solix.webp",
     },
+    {
+      title: "Pillar",
+      desc: "Open-source operations platform for running Solana validators — at one node or fleet scale.",
+      link: "https://github.com/niks3089/pillar/pulls?q=is%3Apr+is%3Aclosed+author%3AFahad-Dezloper",
+      img: "/OSC/Pillar.webp",
+    },
   ];
 
   return (
@@ -43,15 +49,15 @@ export default function Contributions() {
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex md:w-[min(280px,17vw)] w-[min(280px,40vw)] shrink-0 flex-col gap-3 group"
+              className="flex w-[min(200px,35vw)] md:w-[min(200px,15vw)] xl:w-[200px] shrink-0 flex-col gap-3 group"
             >
               <div
-                className={` md:w-[16vw] w-[34vw] rounded-2xl overflow-hidden bg-[var(--foreground)]/5 border border-[var(--foreground)]/5`}
+                className={`w-full aspect-3/3 md:aspect-2/2 xl:aspect-4/4 rounded-2xl overflow-hidden bg-[var(--foreground)]/5 border border-[var(--foreground)]/5 flex items-center justify-center`}
               >
                 <img
                   src={item.img}
                   alt={item.title}
-                  className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-101"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-101"
                 />
               </div>
               <div className="flex items-start justify-between gap-2">
