@@ -6,6 +6,7 @@
   --background: #ffffff;
   --foreground: #333333;
   --secondary: #b9b9b9;
+  --border: lab(90.72% .0000298023 -.0000119209);
 }
 
 @theme {
@@ -13,6 +14,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-secondary: var(--secondary);
+  --color-border: var(--border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-interr: var(--font-next-interr);

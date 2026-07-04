@@ -4,6 +4,8 @@ type ExperienceItem = {
   dates?: string;
   description?: string;
   bullets?: string[];
+  logo?: string;
+  link?: string;
 };
 type FunExperienceItem = {
   id: string;
@@ -27,19 +29,40 @@ type FunExperienceItem = {
 export default function Experiences() {
   const professionalExperince: ExperienceItem[] = [
     {
+      id: "Swish",
+      title: "Swish.cash",
+      dates: "June 2026 - Present",
+      description:
+        "Building the next generation of fun frontend experiences. Managed a team of developers and led architectural decisions.",
+      link: "https://swish.cash/",
+      logo: "/companies/Swish2.png",
+    },
+    {
       id: "x2c",
-      title: "Frontend Lead · X2C.fun",
+      title: "X2C.fun",
       dates: "Nov 2025 – Present",
+      description:
+        "Building the next generation of fun frontend experiences. Managed a team of developers and led architectural decisions.",
+      link: "https://www.x2c.fun/",
+      logo: "/companies/x2c.png",
     },
     {
       id: "artizence",
-      title: "Frontend Lead · Artizence Systems LLP",
-      dates: "Feb 2025 – Apr 2025",
+      title: "Artizence Systems LLP",
+      dates: "Feb 2025",
+      description:
+        "Led frontend development for various client projects. Focused on performance optimization and scalable component architecture.",
+      link: "",
+      logo: "/companies/Artizence.png",
     },
     {
       id: "read-rise",
-      title: "Manager · Read & Rise",
-      dates: "Sep 2022 – Oct 2023",
+      title: "Read & Rise",
+      dates: "2022 – 2023",
+      description:
+        "Managed operations and coordinated teams to deliver educational resources. Streamlined internal processes for better efficiency.",
+      link: "",
+      logo: "/companies/readrise.png",
     },
   ];
 
@@ -118,40 +141,80 @@ export default function Experiences() {
 
   const allExperiences = [...professionalExperince];
 
-  const renderTitle = (title: string) => {
-    const parts = title.split(" · ");
-    if (parts.length === 2) {
-      return (
-        <div className="text-base">
-          <span className="font-medium">{parts[0]}</span>
-          <span className="text-[var(--foreground)]/50 text-sm">
-            {" · " + parts[1]}
-          </span>
-        </div>
-      );
-    }
-    return (
-      <div className="text-base">
-        <span className="font-medium text-xs">{title}</span>
-      </div>
-    );
-  };
-
   return (
     <section className="w-full max-w-none self-stretch">
-      <div className="mx-auto max-w-2xl">
-        <h2 className="text-xs font-medium text-[var(--foreground)]/50 uppercase tracking-wider mb-3">
+      <div className="mx-auto max-w-xl">
+        <h2 className="text-xs font-medium text-[var(--foreground)]/50 uppercase tracking-wider mb-8">
           Cool Experience I have had
         </h2>
-        <div className="mt-6 flex flex-col gap-6">
+        <div className="flex flex-col gap-10">
           {allExperiences.map((item, index) => (
-            <article key={index} className="flex flex-col gap-2">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-1 sm:gap-4">
-                {renderTitle(item.title)}
-                {item.dates && (
-                  <span className="text-xs text-[var(--foreground)]/40 shrink-0">
-                    {item.dates}
-                  </span>
+            <article
+              key={index}
+              className="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start"
+            >
+              {item.dates && (
+                <div className="w-full sm:w-28 shrink-0 text-sm font-medium text-secondary pt-0.5">
+                  {item.dates}
+                </div>
+              )}
+              <div className="flex flex-col gap-2.5 w-full">
+                <div className="flex items-center gap-2.5">
+                  {item.logo ? (
+                    <img
+                      src={item.logo}
+                      alt=""
+                      className="size-5 shrink-0 border border-border"
+                    />
+                  ) : (
+                    <div className="w-6 h-6 rounded bg-[var(--foreground)]/10 shrink-0" />
+                  )}
+                  {item.link ? (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex relative items-center -gap-1 group hover:opacity-80 transition-opacity"
+                    >
+                      <span className="text-[17px] font-semibold text-foreground group-hover:underline">
+                        {item.title}
+                      </span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        className="lucide lucide-arrow-up-right size-3 inline -translate-y-2 translate-x-0.5 text-muted-foreground md:opacity-80 scale-60 group-hover:scale-100 group-hover:opacity-100 transition-[opacity,scale] origin-bottom-left ease-out"
+                        aria-hidden="true"
+                      >
+                        <path d="M7 7h10v10"></path>
+                        <path d="M7 17 17 7"></path>
+                      </svg>
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[17px] font-semibold text-foreground">
+                        {item.title}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                {(item.description || item.bullets) && (
+                  <div className="text-[15px] leading-relaxed text-[var(--foreground)]/70 mt-1">
+                    {item.description && <p>{item.description}</p>}
+                    {item.bullets && (
+                      <ul className="list-disc ml-4 mt-2 space-y-1">
+                        {item.bullets.map((bullet, i) => (
+                          <li key={i}>{bullet}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
                 )}
               </div>
             </article>
