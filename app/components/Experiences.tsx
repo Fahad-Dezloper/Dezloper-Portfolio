@@ -89,11 +89,13 @@ export default function Experiences() {
         <h2 className="text-xs font-medium text-[var(--foreground)]/50 uppercase tracking-wider mb-8">
           Cool Experience I have had
         </h2>
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col">
           {allExperiences.slice(0, 3).map((item, index) => (
-            <ExperienceItemComponent key={index} item={item} />
+            <div key={index} className={index !== 0 ? "mt-10" : ""}>
+              <ExperienceItemComponent item={item} />
+            </div>
           ))}
-          
+
           <AnimatePresence>
             {showAll && (
               <motion.div
@@ -101,10 +103,12 @@ export default function Experiences() {
                 animate={{ height: "auto", opacity: 1, filter: "blur(0px)" }}
                 exit={{ height: 0, opacity: 0, filter: "blur(10px)" }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className="flex flex-col gap-10 overflow-hidden"
+                className="flex flex-col overflow-hidden"
               >
                 {allExperiences.slice(3).map((item, index) => (
-                  <ExperienceItemComponent key={index + 3} item={item} />
+                  <div key={index + 3} className="pt-10">
+                    <ExperienceItemComponent item={item} />
+                  </div>
                 ))}
               </motion.div>
             )}
