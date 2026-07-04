@@ -1,6 +1,10 @@
-import { Link } from "next-view-transitions";
+import re
 
-export default function Contributions() {
+with open("app/components/Projects.tsx", "r") as f:
+    content = f.read()
+
+# Replace videoProjects array with contributions array
+contributions_array = """
   const contributions = [
     {
       title: "Antiwork",
@@ -33,18 +37,21 @@ export default function Contributions() {
       img: "/OSC/Pillar.webp",
     },
   ];
+"""
 
-  return (
-    <section id="contribute" className="w-full max-w-none self-stretch">
-      <div className="mx-auto max-w-xl">
-        <h2 className="text-xs font-medium text-secondary uppercase tracking-wider mb-3">
-          Companies I have Contributed to
-        </h2>
-      </div>
+# We need to find the videoProjects definition and replace it.
+# The user's latest patch shows videoProjects is uncommented lines 22-45.
+# Let's search for "const videoProjects =" up to "];"
+video_projects_pattern = re.compile(r'  const videoProjects = \[\s*\{[\s\S]*?\}\,\s*\];', re.MULTILINE)
+content = video_projects_pattern.sub(contributions_array.strip(), content)
+
+# Now we need to replace the commented out Video Projects Carousel HTML with the contributions HTML.
+contributions_html = """
+      {/* Contributions Carousel */}
       <div className="mt-4 w-full overflow-x-auto scrolll pb-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
         <div className="flex w-max gap-4">
           {contributions.map((item, index) => (
-            <Link
+            <a
               key={index}
               href={item.link}
               target="_blank"
@@ -84,10 +91,18 @@ export default function Contributions() {
               <p className="text-left text-sm leading-snug text-[var(--foreground)]/70">
                 {item.desc}
               </p>
-            </Link>
+            </a>
           ))}
         </div>
       </div>
-    </section>
-  );
-}
+"""
+
+# Look for the Video Projects Carousel section
+# "      {/* Video Projects Carousel */}" up to "</div>" before "</section>"
+video_carousel_pattern = re.compile(r'\s*\{\/\* Video Projects Carousel \*\/\}[\s\S]*?(?=\s*<\/section>)', re.MULTILINE)
+content = video_carousel_pattern.sub(contributions_html, content)
+
+with open("app/components/Projects.tsx", "w") as f:
+    f.write(content)
+
+print("done")

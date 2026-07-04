@@ -34,7 +34,7 @@ export default function Hero() {
             >
               Fahad Khan
             </Link>
-            <p className="text-secondary">Updated 4th July, 2026</p>
+            <p className="text-secondary">Design & Infra Engineer</p>
           </div>
 
           <button

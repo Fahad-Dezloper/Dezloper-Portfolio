@@ -11,7 +11,7 @@ type FunExperienceItem = {
   className?: string;
   object?: string;
   objectPosition?: string;
-  smallImage?: string;
+  // smallImage?: string;
   config?: {
     y: number;
     x: number;
@@ -26,9 +26,9 @@ export default function FunExperiences() {
       id: "superteam",
       title: "Startup Village 2026 Resident",
       dates: "May 15 - May 25",
-      image: "/experiences/startupVillage.png",
+      image: "/Highlight/superdevs.png",
       className: "bg-blue-500",
-      smallImage: "/experiences/STIndia.webp",
+      // smallImage: "/experiences/STIndia.webp",
       width: "60",
       object: "cover",
       config: {
@@ -47,9 +47,9 @@ export default function FunExperiences() {
         "Learned and built on Solana (Rust), including private key management.",
         "Convocation at Ahmedabad Startup Village.",
       ],
-      image: "/experiences/superdevsfellow.webp",
+      image: "/Highlight/graduation.png",
       className: "bg-green-500",
-      smallImage: "/experiences/100xDevs.webp",
+      // smallImage: "/experiences/100xDevs.webp",
       width: "60",
       object: "cover",
       objectPosition: "top",
@@ -61,12 +61,28 @@ export default function FunExperiences() {
       },
     },
     {
+      id: "superteam",
+      title: "Startup Village 2026 Resident",
+      dates: "May 15 - May 25",
+      image: "/Highlight/STeam.png",
+      className: "bg-blue-500",
+      // smallImage: "/experiences/STIndia.webp",
+      width: "60",
+      object: "cover",
+      config: {
+        y: 4,
+        x: 25,
+        zIndex: 10,
+        rotate: -3,
+      },
+    },
+    {
       id: "athena",
       title: "Athena Hacker House",
       dates: "Nov 2025 – Present",
-      image: "/experiences/athena2.webp",
+      image: "/Highlight/Athena.png",
       className: "bg-orange-500",
-      smallImage: "/experiences/athena.webp",
+      // smallImage: "/experiences/athena.webp",
       width: "40",
       object: "cover",
       config: {
@@ -79,7 +95,7 @@ export default function FunExperiences() {
   ];
 
   return (
-    <section className="w-full max-w-none self-stretch">
+    <section className="w-full pt-[80px] max-w-none self-stretch">
       <div className="w-full overflow-x-auto scrolll pb-2 pt-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
         <div className="flex w-max gap-4">
           {experiences.map((item, index) => {
@@ -88,29 +104,21 @@ export default function FunExperiences() {
                 key={index}
                 className="flex flex-col relative gap-2.5 shrink-0 group mt-6"
               >
-                {/* <div className="absolute z-10 w-10 h-10 rounded-md overflow-hidden -top-5 left-2 transition-transform duration-300 md:group-hover:-translate-y-3 md:-translate-y-0 -translate-y-3 shadow-md border border-[var(--foreground)]/10">
-                  <img
-                    src={item.smallImage}
-                    alt=""
-                    className="w-full h-full object-cover"
-                  />
-                </div> */}
-                <div className="w-[min(240px,75vw)] aspect-video z-20 relative overflow-hidden rounded-md bg-[var(--foreground)]/5 border border-[var(--foreground)]/5">
+                <div className="z-20 relative overflow-hidden rounded-xl bg-[var(--foreground)]/5 border border-[var(--foreground)]/5 w-fit">
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="object-cover w-full h-full transition-transform duration-300"
-                    style={{ objectPosition: item.objectPosition || "center" }}
+                    className="w-auto h-[180px] sm:h-[280px] transition-transform duration-300"
                   />
                 </div>
 
                 <div className="flex flex-col gap-0.5 px-0.5 max-w-[min(240px,75vw)] whitespace-normal">
-                  <h3 className="text-sm font-medium text-[var(--foreground)] leading-tight">
+                  {/* <h3 className="text-sm font-medium text-[var(--foreground)] leading-tight">
                     {item.title}
                   </h3>
                   <span className="text-xs text-[var(--foreground)]/50">
                     {item.dates}
-                  </span>
+                  </span> */}
                 </div>
               </div>
             );

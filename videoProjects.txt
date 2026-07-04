@@ -1,0 +1,29 @@
+      {/* Video Projects Carousel */}
+      {/* <div className="mt-8 w-full overflow-x-auto scrolll pb-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
+        <div className="flex w-max gap-4">
+          {videoProjects.map((item, index) => (
+            <Link
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              key={index}
+              className="flex w-[min(280px,85vw)] shrink-0 flex-col gap-3 group"
+            >
+              <div
+                className={`aspect-5/4 w-full rounded-2xl bg-[var(--foreground)]/5 border border-[var(--foreground)]/5 overflow-hidden relative`}
+              >
+                {item.video && (
+                  <video
+                    src={item.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover absolute inset-0"
+                  />
+                )}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div> */}
