@@ -33,7 +33,7 @@ export default function Experiences() {
       title: "Swish.cash",
       dates: "June 2026 - Present",
       description:
-        "Building the next generation of fun frontend experiences. Managed a team of developers and led architectural decisions.",
+        "Privacy consumer app on Solana | Owned the backend end-to-end, building the auto-routing engine, SDK, and relayer infrastructure to aggregate multiple privacy protocols.",
       link: "https://swish.cash/",
       logo: "/companies/Swish2.png",
     },
@@ -42,7 +42,7 @@ export default function Experiences() {
       title: "X2C.fun",
       dates: "Nov 2025 – Present",
       description:
-        "Building the next generation of fun frontend experiences. Managed a team of developers and led architectural decisions.",
+        "Web3 game studio | Owned the frontend across Farcaster mini apps, web games, the Skins NFT marketplace, user game dashboard, and the company website.",
       link: "https://www.x2c.fun/",
       logo: "/companies/x2c.png",
     },
@@ -51,7 +51,7 @@ export default function Experiences() {
       title: "Artizence Systems LLP",
       dates: "Feb 2025",
       description:
-        "Led frontend development for various client projects. Focused on performance optimization and scalable component architecture.",
+        "Web2 SaaS agency | Built CRM frontends for multiple client products using Next.js, focusing on scalable and reusable interfaces.",
       link: "",
       logo: "/companies/Artizence.png",
     },
@@ -60,7 +60,7 @@ export default function Experiences() {
       title: "Read & Rise",
       dates: "2022 – 2023",
       description:
-        "Managed operations and coordinated teams to deliver educational resources. Streamlined internal processes for better efficiency.",
+        "Independent bookstore | Managed the website and day-to-day operations, maintained a 50,000+ book catalog, and oversaw inventory, sales, and customer retention.",
       link: "",
       logo: "/companies/readrise.png",
     },
@@ -176,7 +176,7 @@ export default function Experiences() {
                       rel="noopener noreferrer"
                       className="flex relative items-center -gap-1 group hover:opacity-80 transition-opacity"
                     >
-                      <span className="text-[17px] font-semibold text-foreground group-hover:underline">
+                      <span className="text-base font-semibold text-foreground group-hover:underline">
                         {item.title}
                       </span>
                       <svg
@@ -198,7 +198,7 @@ export default function Experiences() {
                     </a>
                   ) : (
                     <div className="flex items-center gap-1.5">
-                      <span className="text-[17px] font-semibold text-foreground">
+                      <span className="text-base font-semibold text-foreground">
                         {item.title}
                       </span>
                     </div>
