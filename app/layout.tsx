@@ -6,7 +6,6 @@ import "./globals.css";
 import { ViewTransitions } from "next-view-transitions";
 import Navbar from "./components/Navbar";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { ThemeProvider } from "./components/ThemeProvider";
 import SoundOnLoad from "./components/SoundOnLoad";
 import Script from "next/script";
 
@@ -110,18 +109,11 @@ export default function RootLayout({
         <body
           className={`${intertight.variable} ${inter.variable} flex min-h-dvh w-full flex-col items-center px-4 py-6 sm:px-6`}
         >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <div className="flex w-full items-center flex-col">
-              <SoundOnLoad />
-              <Navbar />
-              <TooltipProvider>{children}</TooltipProvider>
-            </div>
-          </ThemeProvider>
+          <div className="flex w-full items-center flex-col">
+            <SoundOnLoad />
+            <Navbar />
+            <TooltipProvider>{children}</TooltipProvider>
+          </div>
         </body>
       </html>
     </ViewTransitions>

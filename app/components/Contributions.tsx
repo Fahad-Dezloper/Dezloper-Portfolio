@@ -22,13 +22,13 @@ export default function Contributions() {
     },
     {
       title: "Solix",
-      desc: "The universal data bridge for Solana. Making on-chain data accessible to every developer.",
+      desc: "The universal data bridge for Solana. ",
       link: "https://github.com/SolixDB/app/pulls?q=is%3Apr+author%3AFahad-Dezloper+is%3Aclosed",
       img: "/OSC/solix.webp",
     },
     {
       title: "Pillar",
-      desc: "Open-source operations platform for running Solana validators — at one node or fleet scale.",
+      desc: "Operations platform for running Solana validators",
       link: "https://github.com/niks3089/pillar/pulls?q=is%3Apr+is%3Aclosed+author%3AFahad-Dezloper",
       img: "/OSC/Pillar.webp",
     },
@@ -37,7 +37,7 @@ export default function Contributions() {
   return (
     <section id="contribute" className="w-full max-w-none self-stretch">
       <div className="mx-auto max-w-2xl">
-        <h2 className="text-xs font-medium text-[var(--foreground)]/50 uppercase tracking-wider mb-3">
+        <h2 className="text-xs font-medium text-secondary uppercase tracking-wider mb-3">
           Companies I have Contributed to
         </h2>
       </div>
@@ -65,7 +65,7 @@ export default function Contributions() {
                   {item.title}
                 </h3>
               </div>
-              <p className="text-left text-sm leading-snug text-[var(--foreground)]/70">
+              <p className="text-left text-sm leading-snug text-secondary">
                 {item.desc}
               </p>
             </Link>
