@@ -19,28 +19,28 @@ export default function Projects() {
     },
   ];
 
-  const videoProjects = [
-    {
-      video: "/Craft/dynamicIsland.mp4",
-      link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/DynamicIsland.tsx",
-    },
-    {
-      video: "/Craft/bell.mp4",
-      link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/shared/Ring.tsx",
-    },
-    {
-      video: "/Craft/Gooey.mp4",
-      link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/GooeyFilter.tsx",
-    },
-    {
-      video: "/Craft/interfaceCraft.mp4",
-      link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/InterfaceCraft.tsx",
-    },
-    {
-      video: "/Craft/smoothness.mp4",
-      link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/SmoothnessState.tsx",
-    },
-  ];
+  // const videoProjects = [
+  //   {
+  //     video: "/Craft/dynamicIsland.mp4",
+  //     link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/DynamicIsland.tsx",
+  //   },
+  //   {
+  //     video: "/Craft/bell.mp4",
+  //     link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/shared/Ring.tsx",
+  //   },
+  //   {
+  //     video: "/Craft/Gooey.mp4",
+  //     link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/GooeyFilter.tsx",
+  //   },
+  //   {
+  //     video: "/Craft/interfaceCraft.mp4",
+  //     link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/InterfaceCraft.tsx",
+  //   },
+  //   {
+  //     video: "/Craft/smoothness.mp4",
+  //     link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/SmoothnessState.tsx",
+  //   },
+  // ];
 
   return (
     <section className="w-full max-w-none self-stretch ">
@@ -90,7 +90,7 @@ export default function Projects() {
       </div>
 
       {/* Video Projects Carousel */}
-      <div className="mt-8 w-full overflow-x-auto scrolll pb-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
+      {/* <div className="mt-8 w-full overflow-x-auto scrolll pb-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
         <div className="flex w-max gap-4">
           {videoProjects.map((item, index) => (
             <Link
@@ -114,24 +114,10 @@ export default function Projects() {
                   />
                 )}
               </div>
-              {/* <div className="flex items-start justify-between gap-2">
-                <h3 className="text-left text-base font-semibold text-neutral-900 dark:text-white group-hover:underline decoration-neutral-300 dark:decoration-zinc-600 underline-offset-4 font-intert">
-                  {item.title}
-                </h3>
-                <span
-                  className="shrink-0 text-neutral-900 dark:text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  aria-hidden
-                >
-                  ↗
-                </span>
-              </div>
-              <p className="text-left text-sm leading-snug text-zinc-600 dark:text-zinc-400 line-clamp-2">
-                {item.desc}
-              </p> */}
             </Link>
           ))}
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }

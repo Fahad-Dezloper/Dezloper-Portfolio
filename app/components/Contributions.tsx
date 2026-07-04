@@ -36,7 +36,7 @@ export default function Contributions() {
 
   return (
     <section id="contribute" className="w-full max-w-none self-stretch">
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto max-w-xl">
         <h2 className="text-xs font-medium text-secondary uppercase tracking-wider mb-3">
           Companies I have Contributed to
         </h2>
@@ -60,12 +60,28 @@ export default function Contributions() {
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-101"
                 />
               </div>
-              <div className="flex items-start justify-between gap-2">
+              <div className="flex items-center -gap-1">
                 <h3 className="text-left text-base font-medium text-[var(--foreground)] group-hover:text-[var(--foreground)]/70 group-hover:underline transition-colors">
                   {item.title}
                 </h3>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-arrow-up-right size-3 inline -translate-y-2 translate-x-0.5 text-muted-foreground md:opacity-80 scale-60 group-hover:scale-100 group-hover:opacity-100 transition-[opacity,scale] origin-bottom-left ease-out"
+                  aria-hidden="true"
+                >
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path>
+                </svg>
               </div>
-              <p className="text-left text-sm leading-snug text-secondary">
+              <p className="text-left text-sm leading-snug text-[var(--foreground)]/70">
                 {item.desc}
               </p>
             </Link>

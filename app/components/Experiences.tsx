@@ -11,7 +11,6 @@ type ExperienceItem = {
   link?: string;
 };
 
-
 export default function Experiences() {
   const [showAll, setShowAll] = useState(false);
 
@@ -168,13 +167,12 @@ export default function Experiences() {
         {allExperiences.length > 3 && (
           <button
             onClick={() => setShowAll(!showAll)}
-            className="mt-8 text-sm font-medium text-secondary hover:text-foreground transition-colors mx-auto flex items-center justify-center w-full"
+            className="mt-8 w-fit mx-auto flex items-center justify-center gap-2 rounded-xl bg-[var(--foreground)]/5 px-3 py-1.5 text-xs font-medium text-[var(--foreground)]/70 transition-all hover:bg-[var(--foreground)]/10 hover:text-[var(--foreground)]"
           >
             {showAll ? "View less" : "View more"}
           </button>
         )}
       </div>
-
     </section>
   );
 }
