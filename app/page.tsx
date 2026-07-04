@@ -8,8 +8,8 @@ export default function Home() {
     <div className="flex w-full flex-col gap-10 flex-1 items-center justify-center font-sans">
       <Hero />
       <Experiences />
-      <Projects />
       <FunExperiences />
+      <Projects />
     </div>
   );
 }

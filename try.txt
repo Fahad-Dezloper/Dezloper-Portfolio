@@ -35,3 +35,25 @@ https://press.stripe.com/
             className="w-full h-full object-cover"
           />
         </div>
+
+
+
+//new structure
+give a bottom bar animated 60fps
+
+-- fix hover animation on links wider space and click include sub descriptioin
+-- show writtings section cards like 
+
+
+craft section
+https://rauno.me/craft
+https://www.marvinschwaibold.com/
+
+
+click sounds
+
+
+cards gradients blogs opening feeel of scroll inspo
+https://www.molly.studio/
+indepth blog inspo
+https://benji.org/liveline

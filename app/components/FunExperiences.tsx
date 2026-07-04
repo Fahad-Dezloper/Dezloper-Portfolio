@@ -97,29 +97,24 @@ export default function FunExperiences() {
   return (
     <section className="w-full pt-[80px] max-w-none self-stretch">
       <div className="w-full overflow-x-auto scrolll pb-2 pt-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
-        <div className="flex w-max gap-4">
+        <div className="flex w-max gap-1 sm:gap-2 items-end">
           {experiences.map((item, index) => {
+            const heights = [
+              "h-[220px] sm:h-[300px]",
+              "h-[170px] sm:h-[240px]",
+              "h-[140px] sm:h-[300px]",
+              "h-[180px] sm:h-[280px]",
+            ];
             return (
               <div
                 key={index}
-                className="flex flex-col relative gap-2.5 shrink-0 group mt-6"
+                className="flex rounded-xl overflow-hidden flex-col relative shrink-0 group"
               >
-                <div className="z-20 relative overflow-hidden rounded-xl bg-[var(--foreground)]/5 border border-[var(--foreground)]/5 w-fit">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-auto h-[180px] sm:h-[280px] transition-transform duration-300"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-0.5 px-0.5 max-w-[min(240px,75vw)] whitespace-normal">
-                  {/* <h3 className="text-sm font-medium text-[var(--foreground)] leading-tight">
-                    {item.title}
-                  </h3>
-                  <span className="text-xs text-[var(--foreground)]/50">
-                    {item.dates}
-                  </span> */}
-                </div>
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className={`w-auto max-w-none transition-transform duration-300 ${heights[index % 4]}`}
+                />
               </div>
             );
           })}
