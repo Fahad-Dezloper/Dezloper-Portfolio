@@ -60,30 +60,35 @@ function AnimatedHome({ scrollContainer }: { scrollContainer: HTMLElement }) {
     container: isWindow ? undefined : containerRef,
   });
 
-  const [progress, setProgress] = useState(0);
-  const [pixels, setPixels] = useState(0);
+  // Write the debug readout straight to the DOM via refs. Using setState here
+  // would re-render AnimatedHome (and every child section) on EVERY scroll
+  // frame, which is what makes scrolling feel heavy. Motion values update the
+  // text off the React render loop, so scrolling triggers zero re-renders and
+  // stays as smooth as Silk's native replacement allows.
+  const progressRef = useRef<HTMLSpanElement>(null);
+  const pixelsRef = useRef<HTMLSpanElement>(null);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    setProgress(latest);
+    if (progressRef.current) progressRef.current.textContent = latest.toFixed(4);
   });
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setPixels(latest);
+    if (pixelsRef.current) pixelsRef.current.textContent = `${latest.toFixed(0)}px`;
   });
 
   // Using the exact scroll boundaries you found!
-  const scale = useTransform(scrollYProgress, [0.6358, 0.9004], [1, 0.93]);
+  const scale = useTransform(scrollYProgress, [0.53, 0.7033], [1, 0.93]);
   const borderRadius = useTransform(
     scrollYProgress,
-    [0.6358, 0.9004],
+    [0.517, 0.7033],
     ["0rem", "2.5rem"],
   );
 
   return (
     <div className="font-sans w-full bg-black flex flex-col relative">
-      {/* <div className="fixed bottom-10 right-10 bg-black/80 text-green-400 font-mono text-sm p-4 rounded-xl z-50 border border-green-400/30 backdrop-blur-md">
-        <div>Scroll Progress (0 to 1): {progress.toFixed(4)}</div>
-        <div>Scroll Pixels: {pixels.toFixed(0)}px</div>
-      </div> */}
+      <div className="fixed bottom-10 right-10 bg-black/80 text-green-400 font-mono text-sm p-4 rounded-xl z-50 border border-green-400/30 backdrop-blur-md">
+        <div>Scroll Progress (0 to 1): <span ref={progressRef}>0.0000</span></div>
+        <div>Scroll Pixels: <span ref={pixelsRef}>0px</span></div>
+      </div>
 
       <motion.div
         style={{ borderRadius, scale }}
