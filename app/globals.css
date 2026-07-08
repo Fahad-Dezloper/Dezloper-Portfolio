@@ -50,3 +50,12 @@ code[data-theme*=" "] span {
 pre[data-theme*=" "] {
   background-color: var(--shiki-light-bg) !important;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

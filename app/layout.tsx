@@ -114,7 +114,7 @@ export default function RootLayout({
                 Scroll.Content in a max-content grid column, so w-full would blow
                 out to the widest child (the horizontal carousels). Pinning to
                 100vw makes those carousels scroll internally again. */}
-            <div className="flex min-h-dvh w-screen max-w-[100vw] flex-col items-center overflow-x-clip px-4 py-6 sm:px-6">
+            <div className="flex min-h-dvh w-screen max-w-[100vw] flex-col items-center overflow-x-clip ">
               <div className="flex w-full items-center flex-col">
                 {/* <Navbar /> */}
                 <TooltipProvider>{children}</TooltipProvider>

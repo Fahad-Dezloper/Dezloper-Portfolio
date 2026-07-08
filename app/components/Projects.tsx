@@ -99,7 +99,7 @@ export default function Projects() {
         </div>
       </div>
       {/* Contributions Carousel */}
-      <div className="mt-4 w-full overflow-x-auto scrolll pb-2 md:pl-[max(1rem,calc((100vw-42rem)/1.8-1.6rem))] pr-4 [scrollbar-width:thin]">
+      <div className="mt-4 w-full overflow-x-auto scrolll pb-2 md:pl-[max(1rem,calc((100vw-42rem)/1.7-1.6rem))] pr-4 [scrollbar-width:thin]">
         <div className="flex w-max gap-4">
           {contributions.map((item, index) => (
             <a
