@@ -12,6 +12,7 @@ type FunExperienceItem = {
   object?: string;
   objectPosition?: string;
   // smallImage?: string;
+  link?: string;
   config?: {
     y: number;
     x: number;
@@ -31,6 +32,7 @@ export default function FunExperiences() {
       // smallImage: "/experiences/STIndia.webp",
       width: "60",
       object: "cover",
+      link: "https://x.com/SuperteamIN/status/2056052264603947245?s=20",
       config: {
         y: 4,
         x: 25,
@@ -53,6 +55,7 @@ export default function FunExperiences() {
       width: "60",
       object: "cover",
       objectPosition: "top",
+      link: "https://x.com/SuperteamIN/status/1987555281283510517?s=20",
       config: {
         y: 18,
         x: 265,
@@ -69,6 +72,7 @@ export default function FunExperiences() {
       // smallImage: "/experiences/STIndia.webp",
       width: "60",
       object: "cover",
+      link: "https://x.com/SuperteamIN/status/2057138549942837653?s=20",
       config: {
         y: 4,
         x: 25,
@@ -85,6 +89,7 @@ export default function FunExperiences() {
       // smallImage: "/experiences/athena.webp",
       width: "40",
       object: "cover",
+      link: "https://x.com/AthenaF0SS/status/1982144753958277340?s=20",
       config: {
         y: 24,
         x: 420,
@@ -110,11 +115,21 @@ export default function FunExperiences() {
                 key={index}
                 className="flex rounded-xl overflow-hidden flex-col relative shrink-0 group"
               >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className={`w-auto max-w-none transition-transform duration-300 ${heights[index % 4]}`}
-                />
+                {item.link ? (
+                  <a href={item.link} target="_blank" rel="noopener noreferrer">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className={`w-auto max-w-none transition-transform duration-300 ${heights[index % 4]}`}
+                    />
+                  </a>
+                ) : (
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className={`w-auto max-w-none transition-transform duration-300 ${heights[index % 4]}`}
+                  />
+                )}
               </div>
             );
           })}

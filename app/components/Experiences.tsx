@@ -86,9 +86,7 @@ export default function Experiences() {
   return (
     <section className="w-full max-w-none self-stretch">
       <div className="mx-auto max-w-xl">
-        <h2 className="text-xs font-medium text-[var(--foreground)]/50 uppercase tracking-wider mb-8">
-          Cool Experience I have had
-        </h2>
+        <h2 className="mb-10">Latest Updates</h2>
         <div className="flex flex-col">
           {allExperiences.slice(0, 3).map((item, index) => (
             <div key={index} className={index !== 0 ? "mt-10" : ""}>

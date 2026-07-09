@@ -12,6 +12,7 @@ import Experiences from "./components/Experiences";
 import FunExperiences from "./components/FunExperiences";
 import Projects from "./components/Projects";
 import Experiments from "./components/Experiments";
+import Writtings from "./components/Writtings";
 
 export default function Home() {
   const [container, setContainer] = useState<HTMLElement | null>(null);
@@ -69,10 +70,12 @@ function AnimatedHome({ scrollContainer }: { scrollContainer: HTMLElement }) {
   const pixelsRef = useRef<HTMLSpanElement>(null);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (progressRef.current) progressRef.current.textContent = latest.toFixed(4);
+    if (progressRef.current)
+      progressRef.current.textContent = latest.toFixed(4);
   });
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (pixelsRef.current) pixelsRef.current.textContent = `${latest.toFixed(0)}px`;
+    if (pixelsRef.current)
+      pixelsRef.current.textContent = `${latest.toFixed(0)}px`;
   });
 
   // Using the exact scroll boundaries you found!
@@ -86,24 +89,29 @@ function AnimatedHome({ scrollContainer }: { scrollContainer: HTMLElement }) {
   return (
     <div className="font-sans w-full bg-black flex flex-col relative">
       <div className="fixed bottom-10 right-10 bg-black/80 text-green-400 font-mono text-sm p-4 rounded-xl z-50 border border-green-400/30 backdrop-blur-md">
-        <div>Scroll Progress (0 to 1): <span ref={progressRef}>0.0000</span></div>
-        <div>Scroll Pixels: <span ref={pixelsRef}>0px</span></div>
+        <div>
+          Scroll Progress (0 to 1): <span ref={progressRef}>0.0000</span>
+        </div>
+        <div>
+          Scroll Pixels: <span ref={pixelsRef}>0px</span>
+        </div>
       </div>
 
       <motion.div
-        style={{ borderRadius, scale }}
+        // style={{ borderRadius, scale }}
         className="flex w-full pb-[150px] overflow-hidden flex-col gap-10 bg-white flex-1 items-center justify-center"
       >
         <Hero />
         <Experiences />
         <FunExperiences />
-        <div ref={projectsRef} className="w-full">
-          <Projects />
-        </div>
+        <Projects />
+        {/* <div ref={projectsRef} className="w-full"> */}
+        <Writtings />
+        {/* </div> */}
       </motion.div>
-      <div className="w-full mt-10">
+      {/* <div className="w-full mt-10">
         <Experiments />
-      </div>
+      </div> */}
     </div>
   );
 }

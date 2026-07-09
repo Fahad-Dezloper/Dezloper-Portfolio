@@ -75,29 +75,31 @@ export default function Hero() {
             className="text-foreground font-medium cursor-default"
             onMouseEnter={() => setUnblurredCrafting(true)}
           >
-            crafting
+            crafting motion
           </span>
           <span
             className={`transition-all duration-300 ${unblurredCrafting ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
           >
             {" "}
-            motion that makes interfaces feel alive.
+            that makes interfaces feel alive.
           </span>
           <br />
 
-          <span className="transition-all duration-300 blur-none opacity-100">
+          <span
+            className={`transition-all duration-300 opacity-100 ${unblurredCrafting ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
+          >
             When I&apos;m not obsessing over pixels,{" "}
           </span>
           <span
             className={`transition-all duration-300 ${unblurredProtocols ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
           >
-            I&apos;m exploring{" "}
+            I&apos;m{" "}
           </span>
           <span
             className="text-foreground font-medium cursor-default"
             onMouseEnter={() => setUnblurredProtocols(true)}
           >
-            protocols
+            exploring protocols
           </span>
           <span
             className={`transition-all duration-300 ${unblurredProtocols ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}

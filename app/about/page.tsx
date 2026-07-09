@@ -32,9 +32,7 @@ const page = () => {
       </div>
 
       <div className="">
-        <h2 className="w-full text-left text-xl font-bold text-neutral-900 dark:text-white">
-          Cool Experience I have had
-        </h2>
+        <h2 className="w-full text-left">Cool Experience I have had</h2>
         <ExperienceAccordion
           items={[
             {

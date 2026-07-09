@@ -93,9 +93,7 @@ const Experiments = () => {
   return (
     <div className="w-screen flex min-h-screen flex-col items-center py-20 pb-40">
       <div className="min-w-5xl w-full max-w-5xl">
-        <h2 className="text-base font-medium text-white/50 uppercase tracking-wider mb-6">
-          Experiments
-        </h2>
+        <h2 className="mb-10 text-white">Experiments</h2>
 
         <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 w-full space-y-4">
           {experimentsData.map((item) => (
