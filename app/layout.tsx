@@ -9,6 +9,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "./components/ThemeProvider";
 import SoundOnLoad from "./components/SoundOnLoad";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -122,6 +123,7 @@ export default function RootLayout({
               <TooltipProvider>{children}</TooltipProvider>
             </div>
           </ThemeProvider>
+          <Analytics />
         </body>
       </html>
     </ViewTransitions>
