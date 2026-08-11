@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { ProjectSheet } from "./LongSheet/ProjectSheet";
 
 export default function Projects() {
   const openSourceProjects = [
@@ -60,24 +60,23 @@ export default function Projects() {
         {/* Text Projects List */}
         <div className="flex flex-col gap-6 group/list">
           {openSourceProjects.map((item, index) => (
-            <a
-              key={index}
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col gap-1.5 group/item cursor-pointer"
-            >
-              <div className="flex items-center gap-2">
-                <div className="flex relative items-center -gap-1 group/link">
-                  <h3 className="text-base text-foreground transition-colors duration-300 group-hover/list:text-secondary group-hover/item:!text-foreground ">
-                    {item.title}
-                  </h3>
+            <ProjectSheet key={index}>
+              <button
+                type="button"
+                className="flex flex-col gap-1.5 group/item cursor-pointer text-left"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="flex relative items-center -gap-1 group/link">
+                    <h3 className="text-base text-foreground transition-colors duration-300 group-hover/list:text-secondary group-hover/item:!text-foreground ">
+                      {item.title}
+                    </h3>
+                  </div>
                 </div>
-              </div>
-              <p className="leading-snug text-secondary transition-colors duration-300 group-hover/list:text-secondary/50 group-hover/item:!text-secondary">
-                {item.desc}
-              </p>
-            </a>
+                <p className="leading-snug text-secondary transition-colors duration-300 group-hover/list:text-secondary/50 group-hover/item:!text-secondary">
+                  {item.desc}
+                </p>
+              </button>
+            </ProjectSheet>
           ))}
         </div>
       </div>
