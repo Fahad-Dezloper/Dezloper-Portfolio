@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import { useRef } from "react";
 
 type FunExperienceItem = {
   id: string;
@@ -11,6 +13,7 @@ type FunExperienceItem = {
   className?: string;
   object?: string;
   objectPosition?: string;
+  video?: string;
   // smallImage?: string;
   link?: string;
   config?: {
@@ -29,6 +32,7 @@ export default function FunExperiences() {
       dates: "May 15 - May 25",
       image: "/Highlight/superdevs.png",
       className: "bg-blue-500",
+      video: "/experiences/videos/sv.mp4",
       // smallImage: "/experiences/STIndia.webp",
       width: "60",
       object: "cover",
@@ -51,6 +55,7 @@ export default function FunExperiences() {
       ],
       image: "/Highlight/graduation.png",
       className: "bg-green-500",
+      video: "/experiences/videos/sdvid.mp4",
       // smallImage: "/experiences/100xDevs.webp",
       width: "60",
       object: "cover",
@@ -70,6 +75,7 @@ export default function FunExperiences() {
       image: "/Highlight/STeam.png",
       className: "bg-blue-500",
       // smallImage: "/experiences/STIndia.webp",
+      video: "/experiences/videos/svfriends.mp4",
       width: "60",
       object: "cover",
       link: "https://x.com/SuperteamIN/status/2057138549942837653?s=20",
@@ -99,6 +105,21 @@ export default function FunExperiences() {
     },
   ];
 
+  const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
+
+  const playVideo = (index: number) => {
+    const video = videoRefs.current[index];
+    if (!video) return;
+    video.currentTime = 0;
+    video.play().catch(() => {});
+  };
+
+  // Pause only — leaving currentTime alone so the clip doesn't snap back to
+  // frame 0 while it is still fading out.
+  const pauseVideo = (index: number) => {
+    videoRefs.current[index]?.pause();
+  };
+
   return (
     <section className="w-full pt-[80px] max-w-none self-stretch">
       <div className="w-full overflow-x-auto scrolll pb-2 pt-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
@@ -113,10 +134,17 @@ export default function FunExperiences() {
             return (
               <div
                 key={index}
+                onMouseEnter={() => playVideo(index)}
+                onMouseLeave={() => pauseVideo(index)}
                 className="flex rounded-xl overflow-hidden flex-col relative shrink-0 group"
               >
                 {item.link ? (
-                  <a href={item.link} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={item.video ? "cursor-pointer" : "cursor-default"}
+                  >
                     <img
                       src={item.image}
                       alt={item.title}
@@ -128,6 +156,19 @@ export default function FunExperiences() {
                     src={item.image}
                     alt={item.title}
                     className={`w-auto max-w-none transition-transform duration-300 ${heights[index % 4]}`}
+                  />
+                )}
+                {item.video && (
+                  <video
+                    ref={(el) => {
+                      videoRefs.current[index] = el;
+                    }}
+                    src={item.video}
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    className="absolute inset-0 h-full w-full object-cover pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   />
                 )}
               </div>

@@ -17,15 +17,6 @@ export default function Experiences() {
 
   const professionalExperince: ExperienceItem[] = [
     {
-      id: "Swish",
-      title: "Swish.cash",
-      dates: "June 2026 - Present",
-      description:
-        "Privacy consumer app on Solana | Owned the backend end-to-end, building the auto-routing engine, SDK, and relayer infrastructure to aggregate multiple privacy protocols.",
-      link: "https://swish.cash/",
-      logo: "/companies/Swish2.png",
-    },
-    {
       id: "x2c",
       title: "X2C.fun",
       dates: "Nov 2025 – Present",
@@ -33,6 +24,15 @@ export default function Experiences() {
         "Web3 game studio | Owned the frontend across Farcaster mini apps, web games, the Skins NFT marketplace, user game dashboard, and the company website.",
       link: "https://www.x2c.fun/",
       logo: "/companies/x2c.png",
+    },
+    {
+      id: "Swish",
+      title: "Swish.cash",
+      dates: "June 2026 - August 2026",
+      description:
+        "Privacy consumer app on Solana | Owned the backend end-to-end, building the auto-routing engine, SDK, and relayer infrastructure to aggregate multiple privacy protocols.",
+      link: "https://swish.cash/",
+      logo: "/companies/Swish2.png",
     },
     {
       id: "food-for-thought",

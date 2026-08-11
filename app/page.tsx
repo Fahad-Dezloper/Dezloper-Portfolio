@@ -88,14 +88,14 @@ function AnimatedHome({ scrollContainer }: { scrollContainer: HTMLElement }) {
 
   return (
     <div className="font-sans w-full bg-black flex flex-col relative">
-      <div className="fixed bottom-10 right-10 bg-black/80 text-green-400 font-mono text-sm p-4 rounded-xl z-50 border border-green-400/30 backdrop-blur-md">
+      {/* <div className="fixed bottom-10 right-10 bg-black/80 text-green-400 font-mono text-sm p-4 rounded-xl z-50 border border-green-400/30 backdrop-blur-md">
         <div>
           Scroll Progress (0 to 1): <span ref={progressRef}>0.0000</span>
         </div>
         <div>
           Scroll Pixels: <span ref={pixelsRef}>0px</span>
         </div>
-      </div>
+      </div> */}
 
       <motion.div
         // style={{ borderRadius, scale }}
