@@ -1,0 +1,147 @@
+---
+title: "Dissecting Complex Interfaces"
+date: "Aug 31, 2026"
+description: "The hard part of design was never making it look good. It is compressing more data than a screen can hold into something understood in under a second. Finance is where that skill gets tested hardest."
+---
+
+## Origins
+
+The most useful things I've learned about interface design didn't come from redesigns or case studies. They came from screens that are serving millions of users and billions in volume.
+
+This one started with an order book. I was watching prices tick on Backpack and realised the numbers weren't moving. Not sideways, anyway. Every digit was holding its column while the values changed underneath it.
+
+<TabularDemo />
+
+Once I noticed that, I couldn't stop finding the rest of them. Depth bars living in the background layer of every row, costing no space at all. A health factor on Aave compressing a dozen liquidation parameters into one number you can read without thinking. Red and green appearing nowhere in an entire terminal except where direction is meant.
+
+None of it looks like design. It looks like a wall of numbers. But every one of those walls is someone solving the hardest problem in the field: more data than the screen can hold, and a person who has to understand it in about a second, then act on it with money at stake. Anyone can centre a card. That was never the hard part.
+
+## Don't confuse density with clutter
+
+There's a myth that whitespace equals clarity.
+
+Tufte settled this in 1990, in [_Envisioning Information_](https://www.edwardtufte.com/book/envisioning-information/): **"Confusion and clutter are failures of design, not attributes of information."** A screen isn't cluttered because it holds a lot. It's cluttered because nothing tells you where to look.
+
+The goal was never to remove things until it feels clean. It's to make a hundred things sit still.
+
+![DeFiLlama protocol rankings](/blogs/density/defillama.webp)
+Screenshot: [defillama.com/protocols](https://defillama.com/protocols)
+
+## Glance is a different act than read
+
+"Answered in a single glance" isn't a figure of speech. It's a mechanism.
+
+The visual system processes a specific set of properties in under 200ms, before attention arrives: hue, intensity, position, length, orientation, motion. Everything else requires serial reading: one item at a time, roughly a quarter second each.
+
+So density works when the data is encoded into those pre-attentive channels, and fails when it demands reading. A table of 200 rows is fine if the answer is a colour or a length. It's unusable if the answer is a minus sign.
+
+![Pre-attentive encoding](/blogs/density/preattentive.svg)
+_Same eighteen numbers, three encodings. Find the losing position in each. The first makes you read every cell. The second you find without trying. The third also tells you how bad it is, because alignment turns magnitude into length._
+
+## Compression is not omission
+
+Hiding data behind a menu is omission. Collapsing twelve numbers into one that means something is compression. Only one of those is design.
+
+Aave's health factor is the cleanest example in DeFi. Collateral value, borrowed value, per-asset liquidation thresholds, all weighted, then resolved into a single scalar where anything below `1.0` means you get liquidated. You don't read your position. You read one number and know.
+
+![Aave reserve parameters](/blogs/density/aave.webp)
+
+_These are the inputs: max LTV, liquidation threshold, liquidation penalty, held separately for every asset and again for every E-Mode category. A borrower never reads any of them. They read one number. Dense interfaces earn their density by compressing; the ones that fail just print everything._
+
+## Numbers need a spine
+
+The highest-leverage detail in financial UI.
+
+Most fonts ship _proportional_ figures: `1` is narrow, `0` is wide. So a column of numbers has a ragged decimal point, and a live price physically jitters sideways as it ticks. One property fixes it:
+
+```css
+font-variant-numeric: tabular-nums;
+```
+
+Every digit gets the same advance width. The column locks.
+
+Then right-align, so the decimal points stack into a vertical line. Magnitude becomes **length**, a pre-attentive channel. You can see that one number is larger than another without reading either one.
+
+![Tabular figures](/blogs/density/tabular.svg)
+
+## Hierarchy without size
+
+Size is the one hierarchy tool you cannot afford, because size costs rows.
+
+So hierarchy has to come from everything else: weight, opacity, position, colour. The most useful of these is precision fade: render the cents at around 55% opacity so the eye lands on the dollars, and the decimals stay available without competing for attention.
+
+![Hierarchy at one size](/blogs/density/hierarchy.svg)
+
+## Red and green are load-bearing
+
+If gain and loss are encoded in colour, then colour is a semantic channel and you have already spent it. Nothing else in the interface can be red or green. Not a button, not a badge, not a link, not a chart series.
+
+This is why terminals are grey. It was never a brutalist aesthetic choice. It's protecting the only channel that carries meaning. The severity is downstream of function, and it keeps getting mistaken for style.
+
+<Row>
+
+![Backpack terminal](/blogs/density/backpackterminal.webp)
+
+![Backpack orderbook](/blogs/density/backpack.webp)
+
+</Row>
+
+_Backpack's book. Every structural element is grey: chrome, headers, sizes, totals. Red and green appear nowhere except direction. That restraint is what lets you read the book without reading it._
+
+Bloomberg is the same argument taken to its limit. It costs around $30,000 a year, it looks like a 1980s CRT on purpose, and traders resist every redesign that tries to rescue them from it. The density and the muscle memory are the product.
+
+## Show the derivation
+
+A number with no origin is a source of anxiety. When a fee spikes or a balance drops, the question is immediate and it is always the same one: _why?_
+
+Jupiter's answer is worth studying because it changed. The old UI laid the route out inline: every venue, every split, the impact, the slippage. The current one leads with a single guaranteed number and puts the route one click behind it.
+
+![Jupiter swap quote](/blogs/density/jupiter.webp)
+
+_45,000 SOL, about $4.6M. Ignore the big number. The one that matters is the guaranteed price beneath it, and the −0.41% beside that: the worst case, quoted before you sign._
+
+So the route didn't disappear, it moved. What leads is the number you would act on; the derivation sits one click behind it. That's compression rather than omission.
+
+<Aside>
+  PS:{" "}
+  <Term label="Optimistic UI">
+    Showing the result before the server has confirmed it. Tap like on a post
+    and the heart fills instantly. The app assumes the request will succeed and
+    quietly corrects itself later if it didn't. It makes an interface feel fast,
+    and it means the screen is briefly lying to you.
+  </Term>
+  , the default reflex everywhere else, is malpractice here. You cannot show
+  someone a fill that hasn't happened yet. A pending state has to say pending.
+</Aside>
+
+## Motion is a channel, and it has a budget
+
+A cell that changes should say so: a brief tint that decays over roughly 400ms. That uses the motion channel, which is pre-attentive, so you catch a change you weren't even looking at.
+
+Spend the motion and the budget wisely only on the values whose changes require a decision.
+
+<FlashDemo />
+
+## Density has an axis
+
+Cash App and Wise are deliberately sparse, and they are right to be. They serve someone moving money once a week, who is never on the screen long enough to learn it. A terminal serves a professional holding a position for six hours. **Frequency of use multiplied by expertise** is what earns density. A first-time user has no muscle memory to reward.
+
+<Term label="Fitts's law">
+  The time it takes to hit a target with a pointer depends on how far away it is
+  and how big it is. Paul Fitts formalised it in 1954, and it is why buttons
+  have minimum sizes and why a menu pinned to the screen edge feels fast: you
+  cannot overshoot an edge. It only governs pointing, though. If you are typing
+  a command, nothing is being aimed at.
+</Term>
+also stops applying the moment the primary input is the keyboard, which is how
+Bloomberg gets away with hit targets a mouse could never reliably find.
+
+<AppStrip />
+
+<DensityAxis />
+
+## —
+
+Design in finance isn't decoration, and it isn't subtraction either. It's the removal of doubt.
+
+Done right, the interface stops being something you look at. You look through it, at the market.

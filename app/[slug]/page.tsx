@@ -1,9 +1,20 @@
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/mdx";
+import { countBlocks, getEditableBlocks, readPost } from "@/lib/mdx-blocks";
+import BlogEditor from "@/app/components/BlogEditor";
+import TabularDemo from "@/app/components/TabularDemo";
+import Row from "@/app/components/Row";
+import Term from "@/app/components/Term";
+import Aside from "@/app/components/Aside";
+import FlashDemo from "@/app/components/FlashDemo";
+import AppStrip from "@/app/components/AppStrip";
+import DensityAxis from "@/app/components/DensityAxis";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Link } from "next-view-transitions";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import rehypePrettyCode from "rehype-pretty-code";
+
+const isDev = process.env.NODE_ENV === "development";
 
 const components = {
   h1: (props: any) => (
@@ -80,6 +91,14 @@ const components = {
       {...props}
     />
   ),
+  // Interactive figures available to any .mdx file in content/blogs
+  TabularDemo,
+  Row,
+  Term,
+  Aside,
+  FlashDemo,
+  AppStrip,
+  DensityAxis,
 };
 
 export async function generateStaticParams() {
@@ -132,6 +151,10 @@ export default async function BlogPostPage({
     notFound();
   }
 
+  // Dev-only: work out which paragraphs are safe to edit in the browser.
+  const source = isDev ? readPost(resolvedParams.slug) : null;
+  const editable = source ? getEditableBlocks(source.body) : [];
+
   return (
     <main className="w-full max-w-2xl flex-1 flex flex-col">
       <article className="flex flex-col w-full">
@@ -172,6 +195,14 @@ export default async function BlogPostPage({
           />
         </div>
       </article>
+
+      {source && (
+        <BlogEditor
+          slug={resolvedParams.slug}
+          blocks={editable}
+          total={countBlocks(source.body)}
+        />
+      )}
     </main>
   );
 }
