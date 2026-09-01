@@ -77,3 +77,29 @@ export function countBlocks(body: string): number {
   for (let i = 0; i < parts.length; i += 2) if (parts[i].trim()) n++;
   return n;
 }
+
+export type Heading = { id: string; text: string };
+
+/** Stable anchor ids, shared by the heading renderer and the index. */
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/**
+ * Section headings for the article index. Headings that slugify to nothing
+ * (the "## —" divider) are skipped rather than given an empty anchor.
+ */
+export function getHeadings(body: string): Heading[] {
+  const headings: Heading[] = [];
+  for (const line of body.split("\n")) {
+    const match = /^##\s+(.+?)\s*$/.exec(line);
+    if (!match) continue;
+    const text = match[1].replace(/[*_`]/g, "").trim();
+    const id = slugify(text);
+    if (id) headings.push({ id, text });
+  }
+  return headings;
+}

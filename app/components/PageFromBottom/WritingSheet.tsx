@@ -1,171 +1,129 @@
 "use client";
-import type { ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { Scroll } from "@silk-hq/components";
 import { PageFromBottom } from "./PageFromBottom";
+import ArticleIndex from "../ArticleIndex";
 import "./WritingSheet.css";
 
 /**
- * Silk's Page from Bottom, wired so that whatever is passed as `children`
- * becomes the trigger — i.e. the arrow on a writing card opens the page.
+ * Opens a writing in Silk's page-from-bottom sheet.
  *
- * The body is still Silk's default demo article, with only the heading swapped
- * for the writing that was clicked. Replace the markup inside
- * <PageFromBottom.Content> once the real pieces are written.
+ * The trigger card is built here rather than passed in as children. Silk's
+ * Trigger uses `asChild`, which clones the trigger and composes a ref onto it,
+ * and an element created in a server component cannot take one. So the card
+ * arrives as plain data and the element is created on the client.
+ *
+ * `content` is the already-rendered article: MDX compiles on the server and is
+ * handed in, which is safe because it is only placed into the tree, never
+ * cloned or given a ref.
  */
+
+type Heading = { id: string; text: string };
+
 const WritingSheet = ({
   title,
-  children,
+  slug,
+  type,
+  bg = "bg-[#e5e5e5]",
+  image,
+  date,
+  content,
+  headings = [],
 }: {
-  title?: string;
-  children: ReactNode;
+  title: string;
+  slug?: string;
+  type?: string;
+  bg?: string;
+  image?: string;
+  date?: string;
+  content?: ReactNode;
+  headings?: Heading[];
 }) => {
+  const [presented, setPresented] = useState(false);
+  // Only step back through history if this sheet is what pushed the entry.
+  const pushedRef = useRef(false);
+
+  // Browser back closes the sheet rather than leaving the page.
+  useEffect(() => {
+    const onPop = () => {
+      pushedRef.current = false;
+      setPresented(false);
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
+  const handlePresentedChange = useCallback(
+    (next: boolean) => {
+      setPresented(next);
+      if (!slug) return;
+
+      if (next) {
+        pushedRef.current = true;
+        window.history.pushState({ sheet: slug }, "", `/${slug}`);
+      } else if (pushedRef.current) {
+        // Unwind our own entry so the URL and the back button stay in step.
+        pushedRef.current = false;
+        window.history.back();
+      }
+    },
+    [slug]
+  );
+
   return (
-    <PageFromBottom.Root>
-      <PageFromBottom.Trigger asChild>{children}</PageFromBottom.Trigger>
+    <PageFromBottom.Root
+      presented={presented}
+      onPresentedChange={handlePresentedChange}
+    >
+      <PageFromBottom.Trigger asChild>
+        <div
+          className={`w-[220px] md:w-[290px] shrink-0 h-[360px] rounded-3xl relative overflow-hidden group cursor-pointer ${bg}`}
+        >
+          {image && (
+            <img
+              src={image}
+              alt={title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
+          <div className="absolute bottom-0 left-0 p-5 flex flex-col gap-1 w-full text-white">
+            <h3 className="font-medium text-xl leading-snug">{title}</h3>
+            {type && <p className="text-white/60 text-sm">{type}</p>}
+          </div>
+        </div>
+      </PageFromBottom.Trigger>
       <PageFromBottom.Portal>
         <PageFromBottom.View>
           <PageFromBottom.Backdrop />
           <PageFromBottom.Content>
             <Scroll.Root asChild>
-              <Scroll.View
-                className="WritingSheet-scrollView"
-                scrollGestureTrap={true}
-              >
+              <Scroll.View className="WritingSheet-scrollView" scrollGestureTrap={true}>
                 <Scroll.Content asChild>
                   <article className="WritingSheet-article">
-                    <div className="WritingSheet-illustration" />
-                    <div className="WritingSheet-articleContent">
-                      <PageFromBottom.Title
-                        className="WritingSheet-title"
-                        asChild
-                      >
-                        <h1>
-                          {title ??
-                            "The Rise of Minimalism: How Modern Architecture is Redefining Space"}
-                        </h1>
-                      </PageFromBottom.Title>
-                      <h2 className="WritingSheet-subtitle">
-                        Exploring how minimalism in architecture is transforming
-                        the way we design, live, and interact with spaces.
-                      </h2>
-                      <div className="WritingSheet-author">
-                        by{" "}
-                        <span className="WritingSheet-authorName">
-                          Frederik Hansen
-                        </span>
+                    <div className="WritingSheet-layout">
+                      <aside className="WritingSheet-index">
+                        <div className="WritingSheet-indexInner">
+                          <ArticleIndex headings={headings} />
+                        </div>
+                      </aside>
+
+                      <div className="WritingSheet-main">
+                        <header>
+                          <PageFromBottom.Title className="WritingSheet-title" asChild>
+                            <h1>{title}</h1>
+                          </PageFromBottom.Title>
+                          {date && <div className="WritingSheet-date">{date}</div>}
+                        </header>
+
+                        <div className="WritingSheet-body">
+                          {content ?? (
+                            <p className="WritingSheet-empty">
+                              This one isn&apos;t written yet.
+                            </p>
+                          )}
+                        </div>
                       </div>
-                      <section className="WritingSheet-articleBody">
-                        <p className="WritingSheet-articleParagraph">
-                          Minimalism in architecture has evolved far beyond a
-                          simple design trend. Today, it is a defining
-                          philosophy that shapes how we conceive, create, and
-                          inhabit our spaces. The sleek lines, open plans, and
-                          functional designs that characterize minimalist
-                          architecture represent a shift toward a more
-                          intentional, thoughtful use of space. As urban centers
-                          grow and land becomes more valuable, the need for
-                          efficient, clean, and flexible environments has never
-                          been more critical. But minimalism isn&apos;t just
-                          about reducing clutter; it&apos;s a philosophy that
-                          encourages simplicity, tranquility, and a connection
-                          to the essentials of living.
-                        </p>
-                        <p className="WritingSheet-articleParagraph">
-                          In its early stages, minimalism was driven by
-                          modernist principles, particularly those of the
-                          Bauhaus movement, which sought to eliminate
-                          ornamentation and focus on functional beauty.
-                          Architects like Ludwig Mies van der Rohe, with his
-                          famous aphorism &quot;Less is more,&quot; laid the
-                          groundwork for the minimalist approach we recognize
-                          today. However, the term &quot;minimalism&quot; has
-                          evolved in both meaning and execution, incorporating
-                          elements of sustainability, flexibility, and even
-                          spirituality into its design ethos. As a result,
-                          minimalist architecture today serves both an aesthetic
-                          and a practical purpose, offering solutions for a
-                          variety of contemporary challenges.
-                        </p>
-                        <p className="WritingSheet-articleParagraph">
-                          One of the key drivers behind the rise of minimalism
-                          is the desire for more efficient use of space. As
-                          cities become more crowded, space is at a premium, and
-                          the need to design smaller but more functional homes
-                          and offices is becoming increasingly important.
-                          Minimalist architecture, with its focus on open floor
-                          plans, multifunctional spaces, and streamlined
-                          designs, offers an ideal solution. Rather than filling
-                          spaces with excessive furnishings or decorative
-                          elements, minimalist designs allow each square foot to
-                          serve a purpose, eliminating wasted space while
-                          creating a sense of openness and freedom.
-                        </p>
-                        <p className="WritingSheet-articleParagraph">
-                          Incorporating natural light and clean lines is another
-                          hallmark of minimalist design. These elements help to
-                          create a sense of peace and serenity, which is central
-                          to the minimalist philosophy. Large windows, often
-                          floor-to-ceiling, invite the outdoors in, connecting
-                          occupants with nature and enhancing the feeling of
-                          openness. Natural materials such as wood, stone, and
-                          concrete are commonly used, not just for their
-                          aesthetic value but for their durability and
-                          sustainable qualities. This focus on materials aligns
-                          with a growing global emphasis on sustainability in
-                          design and construction.
-                        </p>
-                        <p className="WritingSheet-articleParagraph">
-                          The minimalist approach also encourages mindfulness in
-                          how we interact with our surroundings. In a world
-                          filled with distractions, minimalist spaces offer a
-                          reprieve—an opportunity to live more consciously. By
-                          reducing the number of items in a space, the
-                          architecture itself can encourage users to focus on
-                          the essentials, be it a piece of furniture, an
-                          artwork, or even the sheer quality of light entering
-                          the room. This fosters a deeper connection to
-                          one&apos;s environment and promotes a more intentional
-                          lifestyle.
-                        </p>
-                        <p className="WritingSheet-articleParagraph">
-                          Technology has also played a significant role in the
-                          rise of minimalist architecture. The integration of
-                          smart home systems, automated lighting, and
-                          energy-efficient appliances enables modern minimalist
-                          homes to function more efficiently. These
-                          technological advancements complement the clean,
-                          simple lines of minimalist design by adding layers of
-                          functionality that often go unnoticed. The seamless
-                          integration of technology into the design makes it
-                          easier for residents to maintain a minimalist
-                          lifestyle without sacrificing comfort or convenience.
-                        </p>
-                        <p className="WritingSheet-articleParagraph">
-                          Perhaps the most striking element of minimalist
-                          architecture is its ability to blur the lines between
-                          interior and exterior. By creating open, uninterrupted
-                          spaces and using materials that extend from the inside
-                          to the outside, minimalist design allows the boundary
-                          between the two to dissolve. This creates a sense of
-                          harmony and continuity, where nature and architecture
-                          exist in perfect balance. As a result, many minimalist
-                          designs incorporate elements such as courtyards,
-                          terraces, and green roofs to invite nature into the
-                          living environment.
-                        </p>
-                        <p className="WritingSheet-articleParagraph">
-                          Finally, minimalist architecture is not just about
-                          visual aesthetics—it is a tool for enhancing the
-                          quality of life. The rise of minimalism reflects a
-                          growing recognition that our built environments have a
-                          profound impact on our well-being. By creating spaces
-                          that are calm, efficient, and uncluttered, architects
-                          are offering us a new way to interact with the world
-                          around us. In the face of ever-increasing complexity
-                          in daily life, minimalist architecture provides a
-                          welcome reminder that sometimes, less truly is more.
-                        </p>
-                      </section>
                     </div>
                   </article>
                 </Scroll.Content>

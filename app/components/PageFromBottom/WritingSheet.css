@@ -7,122 +7,112 @@
 .WritingSheet-article {
   /* INNER-LAYOUT */
   display: grid;
+  background: var(--background);
 }
 
-.WritingSheet-illustration {
-  /* SELF-LAYOUT */
-  width: 100%;
-  height: 45svh;
-
-  /* APPEARANCE */
-  background-image: conic-gradient(
-    from -140deg at 100% 100%,
-    rgba(36, 239, 215, 1),
-    rgba(179, 250, 241, 1) 120deg,
-    rgba(36, 239, 215, 1)
-  );
-  background-origin: border-box;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.WritingSheet-articleContent {
+/* Narrow: single centred column, no index. */
+.WritingSheet-layout {
   /* SELF-LAYOUT */
   justify-self: center;
-  width: min(100% - 3rem, 800px);
+  width: min(100% - 3rem, 700px);
 
   /* INNER-LAYOUT */
-  padding-block: 1.75rem 2rem;
-  display: grid;
-  place-content: start;
+  padding-block: 1.75rem 4rem;
 }
-@media (min-width: 1000px) {
-  .WritingSheet-articleContent {
-    /* SELF-LAYOUT */
-    padding-block: 3.5rem;
+
+.WritingSheet-index {
+  display: none;
+}
+
+/* Wide: three columns, so the prose sits in the true centre of the page and the
+   index lives out in the left gutter rather than beside the text. Needs roughly
+   700px of prose plus two ~260px gutters before it is worth switching. */
+@media (min-width: 1280px) {
+  .WritingSheet-layout {
+    width: 100%;
+    justify-self: stretch;
+    display: grid;
+    grid-template-columns: 1fr min(100% - 4rem, 700px) 1fr;
+    align-items: start;
+    padding-block: 3.5rem 6rem;
   }
+
+  .WritingSheet-index {
+    display: block;
+    grid-column: 1;
+    justify-self: start;
+    width: 200px;
+    padding-left: 2.75rem;
+
+    /* Follows the reader down the piece. */
+    position: sticky;
+    top: 3.5rem;
+    max-height: calc(100svh - 7rem);
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .WritingSheet-index::-webkit-scrollbar {
+    display: none;
+  }
+
+  .WritingSheet-main {
+    grid-column: 2;
+  }
+}
+
+.WritingSheet-main {
+  min-width: 0;
 }
 
 .WritingSheet-title {
   /* SELF-LAYOUT */
   margin-top: 0;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 
   /* TEXT */
   text-wrap: balance;
-  line-height: 1.25;
-  font-size: 1.875rem;
-  font-weight: 800;
-  color: rgb(17, 24, 39);
+  line-height: 1.2;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--foreground);
 }
 @media (min-width: 1000px) {
   .WritingSheet-title {
-    /* SELF-LAYOUT */
-    margin-bottom: 1.5rem;
-
-    /* TEXT */
-    font-size: 3rem;
+    font-size: 2.25rem;
   }
 }
 
-.WritingSheet-subtitle {
-  /* SELF-LAYOUT */
-  margin: 0;
-
+.WritingSheet-date {
   /* TEXT */
-  text-wrap: balance;
-  text-wrap: pretty;
-  line-height: 1.375;
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: rgb(107, 114, 128);
+  font-size: 0.8125rem;
+  color: color-mix(in srgb, var(--foreground) 45%, transparent);
+}
+
+.WritingSheet-body {
+  /* SELF-LAYOUT */
+  margin-top: 2.5rem;
 }
 @media (min-width: 1000px) {
-  .WritingSheet-subtitle {
-    /* TEXT */
-    line-height: 1.375;
-    font-size: 1.5rem;
-  }
-}
-
-.WritingSheet-author {
-  /* SELF-LAYOUT */
-  margin-top: 1rem;
-
-  /* TEXT */
-  font-size: 0.875rem;
-  color: rgb(107, 114, 128);
-}
-@media (min-width: 1000px) {
-  .WritingSheet-author {
-    margin-top: 1.5rem;
-  }
-}
-
-.WritingSheet-authorName {
-  /* TEXT */
-  font-weight: 500;
-  color: rgb(75, 85, 99);
-}
-
-.WritingSheet-articleBody {
-  /* SELF-LAYOUT */
-  margin-top: 2.25rem;
-  display: grid;
-  gap: 0.75rem;
-
-  /* TEXT */
-  line-height: 1.5;
-  font-size: 1.125rem;
-  color: rgb(31, 41, 55);
-}
-@media (min-width: 1000px) {
-  .WritingSheet-articleBody {
-    /* SELF-LAYOUT */
+  .WritingSheet-body {
     margin-top: 3.5rem;
   }
 }
 
-.WritingSheet-articleParagraph {
-  /* SELF-LAYOUT */
-  margin: 0;
+/* A notch smaller than the standalone route: the sheet is a reading surface
+   inside another page, so it wants to sit slightly quieter. */
+.WritingSheet-body :is(p, li) {
+  font-size: 0.9375rem;
+}
+.WritingSheet-body h2 {
+  font-size: 1.0625rem;
+}
+.WritingSheet-body h3 {
+  font-size: 0.9375rem;
+}
+
+.WritingSheet-empty {
+  /* TEXT */
+  font-size: 0.9375rem;
+  font-style: italic;
+  color: color-mix(in srgb, var(--foreground) 45%, transparent);
 }
