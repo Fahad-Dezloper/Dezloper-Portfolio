@@ -67,3 +67,10 @@ page from bottom component
 experiment section
 
 footer to reach out to you\
+
+
+todos left
+- article polishing before publish
+- remove dump
+- clean up code
+- remove all previous code for articles
