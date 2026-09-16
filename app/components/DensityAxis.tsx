@@ -94,6 +94,15 @@ const CSS = `
 .densityaxis .pt circle,
 .densityaxis .pt text { transition: opacity .18s ease, fill .18s ease; }
 .densityaxis .pt:focus-visible circle.ring { opacity: .9; }
+/* Scaled to a phone the SVG shrinks to about a third, taking the labels below
+   6px. CSS font-size beats the SVG attribute, so bump each size up there. */
+@media (max-width: 520px) {
+  .densityaxis text[font-size="19"] { font-size: 34px; }
+  .densityaxis text[font-size="16"] { font-size: 26px; }
+  .densityaxis text[font-size="15"] { font-size: 26px; }
+  .densityaxis text[font-size="14"] { font-size: 22px; }
+  .densityaxis text[font-size="12"] { font-size: 20px; }
+}
 `;
 
 export default function DensityAxis({

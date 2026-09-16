@@ -120,6 +120,20 @@ const WritingSheet = ({
               <Scroll.View className="WritingSheet-scrollView" scrollGestureTrap={true}>
                 <Scroll.Content asChild>
                   <article className="WritingSheet-article">
+                    {/* Touch has no Escape key, so give it a way out. Sticky inside
+                        the scroll view keeps it in the corner while reading, and
+                        going through Silk's dismiss keeps the URL handling. */}
+                    <div className="WritingSheet-closeBar">
+                      <PageFromBottom.Trigger
+                        action="dismiss"
+                        className="WritingSheet-close"
+                        aria-label="Close"
+                      >
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden>
+                          <path d="M6 6l12 12M18 6L6 18" />
+                        </svg>
+                      </PageFromBottom.Trigger>
+                    </div>
                     <div className="WritingSheet-layout">
                       <aside className="WritingSheet-index">
                         <div className="WritingSheet-indexInner">

@@ -38,12 +38,12 @@ export const writingSlugs = writings.flatMap((w) => (w.slug ? [w.slug] : []));
 
 const Writtings = ({ openSlug }: { openSlug?: string }) => {
   return (
-    <section className="w-full pt-[80px] max-w-none self-stretch overflow-hidden">
-      <div className="mx-auto max-w-xl">
+    <section className="w-full pt-[56px] md:pt-[80px] max-w-none self-stretch overflow-hidden">
+      <div className="mx-auto max-w-xl px-4 md:px-0">
         <h2 className="mb-8">Writing</h2>
       </div>
 
-      <div className="w-full overflow-x-auto scrolll pb-8 pt-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
+      <div className="w-full overflow-x-auto scrolll pb-8 pt-2 pl-4 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
         <div className="flex w-max gap-4 items-start">
           {writings.map((item, i) => {
             const post = item.slug ? getBlogPostBySlug(item.slug) : null;

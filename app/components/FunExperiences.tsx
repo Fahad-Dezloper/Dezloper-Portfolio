@@ -121,8 +121,8 @@ export default function FunExperiences() {
   };
 
   return (
-    <section className="w-full pt-[80px] max-w-none self-stretch">
-      <div className="w-full overflow-x-auto scrolll pb-2 pt-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
+    <section className="w-full pt-[56px] md:pt-[80px] max-w-none self-stretch">
+      <div className="w-full overflow-x-auto scrolll pb-2 pt-2 pl-4 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
         <div className="flex w-max gap-1 sm:gap-2 items-end">
           {experiences.map((item, index) => {
             const heights = [

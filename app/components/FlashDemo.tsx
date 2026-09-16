@@ -45,6 +45,11 @@ const CSS = `
   animation: flashfade 620ms ease-out forwards;
 }
 .flashdemo-range { accent-color: ${GREEN}; height: 4px; cursor: pointer; }
+.flashdemo-grid { grid-template-columns: repeat(${COLS}, minmax(0, 1fr)); }
+@media (max-width: 520px) {
+  /* Six columns of prices overflow their cells on a phone. */
+  .flashdemo-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 @media (prefers-reduced-motion: reduce) {
   .flashcell-tint { animation-duration: 1ms; }
 }
@@ -175,13 +180,13 @@ export default function FlashDemo({
       </div>
 
       <div
+        className="flashdemo-grid"
         style={{
           background: PANEL,
           border: `1px solid ${BORDER}`,
           borderRadius: 12,
           padding: 14,
           display: "grid",
-          gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))`,
           gap: 6,
         }}
       >
@@ -214,6 +219,7 @@ export default function FlashDemo({
       <div
         style={{
           display: "flex",
+          flexWrap: "wrap",
           alignItems: "center",
           gap: 12,
           marginTop: 12,
@@ -234,7 +240,7 @@ export default function FlashDemo({
           step={0.05}
           value={threshold}
           onChange={(e) => setThreshold(Number(e.target.value))}
-          style={{ flex: 1, minWidth: 0 }}
+          style={{ flex: "1 1 120px", minWidth: 0 }}
         />
         <span
           style={{

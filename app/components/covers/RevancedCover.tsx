@@ -132,9 +132,8 @@ export default function RevancedCover() {
         </defs>
 
         <g transform={PLACE}>
-          {/* The V. A thick ink stroke with a slightly thinner background stroke
-            on top leaves a hairline outline, and doing both arms in that order
-            outlines their union, so the bottom joint has no seam. */}
+          {/* The V: two solid black round-capped bars. Overlapping at the bottom
+            they read as one shape, with no seam at the joint. */}
           <motion.g style={{ x, y }}>
             {[L_TOP, R_TOP].map((top, i) => (
               <line
@@ -148,20 +147,8 @@ export default function RevancedCover() {
                 strokeLinecap="round"
               />
             ))}
-            {[L_TOP, R_TOP].map((top, i) => (
-              <line
-                key={`cut-${i}`}
-                x1={top.x}
-                y1={top.y}
-                x2={BOTTOM.x}
-                y2={BOTTOM.y}
-                stroke={BG}
-                strokeWidth={BAR}
-                strokeLinecap="round"
-              />
-            ))}
             {[L_TOP, R_TOP, BOTTOM].map((p, i) => (
-              <circle key={`joint-${i}`} cx={p.x} cy={p.y} r={2.6} fill={INK} />
+              <circle key={`joint-${i}`} cx={p.x} cy={p.y} r={2.6} fill={BG} />
             ))}
           </motion.g>
 

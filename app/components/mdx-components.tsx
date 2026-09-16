@@ -6,6 +6,7 @@ import AppStrip from "@/app/components/AppStrip";
 import Row from "@/app/components/Row";
 import Term from "@/app/components/Term";
 import Aside from "@/app/components/Aside";
+import Sentence from "@/app/components/Sentence";
 import ZoomableImage from "@/app/components/ZoomableImage";
 
 /**
@@ -102,4 +103,5 @@ export const mdxComponents = {
   Row,
   Term,
   Aside,
+  Sentence,
 };

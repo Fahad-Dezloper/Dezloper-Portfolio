@@ -73,7 +73,7 @@ export default function Hero() {
   };
 
   return (
-    <main className="flex flex-1 max-w-xl pt-[200px] w-full flex-col items-center sm:items-start">
+    <main className="flex flex-1 max-w-xl pt-[140px] md:pt-[200px] w-full px-4 md:px-0 flex-col items-center sm:items-start">
       <div className="flex flex-col gap-3 text-[var(--foreground)]/70 leading-relaxed text-[15px] sm:text-base">
         <div className="flex w-full  justify-between items-end  gap-3 sm:gap-0">
           <div className="flex flex-col">

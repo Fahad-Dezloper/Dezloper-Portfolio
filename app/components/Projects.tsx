@@ -75,13 +75,13 @@ export default function Projects() {
       title: "Pillar",
       desc: "Operations platform for running Solana validators",
       link: "https://github.com/niks3089/pillar/pulls?q=is%3Apr+is%3Aclosed+author%3AFahad-Dezloper",
-      img: "/OSC/Pillar.webp",
+      img: "/OSC/pillar.webp",
     },
   ];
 
   return (
-    <section className="w-full pt-[80px] max-w-none self-stretch ">
-      <div className="mx-auto max-w-xl">
+    <section className="w-full pt-[56px] md:pt-[80px] max-w-none self-stretch ">
+      <div className="mx-auto max-w-xl px-4 md:px-0">
         <h2 className=" mb-10">Projects and Contributions</h2>
 
         {/* Text Projects List */}
@@ -130,7 +130,7 @@ export default function Projects() {
         </div>
       </div>
       {/* Contributions Carousel */}
-      <div className="mt-4 w-full overflow-x-auto scrolll pb-2 md:pl-[max(1rem,calc((100vw-42rem)/1.7-1.6rem))] pr-4 [scrollbar-width:thin]">
+      <div className="mt-4 w-full overflow-x-auto scrolll pb-2 pl-4 md:pl-[max(1rem,calc((100vw-42rem)/1.7-1.6rem))] pr-4 [scrollbar-width:thin]">
         <div className="flex w-max gap-4">
           {contributions.map((item, index) => (
             <a

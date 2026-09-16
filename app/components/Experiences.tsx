@@ -32,7 +32,7 @@ export default function Experiences() {
       description:
         "Privacy consumer app on Solana | Decoupled the auto-routing engine, SDK, and relayer infrastructure from the Next.js app into a standalone backend, and migrated the web and mobile clients onto it as a single shared service.",
       link: "https://swish.cash/",
-      logo: "/companies/Swish2.png",
+      logo: "/companies/swish2.png",
     },
     {
       id: "food-for-thought",
@@ -85,7 +85,7 @@ export default function Experiences() {
 
   return (
     <section className="w-full max-w-none self-stretch">
-      <div className="mx-auto max-w-xl">
+      <div className="mx-auto max-w-xl px-4 md:px-0">
         <h2 className="mb-10">Latest Updates</h2>
         <div className="flex flex-col">
           {allExperiences.slice(0, 3).map((item, index) => (

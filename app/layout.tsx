@@ -83,11 +83,6 @@ export const metadata: Metadata = {
     images: ["https://ox35safakaidjuzg.public.blob.vercel-storage.com/OG.png"],
     creator: "@dezloperr",
   },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-icon.png",
-  },
 };
 
 export default function RootLayout({
