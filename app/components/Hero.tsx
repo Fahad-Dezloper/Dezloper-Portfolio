@@ -99,7 +99,7 @@ export default function Hero() {
                 target={href.startsWith("mailto:") ? undefined : "_blank"}
                 rel="noopener noreferrer"
                 aria-label={`${name} — ${label}`}
-                className="group flex items-center rounded-xl bg-[var(--foreground)]/5 p-1.5 text-xs font-medium text-[var(--foreground)]/70 transition-colors hover:bg-[var(--foreground)]/10 hover:text-[var(--foreground)]"
+                className="group flex items-center rounded-xl bg-[var(--foreground)]/5 p-1.5 text-xs font-medium text-[var(--foreground)]/70 transition-colors hover:bg-[var(--foreground)]/5 hover:text-[var(--foreground)]"
               >
                 <Icon />
                 {/* 0fr → 1fr animates the label's width open without a fixed size */}
@@ -122,8 +122,8 @@ export default function Hero() {
           <span className="text-foreground font-medium">
             exploring protocols
           </span>{" "}
-          and complex infrastructure, rebuilding them from scratch to
-          understand them from first principles.
+          and complex infrastructure, rebuilding them from scratch to understand
+          them from first principles.
         </p>
 
         {/* <div className="mt-2 flex items-center">

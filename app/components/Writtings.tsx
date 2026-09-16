@@ -1,7 +1,7 @@
 import React from "react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypePrettyCode from "rehype-pretty-code";
-import { WritingSheet } from "./PageFromBottom/WritingSheet";
+import { WritingSheet, type CoverKey } from "./PageFromBottom/WritingSheet";
 import { mdxComponents } from "./mdx-components";
 import { getBlogPostBySlug } from "@/lib/mdx";
 import { getHeadings, readPost } from "@/lib/mdx-blocks";
@@ -16,29 +16,25 @@ import { getHeadings, readPost } from "@/lib/mdx-blocks";
 
 type Writing = {
   title: string;
-  type?: string;
-  image?: string;
-  bg: string;
   slug?: string;
+  cover?: CoverKey;
 };
 
 const writings: Writing[] = [
   {
     title: "Dissecting Complex Interfaces",
-    bg: "bg-[#715456]",
     slug: "Dissecting",
+    cover: "dissecting",
   },
   {
-    title: "ReVanced: The Art of Digital Reverse Engineering",
-    bg: "bg-[#d4d4ce]",
+    title: "ReVanced: Art of Digital Reverse Engineering",
     slug: "ReVanced",
+    cover: "revanced",
   },
 ];
 
-
 /** Writings that live at /slug. The post route uses this to open the sheet. */
 export const writingSlugs = writings.flatMap((w) => (w.slug ? [w.slug] : []));
-
 
 const Writtings = ({ openSlug }: { openSlug?: string }) => {
   return (
@@ -48,7 +44,7 @@ const Writtings = ({ openSlug }: { openSlug?: string }) => {
       </div>
 
       <div className="w-full overflow-x-auto scrolll pb-8 pt-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
-        <div className="flex w-max gap-4 items-end">
+        <div className="flex w-max gap-4 items-start">
           {writings.map((item, i) => {
             const post = item.slug ? getBlogPostBySlug(item.slug) : null;
             const source = item.slug ? readPost(item.slug) : null;
@@ -58,9 +54,7 @@ const Writtings = ({ openSlug }: { openSlug?: string }) => {
                 key={i}
                 title={item.title}
                 slug={item.slug}
-                type={item.type}
-                bg={item.bg}
-                image={item.image}
+                cover={item.cover}
                 date={post?.metadata.date}
                 headings={source ? getHeadings(source.body) : []}
                 defaultOpen={!!item.slug && item.slug === openSlug}

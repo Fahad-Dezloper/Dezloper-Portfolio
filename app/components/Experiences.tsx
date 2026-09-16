@@ -30,7 +30,7 @@ export default function Experiences() {
       title: "Swish.cash",
       dates: "June 2026 - August 2026",
       description:
-        "Privacy consumer app on Solana | Owned the backend end-to-end, building the auto-routing engine, SDK, and relayer infrastructure to aggregate multiple privacy protocols.",
+        "Privacy consumer app on Solana | Decoupled the auto-routing engine, SDK, and relayer infrastructure from the Next.js app into a standalone backend, and migrated the web and mobile clients onto it as a single shared service.",
       link: "https://swish.cash/",
       logo: "/companies/Swish2.png",
     },

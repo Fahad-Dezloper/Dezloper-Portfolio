@@ -11,6 +11,7 @@ import Hero from "./components/Hero";
 import Experiences from "./components/Experiences";
 import FunExperiences from "./components/FunExperiences";
 import Projects from "./components/Projects";
+import ToastStack from "./components/ToastStack";
 import Experiments from "./components/Experiments";
 
 export default function HomeShell({ writings }: { writings: ReactNode }) {
@@ -93,6 +94,7 @@ function AnimatedHome({
 
   return (
     <div className="font-sans w-full bg-black flex flex-col relative">
+      <ToastStack />
       {/* <div className="fixed bottom-10 right-10 bg-black/80 text-green-400 font-mono text-sm p-4 rounded-xl z-50 border border-green-400/30 backdrop-blur-md">
         <div>
           Scroll Progress (0 to 1): <span ref={progressRef}>0.0000</span>
