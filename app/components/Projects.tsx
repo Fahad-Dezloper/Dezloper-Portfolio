@@ -1,116 +1,164 @@
-import Link from "next/link";
+function ArrowUpRight() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="lucide lucide-arrow-up-right size-3 inline -translate-y-2 translate-x-0.5 text-muted-foreground md:opacity-80 scale-60 group-hover:scale-100 group-hover:opacity-100 transition-[opacity,scale] origin-bottom-left ease-out"
+      aria-hidden="true"
+    >
+      <path d="M7 7h10v10"></path>
+      <path d="M7 17 17 7"></path>
+    </svg>
+  );
+}
+
+type Project = {
+  title: string;
+  desc: string;
+  /** Where the project lives for now, until its in-depth page exists. */
+  link?: string;
+  underConstruction?: boolean;
+};
 
 export default function Projects() {
-  const openSourceProjects = [
+  const openSourceProjects: Project[] = [
     {
-      title: "CEX",
-      desc: "A high-performance centralized crypto exchange on Solana with MPC wallets. Provides real-time order matching and low latency.",
-      link: "https://github.com/Fahad-Dezloper/CEX",
+      title: "PerpExchange",
+      desc: "Crypto Perpetual Futures Exchange",
+      link: "https://github.com/Fahad-Dezloper/PerpExchange",
     },
     {
-      title: "AllSolana",
-      desc: "High-density index of active repositories on Solana. Discover and contribute to top open-source projects in the ecosystem.",
-      link: "https://github.com/Fahad-Dezloper/AllSolana",
+      title: "Wallet",
+      desc: "A Privy-like embedded wallet infrastructure.",
+      underConstruction: true,
+    },
+    {
+      title: "Solana OSS",
+      desc: "Active Solana Open Source Projects",
+      link: "https://www.solanaoss.com/",
     },
   ];
 
-  const videoProjects = [
+  const contributions = [
     {
-      video: "/Craft/dynamicIsland.mp4",
-      link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/DynamicIsland.tsx",
+      title: "Antiwork",
+      desc: "Sell your stuff. See what sticks.",
+      link: "https://github.com/antiwork/gumboard/pulls?q=is%3Apr+author%3AFahad-Dezloper+is%3Aclosed",
+      img: "/OSC/antiwork.webp",
     },
     {
-      video: "/Craft/bell.mp4",
-      link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/shared/Ring.tsx",
+      title: "Zero",
+      desc: "An Open-Source Gmail Alternative for the Future of Email",
+      link: "https://github.com/Mail-0/Zero/pulls?q=is%3Apr+author%3AFahad-Dezloper+is%3Aclosed",
+      img: "/OSC/zero2.webp",
     },
     {
-      video: "/Craft/Gooey.mp4",
-      link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/GooeyFilter.tsx",
+      title: "Cal",
+      desc: "Scheduling infrastructure for absolutely everyone.",
+      link: "https://github.com/calcom/cal.diy/pulls/Fahad-Dezloper",
+      img: "/OSC/cal.webp",
     },
     {
-      video: "/Craft/interfaceCraft.mp4",
-      link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/InterfaceCraft.tsx",
+      title: "Solix",
+      desc: "The universal data bridge for Solana. ",
+      link: "https://github.com/SolixDB/app/pulls?q=is%3Apr+author%3AFahad-Dezloper+is%3Aclosed",
+      img: "/OSC/solix.webp",
     },
     {
-      video: "/Craft/smoothness.mp4",
-      link: "https://github.com/Fahad-Dezloper/Craft/blob/main/components/SmoothnessState.tsx",
+      title: "Pillar",
+      desc: "Operations platform for running Solana validators",
+      link: "https://github.com/niks3089/pillar/pulls?q=is%3Apr+is%3Aclosed+author%3AFahad-Dezloper",
+      img: "/OSC/pillar.webp",
     },
   ];
 
   return (
-    <section className="w-full max-w-none self-stretch ">
-      <div className="mx-auto max-w-2xl">
-        <h2 className="text-xs font-medium text-[var(--foreground)]/50 uppercase tracking-wider mb-3">
-          Projects
-        </h2>
+    <section className="w-full pt-[56px] md:pt-[80px] max-w-none self-stretch ">
+      <div className="mx-auto max-w-xl px-4 md:px-0">
+        <h2 className=" mb-10">Projects and Contributions</h2>
 
         {/* Text Projects List */}
-        <div className="flex flex-col gap-6">
-          {openSourceProjects.map((item, index) => (
-            <div key={index} className="flex flex-col gap-1.5 group">
-              <div className="flex items-center gap-2">
-                <h3 className="text-base font-medium text-[var(--foreground)] group-hover:text-[var(--foreground)]/70 transition-colors">
-                  <a href={item.link} target="_blank" rel="noopener noreferrer">
-                    {item.title}
-                  </a>
-                </h3>
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[var(--foreground)]/50 hover:text-[var(--foreground)] transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                >
-                  ↗
-                </a>
+        <div className="flex flex-col gap-6 group/list">
+          {openSourceProjects.map((item) => {
+            const inner = (
+              <>
+                <div className="flex items-center gap-2">
+                  <div className="flex relative items-center -gap-1">
+                    <h3 className="text-base text-foreground transition-colors duration-300 group-hover/list:text-secondary group-hover/item:!text-foreground ">
+                      {item.title}
+                    </h3>
+                    {item.link && <ArrowUpRight />}
+                  </div>
+                  {item.underConstruction && (
+                    <span className="rounded-full border border-[var(--foreground)]/10 bg-[var(--foreground)]/5 px-2 py-0.5 text-[11px] font-medium leading-none text-[var(--foreground)]/60">
+                      Under construction
+                    </span>
+                  )}
+                </div>
+                <p className="leading-snug text-secondary transition-colors duration-300 group-hover/list:text-secondary/50 group-hover/item:!text-secondary">
+                  {item.desc}
+                </p>
+              </>
+            );
+
+            return item.link ? (
+              <a
+                key={item.title}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col gap-1.5 group/item cursor-pointer text-left"
+              >
+                {inner}
+              </a>
+            ) : (
+              <div
+                key={item.title}
+                className="flex flex-col gap-1.5 group/item cursor-default text-left"
+              >
+                {inner}
               </div>
-              <p className="text-sm leading-snug text-[var(--foreground)]/70">
-                {item.desc}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
-
-      {/* Video Projects Carousel */}
-      <div className="mt-8 w-full overflow-x-auto scrolll pb-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
+      {/* Contributions Carousel */}
+      <div className="mt-4 w-full overflow-x-auto scrolll pb-2 pl-4 md:pl-[max(1rem,calc((100vw-42rem)/1.7-1.6rem))] pr-4 [scrollbar-width:thin]">
         <div className="flex w-max gap-4">
-          {videoProjects.map((item, index) => (
-            <Link
+          {contributions.map((item, index) => (
+            <a
+              key={index}
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"
-              key={index}
-              className="flex w-[min(280px,85vw)] shrink-0 flex-col gap-3 group"
+              className="flex w-[140px] md:w-[160px] shrink-0 flex-col gap-2.5 group cursor-pointer"
             >
               <div
-                className={`aspect-5/4 w-full rounded-2xl bg-[var(--foreground)]/5 border border-[var(--foreground)]/5 overflow-hidden relative`}
+                className={`w-full aspect-square rounded-2xl overflow-hidden bg-[var(--foreground)]/5 border border-[var(--foreground)]/5 flex items-center justify-center`}
               >
-                {item.video && (
-                  <video
-                    src={item.video}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover absolute inset-0"
-                  />
-                )}
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-101"
+                />
               </div>
-              {/* <div className="flex items-start justify-between gap-2">
-                <h3 className="text-left text-base font-semibold text-neutral-900 dark:text-white group-hover:underline decoration-neutral-300 dark:decoration-zinc-600 underline-offset-4 font-intert">
+              <div className="flex items-center -gap-1">
+                <h3 className="text-left text-base font-medium text-[var(--foreground)] group-hover:text-[var(--foreground)]/70 group-hover:underline transition-colors">
                   {item.title}
                 </h3>
-                <span
-                  className="shrink-0 text-neutral-900 dark:text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  aria-hidden
-                >
-                  ↗
-                </span>
+                <ArrowUpRight />
               </div>
-              <p className="text-left text-sm leading-snug text-zinc-600 dark:text-zinc-400 line-clamp-2">
+              <p className="text-left text-sm leading-snug text-[var(--foreground)]/70">
                 {item.desc}
-              </p> */}
-            </Link>
+              </p>
+            </a>
           ))}
         </div>
       </div>

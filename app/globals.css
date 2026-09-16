@@ -3,24 +3,22 @@
 @import "shadcn/tailwind.css";
 
 :root {
-  --background: #fffcf0;
-  --foreground: #100f0f;
+  --background: #ffffff;
+  --foreground: #333333;
+  --secondary: #b9b9b9;
+  --border: lab(90.72% .0000298023 -.0000119209);
 }
 
 @theme {
 
-
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-secondary: var(--secondary);
+  --color-border: var(--border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-interr: var(--font-next-interr);
   --font-intert: var(--font-next-intert);
-}
-
-.dark {
-  --background: #100f0f;
-  --foreground: #cecdc3;
 }
 
 body {
@@ -49,16 +47,15 @@ code[data-theme*=" "] span {
   background-color: var(--shiki-light-bg);
 }
 
-html.dark code[data-theme*=" "],
-html.dark code[data-theme*=" "] span {
-  color: var(--shiki-dark);
-  background-color: var(--shiki-dark-bg);
-}
-
 pre[data-theme*=" "] {
   background-color: var(--shiki-light-bg) !important;
 }
 
-html.dark pre[data-theme*=" "] {
-  background-color: var(--shiki-dark-bg) !important;
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

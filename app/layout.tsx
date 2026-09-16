@@ -6,8 +6,8 @@ import "./globals.css";
 import { ViewTransitions } from "next-view-transitions";
 import Navbar from "./components/Navbar";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { ThemeProvider } from "./components/ThemeProvider";
 import SoundOnLoad from "./components/SoundOnLoad";
+import SilkScroll from "./components/SilkScroll";
 import Script from "next/script";
 
 const geistSans = Geist({
@@ -83,11 +83,6 @@ export const metadata: Metadata = {
     images: ["https://ox35safakaidjuzg.public.blob.vercel-storage.com/OG.png"],
     creator: "@dezloperr",
   },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-icon.png",
-  },
 };
 
 export default function RootLayout({
@@ -100,28 +95,27 @@ export default function RootLayout({
       <html
         lang="en"
         suppressHydrationWarning
-        className={`scroll-smooth ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       >
         <Script
           defer
           src="https://cloud.umami.is/script.js"
           data-website-id="dd06aa90-d4d3-407e-a703-ca7bce3ceec6"
         />
-        <body
-          className={`${intertight.variable} ${inter.variable} flex min-h-dvh w-full flex-col items-center px-4 py-6 sm:px-6`}
-        >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <div className="flex w-full items-center flex-col">
-              <SoundOnLoad />
-              <Navbar />
-              <TooltipProvider>{children}</TooltipProvider>
+        <body className={`${intertight.variable} ${inter.variable}`}>
+          <SoundOnLoad />
+          <SilkScroll>
+            {/* w-screen (a definite viewport width) is required here: Silk places
+                Scroll.Content in a max-content grid column, so w-full would blow
+                out to the widest child (the horizontal carousels). Pinning to
+                100vw makes those carousels scroll internally again. */}
+            <div className="flex min-h-dvh w-screen max-w-[100vw] flex-col items-center overflow-x-clip ">
+              <div className="flex w-full items-center flex-col">
+                {/* <Navbar /> */}
+                <TooltipProvider>{children}</TooltipProvider>
+              </div>
             </div>
-          </ThemeProvider>
+          </SilkScroll>
         </body>
       </html>
     </ViewTransitions>
