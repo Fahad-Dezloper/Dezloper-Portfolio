@@ -45,12 +45,20 @@ export const mdxComponents = {
   p: (props: any) => (
     <p className="text-[var(--foreground)]/80 leading-relaxed mb-4 text-base" {...props} />
   ),
-  a: (props: any) => (
-    <a
-      className="text-[var(--foreground)] underline decoration-[var(--foreground)]/30 underline-offset-4 hover:decoration-[var(--foreground)]/70 transition-colors"
-      {...props}
-    />
-  ),
+  a: ({ href, ...props }: any) => {
+    // Posts are read inside the writing sheet, so following a link in the same
+    // tab would throw the reader out of the article. Every link opens a new tab,
+    // except in-page anchors, which only scroll.
+    const inPage = typeof href === "string" && href.startsWith("#");
+    return (
+      <a
+        href={href}
+        className="text-[var(--foreground)] underline decoration-[var(--foreground)]/30 underline-offset-4 hover:decoration-[var(--foreground)]/70 transition-colors"
+        {...(inPage ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+        {...props}
+      />
+    );
+  },
   ul: (props: any) => (
     <ul className="list-disc pl-5 mb-4 text-[var(--foreground)]/80 space-y-2" {...props} />
   ),

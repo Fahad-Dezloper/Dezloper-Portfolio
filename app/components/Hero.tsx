@@ -63,8 +63,6 @@ const socials = [
 
 export default function Hero() {
   const [copied, setCopied] = useState(false);
-  const [unblurredCrafting, setUnblurredCrafting] = useState(false);
-  const [unblurredProtocols, setUnblurredProtocols] = useState(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText("fahadkhann0204@gmail.com");
@@ -85,8 +83,6 @@ export default function Hero() {
                 if (window.location.pathname === "/") {
                   e.preventDefault();
                 }
-                const audio = new Audio("/sound/FAHHH (Meme Sound Effect).mp3");
-                audio.play().catch(console.error);
               }}
               className="hover:bg-[var(--foreground)]/5 text-foreground p-2 rounded-2xl flex gap-2 items-center -ml-2 transition-[background-color] w-fit font-bold"
             >
@@ -118,48 +114,16 @@ export default function Hero() {
         </div>
 
         <p className="pt-[20px] leading-relaxed">
-          <span
-            className={`transition-all duration-300 ${unblurredCrafting ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
-          >
-            I love designing and{" "}
-          </span>
-          <span
-            className="text-foreground font-medium cursor-default"
-            onMouseEnter={() => setUnblurredCrafting(true)}
-          >
-            crafting motion
-          </span>
-          <span
-            className={`transition-all duration-300 ${unblurredCrafting ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
-          >
-            {" "}
-            that makes interfaces feel alive.
-          </span>
+          I love designing and{" "}
+          <span className="text-foreground font-medium">crafting motion</span>{" "}
+          that makes interfaces feel alive.
           <br />
-
-          <span
-            className={`transition-all duration-300 opacity-100 ${unblurredCrafting ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
-          >
-            When I&apos;m not obsessing over pixels,{" "}
-          </span>
-          <span
-            className={`transition-all duration-300 ${unblurredProtocols ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
-          >
-            I&apos;m{" "}
-          </span>
-          <span
-            className="text-foreground font-medium cursor-default"
-            onMouseEnter={() => setUnblurredProtocols(true)}
-          >
+          When I&apos;m not obsessing over pixels, I&apos;m{" "}
+          <span className="text-foreground font-medium">
             exploring protocols
-          </span>
-          <span
-            className={`transition-all duration-300 ${unblurredProtocols ? "blur-none opacity-100" : "blur-[4px] opacity-70"}`}
-          >
-            {" "}
-            and complex infrastructure, rebuilding them from scratch to
-            understand them from first principles.
-          </span>
+          </span>{" "}
+          and complex infrastructure, rebuilding them from scratch to
+          understand them from first principles.
         </p>
 
         {/* <div className="mt-2 flex items-center">

@@ -7,22 +7,40 @@ import { getBlogPostBySlug } from "@/lib/mdx";
 import { getHeadings, readPost } from "@/lib/mdx-blocks";
 
 /**
- * The writing list. Cards with a `slug` open the real post inside the sheet;
- * the rest open an empty sheet until they are written.
+ * The writing list. Every card opens its post from content/blogs inside the
+ * sheet.
  *
  * This is a server component, so MDX is compiled here and passed into the
  * client sheet as an already-rendered node.
  */
 
-const writings = [
-  { title: "Painting Pixel, Web vs App", type: "Thesis", image: "", bg: "bg-[#e5e5e5]" },
-  { title: "Dissecting Complex Interfaces", type: "", image: "", bg: "bg-[#715456]", slug: "Density" },
-  { title: "Moving from screens to air", type: "Thesis", image: "", bg: "bg-[#d4d4ce]" },
-  { title: "Philosphies I live by", type: "", image: "", bg: "bg-[#e5e5e5]" },
+type Writing = {
+  title: string;
+  type?: string;
+  image?: string;
+  bg: string;
+  slug?: string;
+};
+
+const writings: Writing[] = [
+  {
+    title: "Dissecting Complex Interfaces",
+    bg: "bg-[#715456]",
+    slug: "Dissecting",
+  },
+  {
+    title: "ReVanced: The Art of Digital Reverse Engineering",
+    bg: "bg-[#d4d4ce]",
+    slug: "ReVanced",
+  },
 ];
 
 
-const Writtings = () => {
+/** Writings that live at /slug. The post route uses this to open the sheet. */
+export const writingSlugs = writings.flatMap((w) => (w.slug ? [w.slug] : []));
+
+
+const Writtings = ({ openSlug }: { openSlug?: string }) => {
   return (
     <section className="w-full pt-[80px] max-w-none self-stretch overflow-hidden">
       <div className="mx-auto max-w-xl">
@@ -45,6 +63,7 @@ const Writtings = () => {
                 image={item.image}
                 date={post?.metadata.date}
                 headings={source ? getHeadings(source.body) : []}
+                defaultOpen={!!item.slug && item.slug === openSlug}
                 content={
                   post ? (
                     <MDXRemote

@@ -18,8 +18,6 @@ const Navbar = () => {
           if (window.location.pathname === "/") {
             e.preventDefault();
           }
-          const audio = new Audio("/sound/FAHHH (Meme Sound Effect).mp3");
-          audio.play().catch(console.error);
         }}
         className="hover:bg-[var(--foreground)]/5 p-2 rounded-2xl flex gap-2 items-center -ml-2 transition-[background-color] font-bold"
       >
@@ -34,11 +32,6 @@ const Navbar = () => {
         <Link className="group p-2 font-semibold" href="/craft">
           <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
             Craft
-          </span>
-        </Link>
-        <Link className="group p-2 font-semibold" href="/blogs">
-          <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
-            Blogs
           </span>
         </Link>
         {/* <a className="group p-2" href="/books">
@@ -56,11 +49,6 @@ const Navbar = () => {
           </span>
           {open == true && (
             <div className="flex flex-col items-center bg-neutral-800 rounded-xl absolute top-8 py-1 px-2 gap-0">
-              <a className="group px-2 py-1" href="/blogs">
-                <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
-                  Blogs
-                </span>
-              </a>
               <a className="group px-2 py-1" href="/books">
                 <span className="group-hover:bg-[var(--foreground)]/5 rounded-xl py-0.5 px-1.5 inline-flex">
                   Books

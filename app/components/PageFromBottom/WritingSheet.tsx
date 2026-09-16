@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from "react"
 import { Scroll } from "@silk-hq/components";
 import { PageFromBottom } from "./PageFromBottom";
 import ArticleIndex from "../ArticleIndex";
+import { writingPath } from "@/lib/writing-routes";
 import "./WritingSheet.css";
 
 /**
@@ -29,6 +30,7 @@ const WritingSheet = ({
   date,
   content,
   headings = [],
+  defaultOpen = false,
 }: {
   title: string;
   slug?: string;
@@ -38,10 +40,14 @@ const WritingSheet = ({
   date?: string;
   content?: ReactNode;
   headings?: Heading[];
+  /** True when the page was loaded at this writing's URL, e.g. after a refresh. */
+  defaultOpen?: boolean;
 }) => {
-  const [presented, setPresented] = useState(false);
+  const [presented, setPresented] = useState(defaultOpen);
   // Only step back through history if this sheet is what pushed the entry.
   const pushedRef = useRef(false);
+  // Loaded straight at /slug, so there is no earlier in-app entry to go back to.
+  const openedFromUrlRef = useRef(defaultOpen);
 
   // Browser back closes the sheet rather than leaving the page.
   useEffect(() => {
@@ -60,11 +66,16 @@ const WritingSheet = ({
 
       if (next) {
         pushedRef.current = true;
-        window.history.pushState({ sheet: slug }, "", `/${slug}`);
+        window.history.pushState({ sheet: slug }, "", writingPath(slug));
       } else if (pushedRef.current) {
         // Unwind our own entry so the URL and the back button stay in step.
         pushedRef.current = false;
         window.history.back();
+      } else if (openedFromUrlRef.current) {
+        // Arrived via the article URL: closing should land on the home page,
+        // not step back out of the site.
+        openedFromUrlRef.current = false;
+        window.history.replaceState(null, "", "/");
       }
     },
     [slug]

@@ -12,13 +12,7 @@ import { useEffect, useState } from "react";
 
 type Heading = { id: string; text: string };
 
-export default function ArticleIndex({
-  headings,
-  label = "Index",
-}: {
-  headings: Heading[];
-  label?: string;
-}) {
+export default function ArticleIndex({ headings }: { headings: Heading[] }) {
   const [active, setActive] = useState<string | null>(headings[0]?.id ?? null);
 
   useEffect(() => {
@@ -38,7 +32,7 @@ export default function ArticleIndex({
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
         if (visible[0]) setActive(visible[0].target.id);
       },
-      { rootMargin: "0px 0px -70% 0px", threshold: 0 }
+      { rootMargin: "0px 0px -70% 0px", threshold: 0 },
     );
 
     nodes.forEach((n) => observer.observe(n));
@@ -53,7 +47,12 @@ export default function ArticleIndex({
         <span aria-hidden className="text-base">
           ↩
         </span>
-        {label}
+        <p className="flex items-center gap-1.5 text-[13px] text-[var(--foreground)]/45">
+          Press
+          <kbd className="inline-flex h-[20px] min-w-[28px] items-center justify-center rounded-[5px] border border-[var(--foreground)]/15 bg-[var(--foreground)]/[0.04] px-1.5 font-mono text-[11px] leading-none text-[var(--foreground)]/60 shadow-[0_1px_0_color-mix(in_srgb,var(--foreground)_12%,transparent)]">
+            esc
+          </kbd>
+        </p>
       </span>
 
       <ul className="m-0 flex list-none flex-col gap-[13px] p-0">

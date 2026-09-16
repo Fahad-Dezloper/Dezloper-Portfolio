@@ -78,14 +78,6 @@ const PageFromBottomContent = React.forwardRef<
       {...restProps}
       ref={ref}
     >
-      <div className="PageFromBottom-topBar">
-        <Sheet.Trigger
-          className="PageFromBottom-dismissTrigger"
-          action="dismiss"
-        >
-          Close
-        </Sheet.Trigger>
-      </div>
       {children}
     </Sheet.Content>
   );

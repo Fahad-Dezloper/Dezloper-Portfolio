@@ -116,3 +116,9 @@
   font-style: italic;
   color: color-mix(in srgb, var(--foreground) 45%, transparent);
 }
+
+/* No hero in the sheet. Posts that open with a lead image keep it on their own
+   /[slug] page; here the title and index already do that job. */
+.WritingSheet-body > p:first-child:has(> img:only-child) {
+  display: none;
+}
