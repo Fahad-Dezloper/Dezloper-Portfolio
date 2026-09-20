@@ -1,200 +1,195 @@
+"use client";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+
 type ExperienceItem = {
   id: string;
   title: string;
   dates?: string;
   description?: string;
   bullets?: string[];
-};
-type FunExperienceItem = {
-  id: string;
-  title: string;
-  dates?: string;
-  description?: string;
-  image?: string;
-  width?: string;
-  bullets?: string[];
-  className?: string;
-  object?: string;
-  smallImage?: string;
-  config?: {
-    y: number;
-    x: number;
-    zIndex: number;
-    rotate: number;
-  };
+  logo?: string;
+  link?: string;
 };
 
 export default function Experiences() {
+  const [showAll, setShowAll] = useState(false);
+
   const professionalExperince: ExperienceItem[] = [
     {
       id: "x2c",
-      title: "Frontend Lead · X2C.fun",
+      title: "X2C.fun",
       dates: "Nov 2025 – Present",
+      description:
+        "Web3 game studio | Owned the frontend across Farcaster mini apps, web games, the Skins NFT marketplace, user game dashboard, and the company website.",
+      link: "https://www.x2c.fun/",
+      logo: "/companies/x2c.png",
+    },
+    {
+      id: "Swish",
+      title: "Swish.cash",
+      dates: "June 2026 - August 2026",
+      description:
+        "Privacy consumer app on Solana | Decoupled the auto-routing engine, SDK, and relayer infrastructure from the Next.js app into a standalone backend, and migrated the web and mobile clients onto it as a single shared service.",
+      link: "https://swish.cash/",
+      logo: "/companies/swish2.png",
+    },
+    {
+      id: "food-for-thought",
+      title: "Food For Thought Fest",
+      dates: "Freelance",
+      description:
+        "India's biggest food festival | Built a comprehensive website covering all aspects of the event, including the food, thought, and fun fest verticals.",
+      link: "https://foodforthoughtfest.in/",
+      logo: "/companies/FoodFest.png",
+    },
+    {
+      id: "ascomp",
+      title: "Ascomp INC",
+      dates: "Freelance",
+      description:
+        "India's leading projector supplier for PVR Cinemas | Developed a robust CRM for administrators and engineers to manage projector maintenance and AMCs, featuring customizable forms, automated workflows, and comprehensive payment tracking.",
+      link: "",
+      logo: "/companies/Ascomp.png",
+    },
+    {
+      id: "haute-services",
+      title: "Haute Services",
+      dates: "Freelance",
+      description:
+        "Premium boutique consultancy firm | Built a full-stack website highlighting the firm's three distinct verticals—Hospitality Consulting, Lifestyle Events, and Art Advisory—while maintaining an authentic and premium brand aesthetic.",
+      link: "https://hauteservices.in/",
+      logo: "/companies/Haute.png",
     },
     {
       id: "artizence",
-      title: "Frontend Lead · Artizence Systems LLP",
-      dates: "Feb 2025 – Apr 2025",
+      title: "Artizence Systems LLP",
+      dates: "Feb 2025",
+      description:
+        "Web2 SaaS agency | Built CRM frontends for multiple client products using Next.js, focusing on scalable and reusable interfaces.",
+      link: "",
+      logo: "/companies/Artizence.png",
     },
     {
       id: "read-rise",
-      title: "Manager · Read & Rise",
-      dates: "Sep 2022 – Oct 2023",
+      title: "Read & Rise",
+      dates: "2022 – 2023",
+      description:
+        "Independent bookstore | Managed the website and day-to-day operations, maintained a 50,000+ book catalog, and oversaw inventory, sales, and customer retention.",
+      link: "",
+      logo: "/companies/readrise.png",
     },
-  ];
-
-  const experiences: FunExperienceItem[] = [
-    {
-      id: "superteam",
-      title: "Startup Village 2026 Resident",
-      dates: "May 15 - May 25",
-      image: "/experiences/startupVillage.webp",
-      className: "bg-blue-500",
-      smallImage: "/experiences/STIndia.webp",
-      width: "60",
-      object: "cover",
-      config: {
-        y: 4,
-        x: 25,
-        zIndex: 10,
-        rotate: -3,
-      },
-    },
-    {
-      id: "superdevs",
-      title: "Solana Superdevs Fellowship",
-      dates: "Sept – Dec",
-      bullets: [
-        "Graduated in the top 20 out of 2500.",
-        "Learned and built on Solana (Rust), including private key management.",
-        "Convocation at Ahmedabad Startup Village.",
-      ],
-      image: "/experiences/superdevs.webp",
-      className: "bg-green-500",
-      smallImage: "/experiences/100xDevs.webp",
-      width: "60",
-      object: "cover",
-      config: {
-        y: 18,
-        x: 265,
-        zIndex: 20,
-        rotate: -3,
-      },
-    },
-    {
-      id: "athena",
-      title: "Athena Hacker House",
-      dates: "Nov 2025 – Present",
-      image: "/experiences/athena2.webp",
-      className: "bg-orange-500",
-      smallImage: "/experiences/athena.webp",
-      width: "40",
-      object: "cover",
-      config: {
-        y: 24,
-        x: 420,
-        zIndex: 30,
-        rotate: 5,
-      },
-    },
-    // {
-    //   id: "athena",
-    //   title: "Full Fledged Athena FOSS Member",
-    //   dates: "Aug – Present",
-    //   description:
-    //     "Elite developer community of 300 cracked devs (160/300 members).",
-    //   image: "/experiences/athena.webp",
-    //   className: "bg-red-500",
-    //   width: "40",
-    //   object: "cover",
-    //   config: {
-    //     y: 4,
-    //     x: 500,
-    //     zIndex: 40,
-    //     rotate: 3,
-    //   },
-    // },
   ];
 
   const allExperiences = [...professionalExperince];
 
-  const renderTitle = (title: string) => {
-    const parts = title.split(" · ");
-    if (parts.length === 2) {
-      return (
-        <div className="text-base">
-          <span className="font-medium">{parts[0]}</span>
-          <span className="text-[var(--foreground)]/50 text-sm">
-            {" · " + parts[1]}
-          </span>
-        </div>
-      );
-    }
-    return (
-      <div className="text-base">
-        <span className="font-medium text-xs">{title}</span>
-      </div>
-    );
-  };
-
   return (
     <section className="w-full max-w-none self-stretch">
-      <div className="mx-auto max-w-2xl">
-        <h2 className="text-xs font-medium text-[var(--foreground)]/50 uppercase tracking-wider mb-3">
-          Cool Experience I have had
-        </h2>
-        <div className="mt-6 flex flex-col gap-6">
-          {allExperiences.map((item, index) => (
-            <article key={index} className="flex flex-col gap-2">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-1 sm:gap-4">
-                {renderTitle(item.title)}
-                {item.dates && (
-                  <span className="text-xs text-[var(--foreground)]/40 shrink-0">
-                    {item.dates}
-                  </span>
-                )}
-              </div>
-            </article>
+      <div className="mx-auto max-w-xl px-4 md:px-0">
+        <h2 className="mb-10">Latest Updates</h2>
+        <div className="flex flex-col">
+          {allExperiences.slice(0, 3).map((item, index) => (
+            <div key={index} className={index !== 0 ? "mt-10" : ""}>
+              <ExperienceItemComponent item={item} />
+            </div>
           ))}
-        </div>
-      </div>
 
-      <div className="mt-8 w-full overflow-x-auto scrolll pb-2 pt-2 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
-        <div className="flex w-max gap-4">
-          {experiences.map((item, index) => {
-            return (
-              <div
-                key={index}
-                className="flex flex-col relative gap-2.5 shrink-0 group mt-6"
+          <AnimatePresence>
+            {showAll && (
+              <motion.div
+                initial={{ height: 0, opacity: 0, filter: "blur(10px)" }}
+                animate={{ height: "auto", opacity: 1, filter: "blur(0px)" }}
+                exit={{ height: 0, opacity: 0, filter: "blur(10px)" }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="flex flex-col overflow-hidden"
               >
-                <div className="absolute z-10 w-10 h-10 rounded-md overflow-hidden -top-5 left-2 transition-transform duration-300 md:group-hover:-translate-y-3 md:-translate-y-0 -translate-y-3 shadow-md border border-[var(--foreground)]/10">
-                  <img
-                    src={item.smallImage}
-                    alt=""
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="w-[min(240px,75vw)] aspect-video z-20 relative overflow-hidden rounded-md bg-[var(--foreground)]/5 border border-[var(--foreground)]/5">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="object-cover w-full h-full transition-transform duration-300 "
-                  />
-                </div>
-
-                <div className="flex flex-col gap-0.5 px-0.5 max-w-[min(240px,75vw)] whitespace-normal">
-                  <h3 className="text-sm font-medium text-[var(--foreground)] leading-tight">
-                    {item.title}
-                  </h3>
-                  <span className="text-xs text-[var(--foreground)]/50">
-                    {item.dates}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
+                {allExperiences.slice(3).map((item, index) => (
+                  <div key={index + 3} className="pt-10">
+                    <ExperienceItemComponent item={item} />
+                  </div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
+        {allExperiences.length > 3 && (
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="mt-8 w-fit mx-auto flex items-center justify-center gap-2 rounded-xl bg-[var(--foreground)]/5 px-3 py-1.5 text-xs font-medium text-[var(--foreground)]/70 transition-all hover:bg-[var(--foreground)]/10 hover:text-[var(--foreground)]"
+          >
+            {showAll ? "View less" : "View more"}
+          </button>
+        )}
       </div>
     </section>
   );
 }
+
+const ExperienceItemComponent = ({ item }: { item: ExperienceItem }) => (
+  <article className="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start">
+    {item.dates && (
+      <div className="w-full sm:w-28 shrink-0 text-sm font-medium text-secondary pt-0.5">
+        {item.dates}
+      </div>
+    )}
+    <div className="flex flex-col gap-2.5 w-full">
+      <div className="flex items-center gap-2.5">
+        {item.logo ? (
+          <img
+            src={item.logo}
+            alt=""
+            className="size-5 shrink-0 border border-border"
+          />
+        ) : (
+          <div className="w-6 h-6 rounded bg-[var(--foreground)]/10 shrink-0" />
+        )}
+        {item.link ? (
+          <a
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex relative items-center -gap-1 group hover:opacity-80 transition-opacity"
+          >
+            <span className="text-base font-semibold text-foreground group-hover:underline">
+              {item.title}
+            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-arrow-up-right size-3 inline -translate-y-2 translate-x-0.5 text-muted-foreground md:opacity-80 scale-60 group-hover:scale-100 group-hover:opacity-100 transition-[opacity,scale] origin-bottom-left ease-out"
+              aria-hidden="true"
+            >
+              <path d="M7 7h10v10"></path>
+              <path d="M7 17 17 7"></path>
+            </svg>
+          </a>
+        ) : (
+          <div className="flex items-center gap-1.5">
+            <span className="text-base font-semibold text-foreground">
+              {item.title}
+            </span>
+          </div>
+        )}
+      </div>
+      {(item.description || item.bullets) && (
+        <div className="text-[15px] leading-relaxed text-[var(--foreground)]/70 mt-1">
+          {item.description && <p>{item.description}</p>}
+          {item.bullets && (
+            <ul className="list-disc ml-4 mt-2 space-y-1">
+              {item.bullets.map((bullet, i) => (
+                <li key={i}>{bullet}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+    </div>
+  </article>
+);

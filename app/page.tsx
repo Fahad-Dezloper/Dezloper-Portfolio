@@ -1,15 +1,14 @@
-import Hero from "./components/Hero";
-import Experiences from "./components/Experiences";
-import Projects from "./components/Projects";
-import Contributions from "./components/Contributions";
+import HomeShell from "./HomeShell";
+import Writtings from "./components/Writtings";
 
-export default function Home() {
-  return (
-    <div className="flex w-full flex-col gap-10 flex-1 items-center justify-center font-sans">
-      <Hero />
-      <Experiences />
-      <Projects />
-      <Contributions />
-    </div>
-  );
+/**
+ * Server entry point.
+ *
+ * The shell has to be a client component: it uses hooks to find Silk's scroll
+ * container and hand it to framer-motion. But MDX has to compile on the server,
+ * so the writing section is rendered here and passed down as an already-rendered
+ * node — which is how a server component reaches inside a client tree.
+ */
+export default function Page() {
+  return <HomeShell writings={<Writtings />} />;
 }
