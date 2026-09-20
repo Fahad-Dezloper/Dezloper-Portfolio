@@ -9,6 +9,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import SoundOnLoad from "./components/SoundOnLoad";
 import SilkScroll from "./components/SilkScroll";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -115,6 +116,8 @@ export default function RootLayout({
                 <TooltipProvider>{children}</TooltipProvider>
               </div>
             </div>
+          </ThemeProvider>
+          <Analytics />
           </SilkScroll>
         </body>
       </html>
