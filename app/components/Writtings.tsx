@@ -5,6 +5,7 @@ import { WritingSheet, type CoverKey } from "./PageFromBottom/WritingSheet";
 import { mdxComponents } from "./mdx-components";
 import { getBlogPostBySlug } from "@/lib/mdx";
 import { getHeadings, readPost } from "@/lib/mdx-blocks";
+import { intro } from "./intro";
 
 /**
  * The writing list. Every card opens its post from content/blogs inside the
@@ -38,13 +39,13 @@ export const writingSlugs = writings.flatMap((w) => (w.slug ? [w.slug] : []));
 
 const Writtings = ({ openSlug }: { openSlug?: string }) => {
   return (
-    <section className="w-full pt-[56px] md:pt-[80px] max-w-none self-stretch overflow-hidden">
+    <section id="writing" className="w-full scroll-mt-24 pt-[56px] md:pt-[80px] max-w-none self-stretch overflow-hidden">
       <div className="mx-auto max-w-xl px-4 md:px-0">
-        <h2 className="mb-8">Writing</h2>
+        <h2 className="mb-8" {...intro(13)}>Writing</h2>
       </div>
 
       <div className="w-full overflow-x-auto scrolll pb-8 pt-2 pl-4 md:pl-[max(1rem,calc((100vw-42rem)/2-1.6rem))] pr-4 [scrollbar-width:thin]">
-        <div className="flex w-max gap-4 items-start">
+        <div className="flex w-max gap-4 items-start" {...intro(14)}>
           {writings.map((item, i) => {
             const post = item.slug ? getBlogPostBySlug(item.slug) : null;
             const source = item.slug ? readPost(item.slug) : null;

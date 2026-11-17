@@ -27,6 +27,38 @@ body {
   font-family: var(--font-interr), sans-serif;
 }
 
+/* First-load intro, after benji.org: every block lifts 8px into place, one
+   just behind the last, so the page assembles top to bottom instead of
+   appearing all at once.
+
+   It currently runs on every load. The .home-visited guard below is the way
+   back to playing it once per tab session: nothing sets that class at the
+   moment, and the commented-out script in layout.tsx is what sets it. */
+@keyframes staggerIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.home-visited) .home-intro [data-intro] {
+    /* backwards, not both: the block holds its hidden state through the delay,
+       then hands back to its own styles once it lands. */
+    animation: staggerIn 0.42s ease backwards;
+    /* Each block waits one step longer than the one above it. Keep the steps
+       short: a long ladder draws attention to itself and starts to read as the
+       page struggling rather than arriving. The cap stops the sections below
+       the fold trailing in after the rest, so the whole wave is over in about
+       half a second. */
+    animation-delay: calc(min(var(--intro-i, 0), 8) * 45ms);
+  }
+}
+
 .scrolll::-webkit-scrollbar {
   display: none;
 }

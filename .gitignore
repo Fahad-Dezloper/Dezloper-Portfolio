@@ -12,3 +12,14 @@ yarn-error.log*
 
 .env
 .env.*.local
+
+# Work case-study source media. The originals are 221MB of full-res stills and
+# 60fps video, far too heavy to commit or deploy; the site only ever loads the
+# web-sized derivatives in public/work/_web, which stay tracked. The READMEs
+# and CASE-STUDY.md files stay tracked too.
+public/work/*/screenshots/
+public/work/*/videos/
+public/work/*/before/
+public/work/*/components/
+public/work/*/social/
+public/work/*/backpack-clips/

@@ -8,7 +8,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Books people re-read",
   description:
-    "A living list of books worth returning to — powered by Notion and ISR.",
+    "A living list of books worth returning to, powered by Notion and ISR.",
 };
 
 function BookCard({ book }: { book: Book }) {
@@ -77,7 +77,7 @@ export default async function BooksPage() {
 
         <div className="mx-auto mt-8 max-w-xl space-y-4 text-left text-sm leading-relaxed text-zinc-300">
           <p>
-            This page is backed by a Notion database: add a row, drop a cover, bump a counter — the
+            This page is backed by a Notion database: add a row, drop a cover, bump a counter, and the
             site picks it up on the next regeneration without a deploy.
           </p>
           <p>

@@ -1,7 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type MouseEvent,
+} from "react";
 import { createPortal } from "react-dom";
 
 /**
@@ -23,16 +29,16 @@ type Toast = { href: string; title: string; subtitle: string; image: string };
 // Front card first. Edit freely: any two links work, internal or external.
 const TOASTS: [Toast, Toast] = [
   {
-    href: "https://colosseum.com/worldsfair",
-    title: "Colosseum Crypto World's Fair",
-    subtitle: "Currently building for the hackathon",
-    image: "/notificationbar/colosseum.webp",
+    href: "https://x.com/SuperteamIN/status/2115769095971049927",
+    title: "Redesign Your Favourite App on Solana",
+    subtitle: "Won first place, Superteam India",
+    image: "/notificationbar/superteam.webp",
   },
   {
-    href: "https://solanamobile.radiant.nexus/",
-    title: "Clock In: Solana Mobile Hackathon",
-    subtitle: "Currently building for the Solana Seeker",
-    image: "/notificationbar/clockin-thumb.webp",
+    href: "https://x.com/dezloperr/status/2100593773621494037",
+    title: "MagicBlock Solana Blitz v8",
+    subtitle: "Won first place at the hackathon",
+    image: "/notificationbar/magicblock.webp",
   },
 ];
 
@@ -49,8 +55,6 @@ const CSS = `
   box-sizing: content-box;
   width: min(392px, 100vw - 32px);
   height: var(--toast-height);
-  /* Keeps hover alive while the cursor moves down to the expanded card. */
-  padding-bottom: var(--toast-expanded);
   transform: translateX(-50%);
   transition: transform .18s, visibility .18s step-end;
 }
@@ -76,6 +80,14 @@ body.sheet-open .toast-stack {
   }
 }
 
+/* Both cards ride on this one element. The entrance moves it, never them,
+   so their resting stack transforms are left alone. */
+.toast-entrance {
+  position: relative;
+  width: 100%;
+  height: var(--toast-height);
+}
+
 .toast {
   position: absolute;
   inset: 0 0 auto;
@@ -89,9 +101,9 @@ body.sheet-open .toast-stack {
   padding: 10px 16px 10px 12px;
   border: 1px solid rgba(51, 51, 51, .08);
   border-radius: 18px;
-  background: linear-gradient(rgba(255,255,255,.96), rgba(255,255,255,.88)), rgba(255,255,255,.94);
-  -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  backdrop-filter: blur(18px) saturate(1.08);
+  /* Opaque underneath, so no backdrop-filter: it would blur nothing visible
+     while forcing a backdrop re-read on every frame of the arrival. */
+  background: linear-gradient(rgba(255,255,255,.96), rgba(255,255,255,.88)), #fff;
   box-shadow: 0 22px 55px rgba(35,61,56,.16), 0 8px 22px rgba(35,61,56,.12), inset 0 1px rgba(255,255,255,.9);
   color: #333;
   text-decoration: none;
@@ -106,10 +118,37 @@ body.sheet-open .toast-stack {
   z-index: 1;
   transform: translateY(var(--toast-peek)) scale(.965);
 }
-.toast-stack:hover .toast-back,
-.toast-stack:focus-within .toast-back,
 .toast-stack[data-expanded="true"] .toast-back {
   transform: translateY(var(--toast-expanded)) scale(1);
+}
+/* Stacked, the front card's deep shadow falls on empty page. Once the second
+   card slides out from under it, that same shadow lands squarely on it, so
+   pull it in to a close one while the stack is open. */
+.toast-stack[data-expanded="true"] .toast-front {
+  box-shadow: 0 6px 16px rgba(35,61,56,.10), 0 2px 6px rgba(35,61,56,.08), inset 0 1px rgba(255,255,255,.9);
+}
+
+/* :hover and :focus-within open the stack only where a pointer can actually
+   leave again. A phone keeps the hover state on whatever was tapped last and
+   focus on whatever was tapped last, so on touch these rules held the stack
+   open after data-expanded had already gone back to false: it stayed down
+   until something else was tapped, which is exactly what it looked like.
+   Touch opens it through data-expanded alone, which a scroll can clear.
+   The padding is hover's too: it is the bridge the cursor crosses to reach
+   the card below, and on touch it is an invisible 88px band over the page. */
+@media (hover: hover) and (pointer: fine) {
+  .toast-stack { padding-bottom: var(--toast-expanded); }
+  .toast-stack:hover .toast-back,
+  .toast-stack:focus-within .toast-back {
+    transform: translateY(var(--toast-expanded)) scale(1);
+  }
+  .toast-stack:hover .toast-front,
+  .toast-stack:focus-within .toast-front {
+    box-shadow: 0 6px 16px rgba(35,61,56,.10), 0 2px 6px rgba(35,61,56,.08), inset 0 1px rgba(255,255,255,.9);
+  }
+}
+@media not all and (hover: hover) {
+  .toast-stack[data-expanded="true"] { padding-bottom: var(--toast-expanded); }
 }
 
 .toast-thumb {
@@ -155,36 +194,181 @@ body.sheet-open .toast-stack {
 }
 `;
 
-const isTouch = () => window.matchMedia("(hover: none), (pointer: coarse)").matches;
+const isTouch = () =>
+  window.matchMedia("(hover: none), (pointer: coarse)").matches;
+
+// When the page's own cascade has settled the top of the page. The stack holds
+// back until the text has clearly finished, so it reads as its own beat rather
+// than the tail of the page arriving.
+const PAGE_INTRO_MS = 980;
+
+// The arrival, measured off marvinschwaibold.com frame by frame: the stack
+// drops from 112px above, overshoots its resting place by 23px at ~280ms, comes
+// back through, and rings down over about a second. That is a spring, not an
+// easing curve, which is why it cannot be written as keyframes: a cubic-bezier
+// can overshoot once but it cannot oscillate. Fitting the sampled curve gives a
+// damping ratio of 0.450 at 13.3 rad/s, which for unit mass is:
+const SPRING_START = -112;
+const SPRING_STIFFNESS = 178;
+const SPRING_DAMPING = 12;
+// Fixed integration step, and the point past which the arrival is simply over.
+const SPRING_STEP = 1 / 240;
+const SPRING_MAX_MS = 2500;
+// Opacity is deliberately untouched. His never fades; it is purely vertical.
 
 export default function ToastStack() {
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(true);
   const [expanded, setExpanded] = useState(false);
   const stackRef = useRef<HTMLDivElement>(null);
+  const entranceRef = useRef<HTMLDivElement>(null);
+  const arriving = useRef(false);
 
   useEffect(() => setMounted(true), []);
 
-  // Silk replaces native page scrolling with its own container, so the window
-  // never scrolls here. Watch that container, falling back to the window.
+  // The arrival, integrated per frame rather than declared as keyframes.
+  //
+  // useLayoutEffect, not useEffect: the starting offset has to be written
+  // before the browser paints, or the stack shows for one frame at its resting
+  // place and then jumps back up to fall again.
+  //
+  // The wait is measured from when the page started loading, not from this
+  // mount: the stack is client-only, so it arrives after hydration, and how
+  // long that takes varies. Whatever is left of the cascade is what it waits.
+  useLayoutEffect(() => {
+    const el = entranceRef.current;
+    if (!el) return;
+    if (document.documentElement.classList.contains("home-visited")) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let x = SPRING_START;
+    let velocity = 0;
+    let last = 0;
+    let started = 0;
+    let frame = 0;
+
+    // Parked off screen AND hidden. The card sits 112px above its resting
+    // place for the whole wait, and its shadow reaches about 77px below it, so
+    // left merely translated it spills a grey smudge across the top of the
+    // page for a second before the card itself ever appears. visibility is
+    // instant and uncomposited, so revealing it costs nothing and, unlike
+    // opacity, cannot read as a fade.
+    el.style.transform = `translateY(${SPRING_START}px)`;
+    el.style.visibility = "hidden";
+    // Promoted up front, not at the first frame: asking for the layer mid
+    // animation costs a re-raster of two large shadows exactly when the
+    // stack starts moving.
+    el.style.willChange = "transform";
+    arriving.current = true;
+
+    const settle = () => {
+      cancelAnimationFrame(frame);
+      el.style.transform = "";
+      el.style.willChange = "";
+      arriving.current = false;
+    };
+
+    const step = (now: number) => {
+      const elapsed = now - started;
+      // A tab that was throttled or backgrounded comes back to a finished
+      // animation, not to one playing out in slow motion.
+      if (elapsed > SPRING_MAX_MS) return settle();
+
+      // Integrated in fixed sub-steps rather than one step of however long the
+      // frame happened to be. Stepping by the frame time makes the spring run
+      // slower on a slow device, because each frame advances the simulation by
+      // at most one clamped dt: the physics has to follow the clock, not the
+      // frame rate.
+      let remaining = Math.min((now - last) / 1000, SPRING_MAX_MS / 1000);
+      last = now;
+      while (remaining > 0) {
+        const h = Math.min(remaining, SPRING_STEP);
+        velocity += (-SPRING_STIFFNESS * x - SPRING_DAMPING * velocity) * h;
+        x += velocity * h;
+        remaining -= h;
+      }
+
+      if (Math.abs(x) < 0.08 && Math.abs(velocity) < 0.08) return settle();
+      el.style.transform = `translateY(${x.toFixed(2)}px)`;
+      frame = requestAnimationFrame(step);
+    };
+
+    // The hard stop above is checked on a frame, so it only ever fires if
+    // frames are arriving. A page loaded in a background tab gets none at all,
+    // and the stack would hang 112px above the fold until the tab was looked
+    // at. A plain timer owes nothing to the compositor.
+    let backstop = 0;
+
+    const timer = window.setTimeout(
+      () => {
+        el.style.visibility = "";
+        last = performance.now();
+        started = last;
+        frame = requestAnimationFrame(step);
+        backstop = window.setTimeout(settle, SPRING_MAX_MS);
+      },
+      Math.max(0, PAGE_INTRO_MS - performance.now()),
+    );
+
+    return () => {
+      window.clearTimeout(timer);
+      window.clearTimeout(backstop);
+      cancelAnimationFrame(frame);
+      el.style.visibility = "";
+      el.style.willChange = "";
+      arriving.current = false;
+    };
+  }, [mounted]);
+
+  // Silk replaces page scrolling with its own container, but only where it
+  // needs to: on touch it leaves native page scrolling alone, so the container
+  // is present and stays at 0 while the window is what actually moves. Watch
+  // both, or the stack never notices a scroll on a phone and rides along.
   useEffect(() => {
     const silk = document.querySelector<HTMLElement>('[data-silk~="c2"]');
-    const atTop = () => (silk ? silk.scrollTop : window.scrollY) <= 0;
+    const scrolled = () =>
+      Math.max(
+        silk?.scrollTop ?? 0,
+        window.scrollY,
+        document.documentElement.scrollTop,
+      );
     const onScroll = () => {
-      setVisible(atTop());
+      // A scroll event while the stack is still falling would translate the
+      // whole thing 104px away mid-flight and snap it back: a visible jump on
+      // top of the spring. Silk fires one as it hydrates.
+      if (arriving.current) return;
+      setVisible(scrolled() <= 0);
       setExpanded(false);
     };
+    // A scroll event does not bubble, so listening on window alone misses one
+    // that happens inside any other element. Capturing on the document catches
+    // every scroll in the page whatever is doing the scrolling, which is the
+    // only way to be sure on a phone, where which element actually moves
+    // depends on how Silk resolved nativePageScrollReplacement.
+    const collapse = () => setExpanded(false);
     onScroll();
-    const target: HTMLElement | Window = silk ?? window;
-    target.addEventListener("scroll", onScroll, { passive: true });
-    return () => target.removeEventListener("scroll", onScroll);
+    const opts = { passive: true } as const;
+    document.addEventListener("scroll", onScroll, { capture: true, ...opts });
+    window.addEventListener("scroll", onScroll, opts);
+    // The gesture itself, not its result: a swipe that scrolls nothing (the
+    // page is already at the top, or the finger started on the stack) still
+    // means the reader has moved on from it.
+    window.addEventListener("touchmove", collapse, opts);
+    window.addEventListener("wheel", collapse, opts);
+    return () => {
+      document.removeEventListener("scroll", onScroll, { capture: true });
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("touchmove", collapse);
+      window.removeEventListener("wheel", collapse);
+    };
   }, []);
 
   // On touch, a tap anywhere else collapses the expanded stack.
   useEffect(() => {
     if (!expanded) return;
     const onDown = (e: PointerEvent) => {
-      if (e.target instanceof Node && stackRef.current?.contains(e.target)) return;
+      if (e.target instanceof Node && stackRef.current?.contains(e.target))
+        return;
       setExpanded(false);
     };
     window.addEventListener("pointerdown", onDown);
@@ -211,40 +395,52 @@ export default function ToastStack() {
         data-expanded={expanded ? "true" : "false"}
         onClickCapture={onClickCapture}
       >
-        {TOASTS.map((toast, i) => {
-          const className = `toast ${i === 0 ? "toast-front" : "toast-back"}`;
-          const label = `${toast.title}: ${toast.subtitle}`;
-          const body = (
-            <>
-              <span className="toast-thumb" aria-hidden>
-                <img src={toast.image} alt="" loading="eager" decoding="async" />
-              </span>
-              <span className="toast-copy">
-                <strong>{toast.title}</strong>
-                <span>{toast.subtitle}</span>
-              </span>
-            </>
-          );
+        <div ref={entranceRef} className="toast-entrance">
+          {TOASTS.map((toast, i) => {
+            const className = `toast ${i === 0 ? "toast-front" : "toast-back"}`;
+            const label = `${toast.title}: ${toast.subtitle}`;
+            const body = (
+              <>
+                <span className="toast-thumb" aria-hidden>
+                  <img
+                    src={toast.image}
+                    alt=""
+                    loading="eager"
+                    decoding="async"
+                  />
+                </span>
+                <span className="toast-copy">
+                  <strong>{toast.title}</strong>
+                  <span>{toast.subtitle}</span>
+                </span>
+              </>
+            );
 
-          return toast.href.startsWith("http") ? (
-            <a
-              key={toast.href}
-              href={toast.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={className}
-              aria-label={label}
-            >
-              {body}
-            </a>
-          ) : (
-            <Link key={toast.href} href={toast.href} className={className} aria-label={label}>
-              {body}
-            </Link>
-          );
-        })}
+            return toast.href.startsWith("http") ? (
+              <a
+                key={toast.href}
+                href={toast.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={className}
+                aria-label={label}
+              >
+                {body}
+              </a>
+            ) : (
+              <Link
+                key={toast.href}
+                href={toast.href}
+                className={className}
+                aria-label={label}
+              >
+                {body}
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </>,
-    document.body
+    document.body,
   );
 }

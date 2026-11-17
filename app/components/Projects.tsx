@@ -1,3 +1,5 @@
+import { intro } from "./intro";
+
 function ArrowUpRight() {
   return (
     <svg
@@ -46,47 +48,14 @@ export default function Projects() {
     },
   ];
 
-  const contributions = [
-    {
-      title: "Antiwork",
-      desc: "Sell your stuff. See what sticks.",
-      link: "https://github.com/antiwork/gumboard/pulls?q=is%3Apr+author%3AFahad-Dezloper+is%3Aclosed",
-      img: "/OSC/antiwork.webp",
-    },
-    {
-      title: "Zero",
-      desc: "An Open-Source Gmail Alternative for the Future of Email",
-      link: "https://github.com/Mail-0/Zero/pulls?q=is%3Apr+author%3AFahad-Dezloper+is%3Aclosed",
-      img: "/OSC/zero2.webp",
-    },
-    {
-      title: "Cal",
-      desc: "Scheduling infrastructure for absolutely everyone.",
-      link: "https://github.com/calcom/cal.diy/pulls/Fahad-Dezloper",
-      img: "/OSC/cal.webp",
-    },
-    {
-      title: "Solix",
-      desc: "The universal data bridge for Solana. ",
-      link: "https://github.com/SolixDB/app/pulls?q=is%3Apr+author%3AFahad-Dezloper+is%3Aclosed",
-      img: "/OSC/solix.webp",
-    },
-    {
-      title: "Pillar",
-      desc: "Operations platform for running Solana validators",
-      link: "https://github.com/niks3089/pillar/pulls?q=is%3Apr+is%3Aclosed+author%3AFahad-Dezloper",
-      img: "/OSC/pillar.webp",
-    },
-  ];
-
   return (
     <section className="w-full pt-[56px] md:pt-[80px] max-w-none self-stretch ">
       <div className="mx-auto max-w-xl px-4 md:px-0">
-        <h2 className=" mb-10">Projects and Contributions</h2>
+        <h2 className=" mb-10" {...intro(9)}>Projects</h2>
 
         {/* Text Projects List */}
         <div className="flex flex-col gap-6 group/list">
-          {openSourceProjects.map((item) => {
+          {openSourceProjects.map((item, index) => {
             const inner = (
               <>
                 <div className="flex items-center gap-2">
@@ -115,6 +84,7 @@ export default function Projects() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex flex-col gap-1.5 group/item cursor-pointer text-left"
+                {...intro(10 + index)}
               >
                 {inner}
               </a>
@@ -122,44 +92,12 @@ export default function Projects() {
               <div
                 key={item.title}
                 className="flex flex-col gap-1.5 group/item cursor-default text-left"
+                {...intro(10 + index)}
               >
                 {inner}
               </div>
             );
           })}
-        </div>
-      </div>
-      {/* Contributions Carousel */}
-      <div className="mt-4 w-full overflow-x-auto scrolll pb-2 pl-4 md:pl-[max(1rem,calc((100vw-42rem)/1.7-1.6rem))] pr-4 [scrollbar-width:thin]">
-        <div className="flex w-max gap-4">
-          {contributions.map((item, index) => (
-            <a
-              key={index}
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex w-[140px] md:w-[160px] shrink-0 flex-col gap-2.5 group cursor-pointer"
-            >
-              <div
-                className={`w-full aspect-square rounded-2xl overflow-hidden bg-[var(--foreground)]/5 border border-[var(--foreground)]/5 flex items-center justify-center`}
-              >
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-101"
-                />
-              </div>
-              <div className="flex items-center -gap-1">
-                <h3 className="text-left text-base font-medium text-[var(--foreground)] group-hover:text-[var(--foreground)]/70 group-hover:underline transition-colors">
-                  {item.title}
-                </h3>
-                <ArrowUpRight />
-              </div>
-              <p className="text-left text-sm leading-snug text-[var(--foreground)]/70">
-                {item.desc}
-              </p>
-            </a>
-          ))}
         </div>
       </div>
     </section>
