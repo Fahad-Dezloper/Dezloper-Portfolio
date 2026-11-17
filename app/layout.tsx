@@ -125,8 +125,7 @@ export default function RootLayout({
                 <TooltipProvider>{children}</TooltipProvider>
               </div>
             </div>
-          </ThemeProvider>
-          <Analytics />
+            <Analytics />
           </SilkScroll>
         </body>
       </html>
