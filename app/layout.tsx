@@ -6,7 +6,6 @@ import "./globals.css";
 import { ViewTransitions } from "next-view-transitions";
 import Navbar from "./components/Navbar";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import SoundOnLoad from "./components/SoundOnLoad";
 import SilkScroll from "./components/SilkScroll";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
@@ -42,7 +41,7 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Fahad Khan — Design Engineer",
+    default: "Fahad Khan · Design Engineer",
     template: "%s | Fahad Khan",
   },
   description:
@@ -63,7 +62,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: baseUrl,
-    title: "Fahad Khan — Design Engineer",
+    title: "Fahad Khan · Design Engineer",
     description:
       "I consider myself a builder at heart and enjoy crafting products & interfaces that feel great to use.",
     siteName: "Fahad Khan",
@@ -78,7 +77,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fahad Khan — Design Engineer",
+    title: "Fahad Khan · Design Engineer",
     description:
       "I consider myself a builder at heart and enjoy crafting products & interfaces that feel great to use.",
     images: ["https://ox35safakaidjuzg.public.blob.vercel-storage.com/OG.png"],
@@ -104,7 +103,17 @@ export default function RootLayout({
           data-website-id="dd06aa90-d4d3-407e-a703-ca7bce3ceec6"
         />
         <body className={`${intertight.variable} ${inter.variable}`}>
-          <SoundOnLoad />
+          {/* The intro cascade runs on every load for now. To play it only on
+              the first view of a tab session, put this back: it marks later
+              views with .home-visited before anything paints, which is what
+              globals.css and ToastStack both check.
+
+              <script
+                dangerouslySetInnerHTML={{
+                  __html:
+                    "try{if(sessionStorage.getItem('visited'))document.documentElement.classList.add('home-visited');else sessionStorage.setItem('visited','1')}catch(e){}",
+                }}
+              /> */}
           <SilkScroll>
             {/* w-screen (a definite viewport width) is required here: Silk places
                 Scroll.Content in a max-content grid column, so w-full would blow

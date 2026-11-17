@@ -100,13 +100,15 @@ const WritingSheet = ({
       onPresentedChange={handlePresentedChange}
     >
       <PageFromBottom.Trigger asChild>
-        <div className="group relative aspect-[4/5] w-[220px] shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-[#f4f4f2] md:w-[290px]">
+        {/* The covers are viewBox SVGs at h-full w-full, so the whole tile,
+            artwork included, is set by this one width. */}
+        <div className="group relative aspect-[4/5] w-[178px] shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-[#f4f4f2] md:w-[232px]">
           {Cover && <Cover />}
 
           {/* Title set inside the tile. pointer-events-none so moving over it
               still reaches the cover underneath, which needs the cursor. */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5">
-            <h3 className="text-balance text-[16px] font-medium leading-[1.15] md:text-[20px] text-[#161616] decoration-1 underline-offset-4 group-hover:underline">
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 p-4">
+            <h3 className="text-balance text-[14px] font-medium leading-[1.15] md:text-[16.5px] text-[#161616] decoration-1 underline-offset-4 group-hover:underline">
               {title}
             </h3>
           </div>

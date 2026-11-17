@@ -2,6 +2,7 @@
 import { Check, Copy } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { intro } from "./intro";
 
 const iconProps = {
   viewBox: "0 0 24 24",
@@ -75,7 +76,7 @@ export default function Hero() {
   return (
     <main className="flex flex-1 max-w-xl pt-[140px] md:pt-[200px] w-full px-4 md:px-0 flex-col items-center sm:items-start">
       <div className="flex flex-col gap-3 text-[var(--foreground)]/70 leading-relaxed text-[15px] sm:text-base">
-        <div className="flex w-full  justify-between items-end  gap-3 sm:gap-0">
+        <div className="flex w-full  justify-between items-end  gap-3 sm:gap-0" {...intro(0)}>
           <div className="flex flex-col">
             <Link
               href="/"
@@ -88,7 +89,12 @@ export default function Hero() {
             >
               Fahad Khan
             </Link>
-            <p className="text-secondary">Design & Infra Engineer</p>
+            <time
+              dateTime={process.env.NEXT_PUBLIC_LAST_UPDATED_ISO}
+              className="text-secondary"
+            >
+              Updated {process.env.NEXT_PUBLIC_LAST_UPDATED}
+            </time>
           </div>
 
           <div className="flex items-center gap-1">
@@ -98,7 +104,7 @@ export default function Hero() {
                 href={href}
                 target={href.startsWith("mailto:") ? undefined : "_blank"}
                 rel="noopener noreferrer"
-                aria-label={`${name} — ${label}`}
+                aria-label={`${name}: ${label}`}
                 className="group flex items-center rounded-xl bg-[var(--foreground)]/5 p-1.5 text-xs font-medium text-[var(--foreground)]/70 transition-colors hover:bg-[var(--foreground)]/5 hover:text-[var(--foreground)]"
               >
                 <Icon />
@@ -113,17 +119,15 @@ export default function Hero() {
           </div>
         </div>
 
-        <p className="pt-[20px] leading-relaxed">
-          I love designing and{" "}
-          <span className="text-foreground font-medium">crafting motion</span>{" "}
-          that makes interfaces feel alive.
-          <br />
-          When I&apos;m not obsessing over pixels, I&apos;m{" "}
-          <span className="text-foreground font-medium">
-            exploring protocols
-          </span>{" "}
-          and complex infrastructure, rebuilding them from scratch to understand
-          them from first principles.
+        {/* Two standalone lines rather than one block, after benji.org: each
+            is its own beat in the intro cascade. */}
+        <p className="pt-[20px] leading-relaxed" {...intro(1)}>
+          Cooking up a revolution through code.
+        </p>
+
+        <p className="leading-relaxed" {...intro(2)}>
+          Building things that will have a greater impact on the world, that is
+          all.
         </p>
 
         {/* <div className="mt-2 flex items-center">

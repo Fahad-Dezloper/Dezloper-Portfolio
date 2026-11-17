@@ -9,7 +9,7 @@ const page = () => {
       <div className="flex flex-col gap-4">
         <span>Love building things on the internet.</span>
         <span>
-          I care deeply about the interface — that’s my{" "}
+          I care deeply about the interface. That’s my{" "}
           <Link href="/craft" className="underline">
             craft
           </Link>
