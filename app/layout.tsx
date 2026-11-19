@@ -48,6 +48,7 @@ export const metadata: Metadata = {
     "I consider myself a builder at heart and enjoy crafting products & interfaces that feel great to use.",
   keywords: [
     "Fahad Khan",
+    "dezloper",
     "Design Engineer",
     "Frontend Developer",
     "Web3",
@@ -66,21 +67,15 @@ export const metadata: Metadata = {
     description:
       "I consider myself a builder at heart and enjoy crafting products & interfaces that feel great to use.",
     siteName: "Fahad Khan",
-    images: [
-      {
-        url: "https://ox35safakaidjuzg.public.blob.vercel-storage.com/OG.png",
-        width: 1200,
-        height: 630,
-        alt: "Fahad Khan - Design Engineer",
-      },
-    ],
+    // No images here on purpose. app/opengraph-image.tsx generates the card,
+    // and file-based metadata overrides this object, so listing a URL as well
+    // would leave a second source that silently never wins.
   },
   twitter: {
     card: "summary_large_image",
     title: "Fahad Khan · Design Engineer",
     description:
       "I consider myself a builder at heart and enjoy crafting products & interfaces that feel great to use.",
-    images: ["https://ox35safakaidjuzg.public.blob.vercel-storage.com/OG.png"],
     creator: "@dezloperr",
   },
 };

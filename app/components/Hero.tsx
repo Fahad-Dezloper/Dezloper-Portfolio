@@ -78,17 +78,26 @@ export default function Hero() {
       <div className="flex flex-col gap-3 text-[var(--foreground)]/70 leading-relaxed text-[15px] sm:text-base">
         <div className="flex w-full  justify-between items-end  gap-3 sm:gap-0" {...intro(0)}>
           <div className="flex flex-col">
-            <Link
-              href="/"
-              onClick={(e) => {
-                if (window.location.pathname === "/") {
-                  e.preventDefault();
-                }
-              }}
-              className="hover:bg-[var(--foreground)]/5 text-foreground p-2 rounded-2xl flex gap-2 items-center -ml-2 transition-[background-color] w-fit font-bold"
-            >
-              Fahad Khan
-            </Link>
+            <div className="flex items-center">
+              <Link
+                href="/"
+                onClick={(e) => {
+                  if (window.location.pathname === "/") {
+                    e.preventDefault();
+                  }
+                }}
+                className="hover:bg-[var(--foreground)]/5 text-foreground p-2 rounded-2xl flex gap-2 items-center -ml-2 transition-[background-color] w-fit font-bold"
+              >
+                Fahad Khan
+              </Link>
+              {/* The handle everything else is signed with: the socials, the
+                  repositories, the OG card. Beside the name rather than under
+                  it, and in mono, where a username belongs, so it reads as a
+                  second name instead of a subtitle. */}
+              <span className="font-mono text-[13px] tracking-tight text-secondary">
+                dezloper
+              </span>
+            </div>
             <time
               dateTime={process.env.NEXT_PUBLIC_LAST_UPDATED_ISO}
               className="text-secondary"
