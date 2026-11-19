@@ -32,11 +32,25 @@ const intertight = Inter_Tight({
   variable: "--font-next-intert",
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
-  ? process.env.NEXT_PUBLIC_SITE_URL
-  : process.env.VERCEL_URL
+/**
+ * The origin every absolute metadata URL is built from, the share card's
+ * among them.
+ *
+ * VERCEL_URL is deliberately not used in production. It is the
+ * deployment-specific hostname (dezloper-portfolio-<hash>.vercel.app), which
+ * changes on every deploy and sits behind Vercel's deployment protection, so
+ * an og:image pointing at it serves crawlers an HTML login page rather than
+ * the PNG, and no preview image shows anywhere the link is posted. The
+ * canonical domain is stable and public, so production always uses it.
+ *
+ * Previews keep the deployment hostname, which is what you want when checking
+ * a branch before it ships.
+ */
+const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
-    : "https://www.faahhad.com";
+    : "https://www.faahhad.com");
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
