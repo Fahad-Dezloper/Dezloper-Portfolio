@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Fahad Khan",
     short_name: "Fahad Khan",
-    description: "Engineer",
+    description: "Technologist",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

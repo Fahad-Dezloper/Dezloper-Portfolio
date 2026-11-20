@@ -55,7 +55,7 @@ const baseUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Fahad Khan · Engineer",
+    default: "Fahad Khan · Technologist",
     template: "%s | Fahad Khan",
   },
   description:
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   keywords: [
     "Fahad Khan",
     "dezloper",
-    "Engineer",
+    "Technologist",
     "Frontend Developer",
     "Web3",
     "Solana",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: baseUrl,
-    title: "Fahad Khan · Engineer",
+    title: "Fahad Khan · Technologist",
     description:
       "I consider myself a builder at heart and enjoy crafting products & interfaces that feel great to use.",
     siteName: "Fahad Khan",
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fahad Khan · Engineer",
+    title: "Fahad Khan · Technologist",
     description:
       "I consider myself a builder at heart and enjoy crafting products & interfaces that feel great to use.",
     creator: "@dezloperr",

@@ -22,7 +22,7 @@ const page = () => {
           full-stack web applications.
         </span>{" "}
         <span>
-          Right now, I’m focused on becoming a great engineer and
+          Right now, I’m focused on becoming a great technologist and
           building fast, thoughtful products with AI's as my co-founder.
         </span>
       </div>
