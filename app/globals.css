@@ -91,3 +91,20 @@ pre[data-theme*=" "] {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+/* The resume badge sits open by default, because an icon alone does not say
+   "click me". While the pointer is on one of its neighbours, it closes, so
+   only one label is ever open and the row never shows two at once. Guarded by
+   a hover query: on a touch screen there is no pointer to leave, and a sticky
+   :hover would strand the label shut. */
+@media (hover: hover) and (pointer: fine) {
+  [data-contact-row]:has(a:not([data-badge="resume"]):hover)
+    [data-badge="resume"]
+    [data-badge-label] {
+    grid-template-columns: 0fr;
+  }
+  [data-contact-row]:has(a:not([data-badge="resume"]):hover)
+    [data-badge="resume"]
+    [data-badge-text] {
+    opacity: 0;
+  }
+}

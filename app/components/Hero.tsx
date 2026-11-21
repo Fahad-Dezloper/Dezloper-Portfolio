@@ -41,7 +41,26 @@ function TelegramIcon() {
   );
 }
 
+function ResumeIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" {...iconProps}>
+      <path d="M12.5 2.5H6.5C5.4 2.5 4.5 3.4 4.5 4.5V19.5C4.5 20.6 5.4 21.5 6.5 21.5H17.5C18.6 21.5 19.5 20.6 19.5 19.5V9.5L12.5 2.5Z" />
+      <path d="M12.5 2.5V7.5C12.5 8.6 13.4 9.5 14.5 9.5H19.5" />
+      <path d="M8.5 13.5H15.5M8.5 17H13" />
+    </svg>
+  );
+}
+
 const socials = [
+  {
+    name: "Resume",
+    label: "Resume",
+    href: "/resume",
+    Icon: ResumeIcon,
+    /** The one badge that starts open: it is the thing to click, and an icon
+     *  alone does not say so. It yields while a neighbour is hovered. */
+    openByDefault: true,
+  },
   {
     name: "Gmail",
     label: "fahadkhann0204@gmail.com",
@@ -106,25 +125,45 @@ export default function Hero() {
             </time>
           </div>
 
-          <div className="flex items-center gap-1">
-            {socials.map(({ name, label, href, Icon }) => (
-              <a
-                key={name}
-                href={href}
-                target={href.startsWith("mailto:") ? undefined : "_blank"}
-                rel="noopener noreferrer"
-                aria-label={`${name}: ${label}`}
-                className="group flex items-center rounded-xl bg-[var(--foreground)]/5 p-1.5 text-xs font-medium text-[var(--foreground)]/70 transition-colors hover:bg-[var(--foreground)]/5 hover:text-[var(--foreground)]"
-              >
-                <Icon />
-                {/* 0fr → 1fr animates the label's width open without a fixed size */}
-                <span className="grid grid-cols-[0fr] transition-[grid-template-columns] duration-300 ease-out group-hover:grid-cols-[1fr]">
-                  <span className="overflow-hidden whitespace-nowrap opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <span className="pl-1.5 pr-0.5">{label}</span>
+          {/* data-contact-row drives the one rule globals.css adds: while any
+              other badge is hovered, the resume label closes. CSS :has rather
+              than state, so it needs no re-render and cannot fall out of sync
+              with the :hover the other three already use. */}
+          <div className="flex items-center gap-1" data-contact-row>
+            {socials.map(({ name, label, href, Icon, openByDefault }) => {
+              const internal = href.startsWith("/");
+              return (
+                <a
+                  key={name}
+                  href={href}
+                  data-badge={openByDefault ? "resume" : undefined}
+                  target={
+                    href.startsWith("mailto:") || internal ? undefined : "_blank"
+                  }
+                  rel={internal ? undefined : "noopener noreferrer"}
+                  aria-label={`${name}: ${label}`}
+                  className="group flex items-center rounded-xl bg-[var(--foreground)]/5 p-1.5 text-xs font-medium text-[var(--foreground)]/70 transition-colors hover:bg-[var(--foreground)]/5 hover:text-[var(--foreground)]"
+                >
+                  <Icon />
+                  {/* 0fr → 1fr animates the label's width open without a fixed size */}
+                  <span
+                    data-badge-label
+                    className={`grid transition-[grid-template-columns] duration-300 ease-out group-hover:grid-cols-[1fr] ${
+                      openByDefault ? "grid-cols-[1fr]" : "grid-cols-[0fr]"
+                    }`}
+                  >
+                    <span
+                      data-badge-text
+                      className={`overflow-hidden whitespace-nowrap transition-opacity duration-300 group-hover:opacity-100 ${
+                        openByDefault ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      <span className="pl-1.5 pr-0.5">{label}</span>
+                    </span>
                   </span>
-                </span>
-              </a>
-            ))}
+                </a>
+              );
+            })}
           </div>
         </div>
 
