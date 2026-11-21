@@ -55,7 +55,11 @@ const socials = [
   {
     name: "Resume",
     label: "Resume",
-    href: "/resume",
+    // The file itself, not a page wrapping it: a .pdf served as
+    // application/pdf opens in the browser's own viewer, which already has
+    // zoom, search, print and download. A page around it only takes those
+    // away and puts worse ones back.
+    href: "/Fahad-Khan-Resume.pdf",
     Icon: ResumeIcon,
     /** The one badge that starts open: it is the thing to click, and an icon
      *  alone does not say so. It yields while a neighbour is hovered. */
@@ -131,16 +135,14 @@ export default function Hero() {
               with the :hover the other three already use. */}
           <div className="flex items-center gap-1" data-contact-row>
             {socials.map(({ name, label, href, Icon, openByDefault }) => {
-              const internal = href.startsWith("/");
+              const mail = href.startsWith("mailto:");
               return (
                 <a
                   key={name}
                   href={href}
                   data-badge={openByDefault ? "resume" : undefined}
-                  target={
-                    href.startsWith("mailto:") || internal ? undefined : "_blank"
-                  }
-                  rel={internal ? undefined : "noopener noreferrer"}
+                  target={mail ? undefined : "_blank"}
+                  rel={mail ? undefined : "noopener noreferrer"}
                   aria-label={`${name}: ${label}`}
                   className="group flex items-center rounded-xl bg-[var(--foreground)]/5 p-1.5 text-xs font-medium text-[var(--foreground)]/70 transition-colors hover:bg-[var(--foreground)]/5 hover:text-[var(--foreground)]"
                 >
